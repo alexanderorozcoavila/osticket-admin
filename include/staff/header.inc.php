@@ -47,6 +47,7 @@ if ($lang) {
 
     <!-- Modificaciones de CC and CCO-->   
     <script type="text/javascript" src="<?php echo ROOT_PATH ?>scp/selectize.js/dist/js/selectize.min.js"></script>
+    <script type="text/javascript" src="<?php echo ROOT_PATH ?>scp/selectize.js/microplugin.js"></script>
     <link rel="stylesheet" type="text/css" href="<?php echo ROOT_PATH ?>scp/selectize.js/dist/css/selectize.css" />
     
 
