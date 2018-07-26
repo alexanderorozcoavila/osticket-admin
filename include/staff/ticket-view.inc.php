@@ -590,11 +590,20 @@ if ($errors['err'] && isset($_POST['a'])) {
                         valueField: 'email',
                         labelField: 'name',
                         searchField: ['name', 'email'],
-                        options: [
-                            {email: 'brian@thirdroute.com', name: 'Brian Reavis'},
-                            {email: 'nikola@tesla.com', name: 'Nikola Tesla'},
-                            {email: 'someone@gmail.com'}
-                        ],
+                        options: [],
+                        load: function(query, callback) {
+                            if (!query.length) return callback();
+                            $.ajax({
+                                url: 'ajax.php/users/local?q=' + encodeURIComponent(query),
+                                type: 'GET',
+                                error: function() {
+                                    callback();
+                                },
+                                success: function(res) {
+                                    callback(res.repositories.slice(0, 10));
+                                }
+                            });
+                        },
                         render: {
                             item: function(item, escape) {
                                 return '<div>' +
