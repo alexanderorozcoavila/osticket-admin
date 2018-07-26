@@ -45,13 +45,9 @@ if ($lang) {
     <link type="text/css" rel="stylesheet" href="<?php echo ROOT_PATH; ?>css/rtl.css?9ae093d"/>
     <link type="text/css" rel="stylesheet" href="<?php echo ROOT_PATH ?>scp/css/translatable.css?9ae093d"/>
 
-    <script type="text/javascript" src="<?php echo ROOT_PATH ?>scp/tokeninput/src/jquery.tokeninput.js"></script>
-
-    <link rel="stylesheet" href="<?php echo ROOT_PATH ?>scp/tokeninput/styles/token-input.css" type="text/css" />
-    <link rel="stylesheet" href="<?php echo ROOT_PATH ?>scp/tokeninput/styles/token-input-facebook.css" type="text/css" />
-
-    
-
+    <!-- Modificaciones de CC and CCO-->   
+    <script type="text/javascript" src="<?php echo ROOT_PATH ?>scp/selectize.js/selectize.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo ROOT_PATH ?>scp/selectize.js/selectize.css" />
     
 
     

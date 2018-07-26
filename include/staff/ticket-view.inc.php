@@ -579,23 +579,71 @@ if ($errors['err'] && isset($_POST['a'])) {
                     <label><strong><?php echo __('CC'); ?>:</strong></label>
                 </td>
                 <td>
-                <input type="text" id="demo-input" name="blah" />
-                <script type="text/javascript">
-                $(document).ready(function() {
-                    $("#demo-input").tokenInput("ajax.php/users/local",{
-                        theme: "facebook",
-                        onAdd: function (item) {
-                            console.log("Added " + item.name);
+                    <select id="select-to" class="contacts" placeholder="Pick some people..."></select>
+                    <script>
+                    var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
+                  '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
+
+                    $('#select-to').selectize({
+                        persist: false,
+                        maxItems: null,
+                        valueField: 'email',
+                        labelField: 'name',
+                        searchField: ['name', 'email'],
+                        options: [
+                            {email: 'brian@thirdroute.com', name: 'Brian Reavis'},
+                            {email: 'nikola@tesla.com', name: 'Nikola Tesla'},
+                            {email: 'someone@gmail.com'}
+                        ],
+                        render: {
+                            item: function(item, escape) {
+                                return '<div>' +
+                                    (item.name ? '<span class="name">' + escape(item.name) + '</span>' : '') +
+                                    (item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
+                                '</div>';
+                            },
+                            option: function(item, escape) {
+                                var label = item.name || item.email;
+                                var caption = item.name ? item.email : null;
+                                return '<div>' +
+                                    '<span class="label">' + escape(label) + '</span>' +
+                                    (caption ? '<span class="caption">' + escape(caption) + '</span>' : '') +
+                                '</div>';
+                            }
                         },
-                        onDelete: function (item) {
-                            console.log("Deleted " + item.name);
+                        createFilter: function(input) {
+                            var match, regex;
+
+                            // email@address.com
+                            regex = new RegExp('^' + REGEX_EMAIL + '$', 'i');
+                            match = input.match(regex);
+                            if (match) return !this.options.hasOwnProperty(match[0]);
+
+                            // name <email@address.com>
+                            regex = new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i');
+                            match = input.match(regex);
+                            if (match) return !this.options.hasOwnProperty(match[2]);
+
+                            return false;
                         },
-                        preventDuplicates: true,
-                        hintText: "Ingrese nombre o correo.",
-                        noResultsText: "No hay coincidencias",
-                        searchingText: "Buscando..."});
-                });
-                </script>
+                        create: function(input) {
+                            if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
+                                return {email: input};
+                            }
+                            var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
+                            if (match) {
+                                return {
+                                    email : match[2],
+                                    name  : $.trim(match[1])
+                                };
+                            }
+                            alert('Invalid email address.');
+                            return false;
+                        }
+                    });
+                    </script>
+
+
                 </td>
              </tr>
              <tr>
@@ -603,23 +651,10 @@ if ($errors['err'] && isset($_POST['a'])) {
                     <label><strong><?php echo __('CCO'); ?>:</strong></label>
                 </td>
                 <td>
-                <input type="text" id="cco_user_search" name="blah2" />
-                <script type="text/javascript">
-                $(document).ready(function() {
-                    $("#cco_user_search").tokenInput("ajax.php/users/local",{
-                        theme: "facebook",
-                        onAdd: function (item) {
-                            console.log("Added " + item.name);
-                        },
-                        onDelete: function (item) {
-                            console.log("Deleted " + item.name);
-                        },
-                        preventDuplicates: true,
-                        hintText: "Ingrese nombre o correo.",
-                        noResultsText: "No hay coincidencias",
-                        searchingText: "Buscando..."});
-                });
-                </script>
+                
+
+
+
                 </td>
              </tr>
             </tbody>
