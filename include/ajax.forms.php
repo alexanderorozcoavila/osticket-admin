@@ -15,9 +15,6 @@ class DynamicFormsAjaxAPI extends AjaxController {
     }
 
     function getFormsForHelpTopic($topic_id, $client=false) {
-        if (!$_SERVER['HTTP_REFERER'])
-            Http::response(403, 'Forbidden.');
-
         if (!($topic = Topic::lookup($topic_id)))
             Http::response(404, 'No such help topic');
 
@@ -384,15 +381,9 @@ class DynamicFormsAjaxAPI extends AjaxController {
     }
 
     function attach() {
-        global $thisstaff;
-
-        $config = DynamicFormField::objects()
-            ->filter(array('type__contains'=>'thread'))
-            ->first()->getConfiguration();
         $field = new FileUploadField();
-        $field->_config = $config;
         return JsonDataEncoder::encode(
-            array('id'=>$field->ajaxUpload($thisstaff ? true : false))
+            array('id'=>$field->ajaxUpload())
         );
     }
 

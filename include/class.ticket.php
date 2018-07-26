@@ -100,43 +100,51 @@ class TicketModel extends VerySimpleModel {
     const PERM_CLOSE    = 'ticket.close';
     const PERM_DELETE   = 'ticket.delete';
 
+    // test
+    const PERM_CCANDCCO   = 'ticket.ccandcco';
+
 
     static protected $perms = array(
             self::PERM_CREATE => array(
                 'title' =>
                 /* @trans */ 'Create',
                 'desc'  =>
-                /* @trans */ 'Ability to open tickets on behalf of users'),
+                /* @trans */ 'Permiso para abrir tickets en nombre de un usuario'),
             self::PERM_EDIT => array(
                 'title' =>
                 /* @trans */ 'Edit',
                 'desc'  =>
-                /* @trans */ 'Ability to edit tickets'),
+                /* @trans */ 'Permiso para editar tickets y propietarios de tickets. Permiso de reenvío a terceros'),
             self::PERM_ASSIGN => array(
                 'title' =>
                 /* @trans */ 'Assign',
                 'desc'  =>
-                /* @trans */ 'Ability to assign tickets to agents or teams'),
+                /* @trans */ 'Permiso para asignar tickets a agentes o equipos'),
             self::PERM_TRANSFER => array(
                 'title' =>
                 /* @trans */ 'Transfer',
                 'desc'  =>
-                /* @trans */ 'Ability to transfer tickets between departments'),
+                /* @trans */ 'Permiso para trasferir tickets entre departamentos'),
             self::PERM_REPLY => array(
                 'title' =>
                 /* @trans */ 'Post Reply',
                 'desc'  =>
-                /* @trans */ 'Ability to post a ticket reply'),
+                /* @trans */ 'Permiso para la respuesta a un ticket'),
             self::PERM_CLOSE => array(
                 'title' =>
                 /* @trans */ 'Close',
                 'desc'  =>
-                /* @trans */ 'Ability to close tickets'),
+                /* @trans */ ' Permiso para cerrar tickets'),
             self::PERM_DELETE => array(
                 'title' =>
                 /* @trans */ 'Delete',
                 'desc'  =>
-                /* @trans */ 'Ability to delete tickets'),
+                /* @trans */ 'Permiso para eliminar tickets'),
+            self::PERM_CCANDCCO => array(
+                'title' =>
+                /* @trans */ 'CC y CCO',
+                'desc'  =>
+                /* @trans */ 'Permiso para poner en copia y/o copia oculta a un tercero en un ticket'),
             );
 
     // Ticket Sources

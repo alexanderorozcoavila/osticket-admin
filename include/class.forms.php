@@ -1822,7 +1822,7 @@ class DatetimeField extends FormField {
     function display($value) {
         global $cfg;
 
-        if (!$value || !($datetime = Format::parseDateTime($value)))
+        if (!$value || !($datetime = Format::parseDatetime($value)))
             return '';
 
         $config = $this->getConfiguration();
@@ -1933,14 +1933,14 @@ class DatetimeField extends FormField {
 
         $config = $this->getConfiguration();
         parent::validateEntry($value);
-        if (!$value || !($datetime = Format::parseDateTime($value)))
+        if (!$value || !($datetime = Format::parseDatetime($value)))
             return;
 
         // Parse value to DateTime object
-        $val = Format::parseDateTime($value);
+        $val = Format::parseDatetime($value);
         // Get configured min/max (if any)
-        $min = $this->getMinDateTime();
-        $max = $this->getMaxDateTime();
+        $min = $this->getMinDatetime();
+        $max = $this->getMaxDatetime();
 
         if (!$val) {
             $this->_errors[] = __('Enter a valid date');
@@ -2837,7 +2837,7 @@ class FileUploadField extends FormField {
 
         // Check MIME type - file ext. shouldn't be solely trusted.
         if ($type && $config['__mimetypes']
-                && in_array($type, $config['__mimetypes'], true))
+                && in_array($type, $config['__mimetypes']))
             return true;
 
         // Return true if all file types are allowed (.*)
@@ -3803,7 +3803,7 @@ class SectionBreakWidget extends Widget {
     function render($options=array()) {
         ?><div class="form-header section-break"><h3><?php
         echo Format::htmlchars($this->field->getLocal('label'));
-        ?></h3><em><?php echo Format::display($this->field->getLocal('hint'));
+        ?></h3><em><?php echo Format::htmlchars($this->field->getLocal('hint'));
         ?></em></div>
         <?php
     }

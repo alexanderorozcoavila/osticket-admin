@@ -67,7 +67,6 @@ $info = Format::htmlchars(($errors && $_POST) ? $_POST : $info);
                     ?>><?php echo $name; ?></option>
 <?php } ?>
                 </select>
-                &nbsp;<span class="error"><?php echo $errors['pid']; ?></span>
             </td>
         </tr>
         <tr>

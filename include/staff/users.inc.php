@@ -14,7 +14,6 @@ if ($_REQUEST['query']) {
         'emails__address__contains' => $search,
         'name__contains' => $search,
         'org__name__contains' => $search,
-        'cdata__phone__contains' => $search,
         // TODO: Add search for cdata
     )));
     $qs += array('query' => $_REQUEST['query']);
@@ -312,11 +311,6 @@ $(function() {
         goBaby($(this).attr('href').substr(1));
         return false;
     });
-
-    // Remove CSRF Token From GET Request
-    document.querySelector("form[action='users.php']").onsubmit = function() {
-        document.getElementsByName("__CSRFToken__")[0].remove();
-    };
 });
 </script>
 

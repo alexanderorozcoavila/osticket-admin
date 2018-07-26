@@ -1246,8 +1246,6 @@ class Task extends TaskModel implements RestrictedAccess, Threadable {
                     $thisstaff);
         }
 
-        $this->updated = SqlFunction::NOW();
-
         if ($changes)
             $this->logEvent('edited', array('fields' => $changes));
 

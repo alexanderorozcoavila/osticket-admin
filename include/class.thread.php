@@ -610,7 +610,7 @@ implements TemplateVariable {
     static protected $perms = array(
         self::PERM_EDIT => array(
             'title' => /* @trans */ 'Edit Thread',
-            'desc'  => /* @trans */ 'Ability to edit thread items of other agents',
+            'desc'  => /* @trans */ 'Permiso para editar hilos de un ticket de otros agentes ',
         ),
     );
 
@@ -1791,8 +1791,8 @@ class ThreadEvents extends InstrumentedList {
             }
             // XXX: Use $user here
             elseif ($thisclient) {
-                if ($thisclient->hasAccount())
-                    $username = $thisclient->getFullName();
+                if ($thisclient->hasAccount)
+                    $username = $thisclient->getAccount()->getUserName();
                 if (!$username)
                     $username = $thisclient->getEmail();
             }
@@ -2191,7 +2191,7 @@ class TextThreadEntryBody extends ThreadEntryBody {
     }
 
     function getClean() {
-        return  Format::htmlchars(Format::stripEmptyLines(parent::getClean()), true);
+        return  Format::stripEmptyLines(parent::getClean());
     }
 
     function prepend($what) {

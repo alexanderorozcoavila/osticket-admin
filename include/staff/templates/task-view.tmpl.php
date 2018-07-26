@@ -154,7 +154,7 @@ if ($task->isOverdue())
                             echo __('Reopen');?> </a>
                     </li>
                     <?php
-                    } elseif ($canClose) {
+                    } else {
                     ?>
                     <li>
                         <a class="no-pjax task-action"
@@ -212,7 +212,7 @@ if ($task->isOverdue())
                                 echo __('Reopen');?> </a>
                         </li>
                         <?php
-                        } elseif ($canClose) {
+                        } else {
                         ?>
                         <li>
                             <a class="no-pjax task-action"
@@ -268,7 +268,7 @@ if ($task->isOverdue())
                 <?php
                 foreach ($actions as $action) {?>
                 <span class="action-button <?php echo $action['class'] ?: ''; ?>">
-                    <a class="<?php echo ($action['class'] == 'no-pjax') ? '' : 'task-action'; ?>"
+                    <a class="task-action"
                         <?php
                         if ($action['dialog'])
                             echo sprintf("data-dialog-config='%s'", $action['dialog']);

@@ -1,4 +1,5 @@
 <?php
+$role  = $thisstaff->getRole($dept);
 if (!isset($info['title']))
     $info['title'] = Format::htmlchars($user->getName());
 
@@ -21,10 +22,12 @@ if ($info['error']) {
     </div>
     <?php
     if ($ticket) { ?>
+        <?php if ($role->hasPerm(Ticket::PERM_CCANDCCO)) { ?>
     <a class="action-button pull-right change-user" style="overflow:inherit"
         href="#tickets/<?php echo $ticket->getId(); ?>/change-user" ><i class="icon-user"></i>
         <?php echo __('Change User'); ?></a>
     <?php
+        }
     } ?>
     <div><b><?php
     echo Format::htmlchars($user->getName()->getOriginal()); ?></b></div>
