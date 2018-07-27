@@ -72,7 +72,8 @@ $note_form = new SimpleForm(array(
 
 //At this stage we know the access status. we can process the post.
 if($_POST && !$errors):
-    print "texto";
+    // print "texto";
+    print $_POST['a'];
     exit;
     if($ticket && $ticket->getId()) {
         //More coffee please.
