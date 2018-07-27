@@ -565,7 +565,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                             $ticket->getReplyToEmail());
                     $emailReply = (!isset($info['emailreply']) || $info['emailreply']);
                     ?>
-                    <input type="text" id="to_user_search" value="" style="width: 350px;max-width: 350px;">
+                    <input type="text" id="emailreply" name="emailreply" value="" style="width: 350px;max-width: 350px;">
                 </td>
             </tr>
             </tbody>
@@ -1007,7 +1007,7 @@ $(function() {
     });
 
 
-    $('input#to_user_search').typeahead({
+    $('input#emailreply').typeahead({
         source: function (typeahead, query) {
             $.ajax({
                 url: "ajax.php/users/local?q="+query,
@@ -1018,7 +1018,7 @@ $(function() {
             });
         },
         onselect: function (obj) {
-            $('input#to_user_search').val(obj.name);
+            $('input#emailreply').val(obj.email);
             //window.location.href = 'users.php?id='+obj.id;
         },
         property: "/bin/true"
