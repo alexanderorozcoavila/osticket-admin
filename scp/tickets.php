@@ -74,6 +74,7 @@ $note_form = new SimpleForm(array(
 if($_POST && !$errors):
     // print "texto";
     print $_POST['a'];
+    print var_dump($ticket);
     exit;
     if($ticket && $ticket->getId()) {
         //More coffee please.
