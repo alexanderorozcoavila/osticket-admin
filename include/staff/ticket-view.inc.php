@@ -563,9 +563,13 @@ if ($errors['err'] && isset($_POST['a'])) {
                     $to =sprintf('%s &lt;%s&gt;',
                             Format::htmlchars($ticket->getName()),
                             $ticket->getReplyToEmail());
+
+                    $emailto1 = $ticket->getReplyToEmail();
                     $emailReply = (!isset($info['emailreply']) || $info['emailreply']);
                     ?>
-                    <select id="emailreply" name="emailreply" placeholder="Agregar"></select>
+                    <select id="emailreply" name="emailreply" placeholder="Agregar">
+                    <option value="<?php echo $emailto1; ?>" selected="selected"></option>
+                    </select>
                     <script>
                     var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
                   '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
@@ -652,18 +656,26 @@ if ($errors['err'] && isset($_POST['a'])) {
                     <label><strong><?php echo __('CC'); ?>:</strong></label>
                 </td>
                 <td>
-                    <select id="select-to" class="contacts" placeholder="Agregar"></select>
+                    <?php
+                        $ticket2=Ticket::lookup($ticket->getId());
+                        $thread2 = $ticket2->getThread();
+                        $collabs2=$thread2->getCollaborators();
+                        $colaboradores2 = "";
+                        foreach($collabs2 as $collab2) {
+                            $colaboradores2 = $colaboradores2 . '<option value="'.$collab2->getEmail().'" selected></option>';
+                        }
+                    ?>
+                    <select id="select-to" class="contacts" placeholder="Agregar"  multiple>
+                        <?php echo $colaboradores2; ?>
+                    </select>
                     <script>
-                    var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
-                  '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
-
                     $('#select-to').selectize({
-                        persist: false,
                         maxItems: null,
                         valueField: 'email',
-                        labelField: 'name',
+                        // currentValue:['jose@gmail.com','maria@gmail.com'],
+                        labelField: 'email',
                         searchField: ['name', 'email'],
-                        options: [],
+                        // options: ['jose@gmail.com','maria@gmail.com'],
                         load: function(query, callback) {
                             if (!query.length) return callback();
                             $.ajax({
@@ -679,51 +691,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                                 }
                             });
                         },
-                        render: {
-                            item: function(item, escape) {
-                                return '<div>' +
-                                    (item.name ? '<span class="name">' + escape(item.name) + '</span>' : '') +
-                                    (item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
-                                '</div>';
-                            },
-                            option: function(item, escape) {
-                                var label = item.name || item.email;
-                                var caption = item.name ? item.email : null;
-                                return '<div>' +
-                                    '<span class="label">' + escape(label) + '</span>' +
-                                    (caption ? '<span class="caption">' + escape(caption) + '</span>' : '') +
-                                '</div>';
-                            }
-                        },
-                        createFilter: function(input) {
-                            var match, regex;
-
-                            // email@address.com
-                            regex = new RegExp('^' + REGEX_EMAIL + '$', 'i');
-                            match = input.match(regex);
-                            if (match) return !this.options.hasOwnProperty(match[0]);
-
-                            // name <email@address.com>
-                            regex = new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i');
-                            match = input.match(regex);
-                            if (match) return !this.options.hasOwnProperty(match[2]);
-
-                            return false;
-                        },
-                        create: function(input) {
-                            if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
-                                return {email: input};
-                            }
-                            var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
-                            if (match) {
-                                return {
-                                    email : match[2],
-                                    name  : $.trim(match[1])
-                                };
-                            }
-                            alert('Invalid email address.');
-                            return false;
-                        }
+                        create: true
                     });
                     </script>
 
@@ -744,7 +712,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                         persist: false,
                         maxItems: null,
                         valueField: 'email',
-                        labelField: 'name',
+                        labelField: 'email',
                         searchField: ['name', 'email'],
                         options: [],
                         load: function(query, callback) {
