@@ -560,48 +560,112 @@ if ($errors['err'] && isset($_POST['a'])) {
                 </td>
                 <td>
                     <?php
-                    # XXX: Add user-to-name and user-to-email HTML ID#s
                     $to =sprintf('%s &lt;%s&gt;',
                             Format::htmlchars($ticket->getName()),
                             $ticket->getReplyToEmail());
                     $emailReply = (!isset($info['emailreply']) || $info['emailreply']);
                     ?>
-                    <select id="emailreply" name="emailreply">
-                        <option value="1" <?php echo $emailReply ?  'selected="selected"' : ''; ?>><?php echo $to; ?></option>
-                        <option value="0" <?php echo !$emailReply ? 'selected="selected"' : ''; ?>
-                        >&mdash; <?php echo __('Do Not Email Reply'); ?> &mdash;</option>
-                    </select>
+                    <input type="text" id="emailreply" name="emailreply" value="" style="width: 350px;max-width: 350px;">
                 </td>
             </tr>
             </tbody>
             <?php
-            if(1) { //Make CC optional feature? NO, for now.
+            if ($role->hasPerm(Ticket::PERM_CCANDCCO)) { //Make CC optional feature? NO, for now.
                 ?>
             <tbody id="cc_sec"
                 style="display:<?php echo $emailReply?  'table-row-group':'none'; ?>;">
              <tr>
                 <td width="120">
-                    <label><strong><?php echo __('Collaborators'); ?>:</strong></label>
+                    <label><strong><?php echo __('CC'); ?>:</strong></label>
                 </td>
                 <td>
-                    <input type='checkbox' value='1' name="emailcollab"
-                    id="t<?php echo $ticket->getThreadId(); ?>-emailcollab"
-                        <?php echo ((!$info['emailcollab'] && !$errors) || isset($info['emailcollab']))?'checked="checked"':''; ?>
-                        style="display:<?php echo $ticket->getThread()->getNumCollaborators() ? 'inline-block': 'none'; ?>;"
-                        >
-                    <?php
-                    $recipients = __('Add Recipients');
-                    if ($ticket->getThread()->getNumCollaborators())
-                        $recipients = sprintf(__('Recipients (%d of %d)'),
-                                $ticket->getThread()->getNumActiveCollaborators(),
-                                $ticket->getThread()->getNumCollaborators());
+                    <select id="select-to" class="contacts" placeholder="Pick some people..."></select>
+                    <script>
+                    var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
+                  '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
 
-                    echo sprintf('<span><a class="collaborators preview"
-                            href="#thread/%d/collaborators"><span id="t%d-recipients">%s</span></a></span>',
-                            $ticket->getThreadId(),
-                            $ticket->getThreadId(),
-                            $recipients);
-                   ?>
+                    $('#select-to').selectize({
+                        persist: false,
+                        maxItems: null,
+                        valueField: 'email',
+                        labelField: 'name',
+                        searchField: ['name', 'email'],
+                        options: [],
+                        load: function(query, callback) {
+                            if (!query.length) return callback();
+                            $.ajax({
+                                url: 'ajax.php/users/local?q=' + encodeURIComponent(query),
+                                type: 'GET',
+                                dataType: 'json',
+                                error: function() {
+                                    callback();
+                                },
+                                success: function(res) {
+                                    console.log(res);
+                                    callback(res);
+                                }
+                            });
+                        },
+                        render: {
+                            item: function(item, escape) {
+                                return '<div>' +
+                                    (item.name ? '<span class="name">' + escape(item.name) + '</span>' : '') +
+                                    (item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
+                                '</div>';
+                            },
+                            option: function(item, escape) {
+                                var label = item.name || item.email;
+                                var caption = item.name ? item.email : null;
+                                return '<div>' +
+                                    '<span class="label">' + escape(label) + '</span>' +
+                                    (caption ? '<span class="caption">' + escape(caption) + '</span>' : '') +
+                                '</div>';
+                            }
+                        },
+                        createFilter: function(input) {
+                            var match, regex;
+
+                            // email@address.com
+                            regex = new RegExp('^' + REGEX_EMAIL + '$', 'i');
+                            match = input.match(regex);
+                            if (match) return !this.options.hasOwnProperty(match[0]);
+
+                            // name <email@address.com>
+                            regex = new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i');
+                            match = input.match(regex);
+                            if (match) return !this.options.hasOwnProperty(match[2]);
+
+                            return false;
+                        },
+                        create: function(input) {
+                            if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
+                                return {email: input};
+                            }
+                            var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
+                            if (match) {
+                                return {
+                                    email : match[2],
+                                    name  : $.trim(match[1])
+                                };
+                            }
+                            alert('Invalid email address.');
+                            return false;
+                        }
+                    });
+                    </script>
+
+
+                </td>
+             </tr>
+             <tr>
+                <td width="120">
+                    <label><strong><?php echo __('CCO'); ?>:</strong></label>
+                </td>
+                <td>
+                
+
+
+
                 </td>
              </tr>
             </tbody>
@@ -941,6 +1005,27 @@ $(function() {
             }
         });
     });
+
+
+    $('input#emailreply').typeahead({
+        source: function (typeahead, query) {
+            $.ajax({
+                url: "ajax.php/users/local?q="+query,
+                dataType: 'json',
+                success: function (data) {
+                    typeahead.process(data);
+                }
+            });
+        },
+        onselect: function (obj) {
+            $('input#emailreply').val(obj.email);
+            //window.location.href = 'users.php?id='+obj.id;
+        },
+        property: "/bin/true"
+    });
+
+   
+
 
     // Post Reply or Note action buttons.
     $('a.post-response').click(function (e) {
