@@ -581,34 +581,13 @@ if ($errors['err'] && isset($_POST['a'])) {
                 <td>
                     <select id="select-to" class="contacts" placeholder="Pick some people..."></select>
                     <script>
-                    var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
-                  '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
-
                     $('#select-to').selectize({
                         persist: false,
                         maxItems: null,
                         valueField: 'email',
                         labelField: 'name',
                         searchField: ['name', 'email'],
-                        options: [],
-                        load: function(query, callback) {
-                            if (!query.length) return callback();
-                            $.ajax({
-                                url: 'ajax.php/users/local?q=' + encodeURIComponent(query),
-                                type: 'GET',
-                                error: function() {
-                                    callback();
-                                },
-                                success: function(res) {
-                                    console.log(res);
-                                    //callback(res.repositories.slice(0, 10));
-                                    return '<div>' +
-                                        (item.name ? '<span class="name">' + escape(item.name) + '</span>' : '') +
-                                        (item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
-                                    '</div>';
-                                }
-                            });
-                        },
+                        create: false,
                         render: {
                             item: function(item, escape) {
                                 return '<div>' +
@@ -625,34 +604,24 @@ if ($errors['err'] && isset($_POST['a'])) {
                                 '</div>';
                             }
                         },
-                        createFilter: function(input) {
-                            var match, regex;
-
-                            // email@address.com
-                            regex = new RegExp('^' + REGEX_EMAIL + '$', 'i');
-                            match = input.match(regex);
-                            if (match) return !this.options.hasOwnProperty(match[0]);
-
-                            // name <email@address.com>
-                            regex = new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i');
-                            match = input.match(regex);
-                            if (match) return !this.options.hasOwnProperty(match[2]);
-
-                            return false;
+                        score: function(search) {
+                            var score = this.getScoreFunction(search);
+                            return function(item) {
+                                return score(item) * (1 + Math.min(item.watchers / 100, 1));
+                            };
                         },
-                        create: function(input) {
-                            if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
-                                return {email: input};
-                            }
-                            var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
-                            if (match) {
-                                return {
-                                    email : match[2],
-                                    name  : $.trim(match[1])
-                                };
-                            }
-                            alert('Invalid email address.');
-                            return false;
+                        load: function(query, callback) {
+                            if (!query.length) return callback();
+                            $.ajax({
+                                url: 'ajax.php/users/local?q=' + encodeURIComponent(query),
+                                type: 'GET',
+                                error: function() {
+                                    callback();
+                                },
+                                success: function(res) {
+                                    callback(res.repositories.slice(0, 10));
+                                }
+                            });
                         }
                     });
                     </script>
