@@ -351,6 +351,7 @@ case 'updated':
     break;
 }
 
+print var_dump($tickets);
 
 if (in_array($sort_cols, array('created', 'due', 'updated')))
     $queue_columns['date']['sort_dir'] = $sort_dir;
@@ -398,20 +399,6 @@ $tickets->constrain(array('lock' => array(
                 'lock__expire__gt' => SqlFunction::NOW())));
 
 ?>
-
-<style>
-    .tooltip {
-    text-align:left !important;
-    width: 250px !important;
- padding-right:3px !important;
-    }   
-    .tooltip-inner {
- text-align:left !important;
- width: 250px !important;
- padding-right:3px !important;
-}
-</style>
-
 
 <!-- SEARCH FORM START -->
 <div id='basic_search'>
@@ -519,8 +506,6 @@ return false;">
         $total=0;
         $ids=($errors && $_POST['tids'] && is_array($_POST['tids']))?$_POST['tids']:null;
         foreach ($tickets as $T) {
-            
-
             $total += 1;
                 $tag=$T['staff_id']?'assigned':'openticket';
                 $flag=null;
@@ -588,16 +573,8 @@ return false;">
                 </td>
                 <td nowrap><div><?php
                     if ($T['collab_count'])
-                        $ticket=Ticket::lookup($T['ticket_id']);
-                        $thread = $ticket->getThread();
-                        $collabs=$thread->getCollaborators();
-                        $colaboradores = "";
-                        foreach($collabs as $collab) {
-                            $colaboradores = $colaboradores.$collab->getEmail().'&#10;';
-                        }
-
-                        
-                        echo '<span class="pull-right faded-more" data-toggle="tooltip" title="'.$colaboradores.'"><i class="icon-group"></i></span>';
+                        echo '<span class="pull-right faded-more" data-toggle="tooltip" title="'
+                            .$T['collab_count'].'"><i class="icon-group"></i></span>';
                     ?><span class="truncate" style="max-width:<?php
                         echo $T['collab_count'] ? '150px' : '170px'; ?>"><?php
                     $un = new UsersName($T['user__name']);
