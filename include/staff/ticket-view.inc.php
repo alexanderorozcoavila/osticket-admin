@@ -579,9 +579,9 @@ if ($errors['err'] && isset($_POST['a'])) {
                     <label><strong><?php echo __('CC'); ?>:</strong></label>
                 </td>
                 <td>
-                    <select id="select-to" class="contacts" placeholder="Pick some people..."></select>
+                    <select id="select-to" class="repositories selectized" placeholder="Pick some people..."></select>
                     <script>
-                    $('#select-to').selectize({
+                    ('#select-to').selectize({
                         valueField: 'url',
                         labelField: 'name',
                         searchField: 'name',
@@ -611,7 +611,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                         load: function(query, callback) {
                             if (!query.length) return callback();
                             $.ajax({
-                                url: 'ajax.php/users/local?q=' + encodeURIComponent(query),
+                                url: 'https://api.github.com/legacy/repos/search/' + encodeURIComponent(query),
                                 type: 'GET',
                                 error: function() {
                                     callback();
