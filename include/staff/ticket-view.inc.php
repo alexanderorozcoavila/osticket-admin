@@ -600,6 +600,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                                     callback();
                                 },
                                 success: function(res) {
+                                    console.log(res);
                                     callback(res.repositories.slice(0, 10));
                                 }
                             });
