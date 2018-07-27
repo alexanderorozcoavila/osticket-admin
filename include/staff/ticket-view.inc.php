@@ -589,12 +589,6 @@ if ($errors['err'] && isset($_POST['a'])) {
                         searchField: ['name', 'email'],
                         create: false,
                         render: {
-                            item: function(item, escape) {
-                                return '<div>' +
-                                    (item.name ? '<span class="name">' + escape(item.name) + '</span>' : '') +
-                                    (item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
-                                '</div>';
-                            },
                             option: function(item, escape) {
                                 var label = item.name || item.email;
                                 var caption = item.name ? item.email : null;
