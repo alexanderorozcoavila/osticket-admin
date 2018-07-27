@@ -601,7 +601,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                                 },
                                 success: function(res) {
                                     console.log(res);
-                                    callback(res);
+                                    callback(res.slice(0, 10));
                                 }
                             });
                         },
