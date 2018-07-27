@@ -581,31 +581,27 @@ if ($errors['err'] && isset($_POST['a'])) {
                 <td>
                     <select id="select-to" class="contacts" placeholder="Pick some people..."></select>
                     <script>
-                    var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
-                  '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
-
                     $('#select-to').selectize({
-                        persist: false,
-                        maxItems: null,
-                        valueField: 'email',
+                        valueField: 'name',
                         labelField: 'name',
-                        searchField: ['name', 'email'],
+                        searchField: 'name',
                         options: [],
+                        create: false,
                         load: function(query, callback) {
                             if (!query.length) return callback();
                             $.ajax({
                                 url: 'ajax.php/users/local?q=' + encodeURIComponent(query),
                                 type: 'GET',
+                                dataType: 'json',
+                                ,
                                 error: function() {
                                     callback();
                                 },
                                 success: function(res) {
-                                    console.log(res);
                                     callback(res);
                                 }
                             });
-                        }
-                    });
+                        });
                     </script>
 
 
