@@ -560,16 +560,53 @@ if ($errors['err'] && isset($_POST['a'])) {
                 </td>
                 <td>
                     <?php
+                    # XXX: Add user-to-name and user-to-email HTML ID#s
                     $to =sprintf('%s &lt;%s&gt;',
                             Format::htmlchars($ticket->getName()),
                             $ticket->getReplyToEmail());
                     $emailReply = (!isset($info['emailreply']) || $info['emailreply']);
                     ?>
-                    <input type="text" id="emailreply" name="emailreply" value="" style="width: 350px;max-width: 350px;">
+                    <select id="emailreply" name="emailreply">
+                        <option value="1" <?php echo $emailReply ?  'selected="selected"' : ''; ?>><?php echo $to; ?></option>
+                        <option value="0" <?php echo !$emailReply ? 'selected="selected"' : ''; ?>
+                        >&mdash; <?php echo __('Do Not Email Reply'); ?> &mdash;</option>
+                    </select>
                 </td>
             </tr>
             </tbody>
-            
+            <?php
+            if(1) { //Make CC optional feature? NO, for now.
+                ?>
+            <tbody id="cc_sec"
+                style="display:<?php echo $emailReply?  'table-row-group':'none'; ?>;">
+             <tr>
+                <td width="120">
+                    <label><strong><?php echo __('Collaborators'); ?>:</strong></label>
+                </td>
+                <td>
+                    <input type='checkbox' value='1' name="emailcollab"
+                    id="t<?php echo $ticket->getThreadId(); ?>-emailcollab"
+                        <?php echo ((!$info['emailcollab'] && !$errors) || isset($info['emailcollab']))?'checked="checked"':''; ?>
+                        style="display:<?php echo $ticket->getThread()->getNumCollaborators() ? 'inline-block': 'none'; ?>;"
+                        >
+                    <?php
+                    $recipients = __('Add Recipients');
+                    if ($ticket->getThread()->getNumCollaborators())
+                        $recipients = sprintf(__('Recipients (%d of %d)'),
+                                $ticket->getThread()->getNumActiveCollaborators(),
+                                $ticket->getThread()->getNumCollaborators());
+
+                    echo sprintf('<span><a class="collaborators preview"
+                            href="#thread/%d/collaborators"><span id="t%d-recipients">%s</span></a></span>',
+                            $ticket->getThreadId(),
+                            $ticket->getThreadId(),
+                            $recipients);
+                   ?>
+                </td>
+             </tr>
+            </tbody>
+            <?php
+            } ?>
             <tbody id="resp_sec">
             <?php
             if($errors['response']) {?>
@@ -904,27 +941,6 @@ $(function() {
             }
         });
     });
-
-
-    $('input#emailreply').typeahead({
-        source: function (typeahead, query) {
-            $.ajax({
-                url: "ajax.php/users/local?q="+query,
-                dataType: 'json',
-                success: function (data) {
-                    typeahead.process(data);
-                }
-            });
-        },
-        onselect: function (obj) {
-            $('input#emailreply').val(obj.email);
-            //window.location.href = 'users.php?id='+obj.id;
-        },
-        property: "/bin/true"
-    });
-
-   
-
 
     // Post Reply or Note action buttons.
     $('a.post-response').click(function (e) {
