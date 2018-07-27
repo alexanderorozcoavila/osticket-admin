@@ -602,6 +602,10 @@ if ($errors['err'] && isset($_POST['a'])) {
                                 success: function(res) {
                                     console.log(res);
                                     //callback(res.repositories.slice(0, 10));
+                                    return '<div>' +
+                                        (item.name ? '<span class="name">' + escape(item.name) + '</span>' : '') +
+                                        (item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
+                                    '</div>';
                                 }
                             });
                         },
