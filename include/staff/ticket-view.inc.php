@@ -579,7 +579,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                     <label><strong><?php echo __('CC'); ?>:</strong></label>
                 </td>
                 <td>
-                    <select id="select-to" class="repositories selectized" placeholder="Pick some people..."></select>
+                    <select id="select-to" class="repositories" placeholder="Pick some people..."></select>
                     <script>
                     ('#select-to').selectize({
                         valueField: 'url',
