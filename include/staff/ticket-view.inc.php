@@ -732,7 +732,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                         },
                         render: {
                             item: function(item, escape) {
-                                console.log(item.name + '1');
+                                //console.log(item.name + '1');
                                 return '<div>' +
                                     (item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
                                 '</div>';
@@ -755,17 +755,19 @@ if ($errors['err'] && isset($_POST['a'])) {
                             return false;
                         },
                         onItemRemove: function(input) {
-                            console.log(input);
+                            console.log('eliminado:' + input);
                         },
                         onItemAdd: function(input,item){
-                            console.log(input);
+                            console.log('agregador:' + input);
                         },
                         create: function(input) {
+                            
                             if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
                                 return {email: input};
                             }
                             var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
                             if (match) {
+                                console.log('creado: '+match[2]);
                                 return {
                                     email : match[2],
                                     name  : $.trim(match[1])
