@@ -203,7 +203,7 @@ class ThreadAjaxAPI extends AjaxController {
 
     function _addcollaborator($thread, $user=null, $form=null, $info=array()) {
         global $thisstaff;
-
+        
         $info += array(
                     'title' => __('Add a collaborator'),
                     'action' => sprintf('#thread/%d/add-collaborator',
@@ -263,6 +263,10 @@ class ThreadAjaxAPI extends AjaxController {
     }
 
     function _collaborators($thread, $info=array()) {
+
+
+        print "add colaborador";
+        exit;
 
         ob_start();
         include(STAFFINC_DIR . 'templates/collaborators.tmpl.php');
