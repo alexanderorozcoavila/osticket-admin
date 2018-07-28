@@ -587,7 +587,7 @@ return false;">
                     <?php } ?>
                 </td>
                 <td nowrap><div><?php
-                    if ($T['collab_count'])
+                    if ($T['collab_count']){
                         $ticket=Ticket::lookup($T['ticket_id']);
                         $thread = $ticket->getThread();
                         $collabs=$thread->getCollaborators();
@@ -595,9 +595,10 @@ return false;">
                         foreach($collabs as $collab) {
                             $colaboradores = $colaboradores.$collab->getEmail().'&#10;';
                         }
-
-                        
                         echo '<span class="pull-right faded-more" data-toggle="tooltip" title="'.$colaboradores.'"><i class="icon-group"></i></span>';
+                    }else{
+
+                    }
                     ?><span class="truncate" style="max-width:<?php
                         echo $T['collab_count'] ? '150px' : '170px'; ?>"><?php
                     $un = new UsersName($T['user__name']);

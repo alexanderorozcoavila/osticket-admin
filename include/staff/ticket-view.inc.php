@@ -659,7 +659,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                     <?php
                         $ticket2=Ticket::lookup($ticket->getId());
                         $thread2 = $ticket2->getThread();
-                        $collabs2=$thread2->getCollaborators();
+                        $collabs2=$thread2->getCollaborators(array('role'=>'M'));
                         $colaboradores2 = "";
                         foreach($collabs2 as $collab2) {
                             $colaboradores2 = $colaboradores2 . '<option value="'.$collab2->getEmail().'" selected></option>';
@@ -709,7 +709,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                   '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
 
                     $('#select-to2').selectize({
-                        persist: false,
+                        persist: true,
                         maxItems: null,
                         valueField: 'email',
                         labelField: 'email',
@@ -732,18 +732,11 @@ if ($errors['err'] && isset($_POST['a'])) {
                         },
                         render: {
                             item: function(item, escape) {
+                                console.log(item.name + '1');
                                 return '<div>' +
-                                    (item.name ? '<span class="name">' + escape(item.name) + '</span>' : '') +
                                     (item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
                                 '</div>';
-                            },
-                            option: function(item, escape) {
-                                var label = item.name || item.email;
-                                var caption = item.name ? item.email : null;
-                                return '<div>' +
-                                    '<span class="label">' + escape(label) + '</span>' +
-                                    (caption ? '<span class="caption">' + escape(caption) + '</span>' : '') +
-                                '</div>';
+
                             }
                         },
                         createFilter: function(input) {
@@ -760,6 +753,12 @@ if ($errors['err'] && isset($_POST['a'])) {
                             if (match) return !this.options.hasOwnProperty(match[2]);
 
                             return false;
+                        },
+                        onItemRemove: function(input) {
+                            console.log(input);
+                        },
+                        onItemAdd: function(input,item){
+                            console.log(input);
                         },
                         create: function(input) {
                             if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
