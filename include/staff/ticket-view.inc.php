@@ -763,11 +763,11 @@ if ($errors['err'] && isset($_POST['a'])) {
                         create: function(input) {
                             
                             if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
+                                console.log('creado: '+input);
                                 return {email: input};
                             }
                             var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
                             if (match) {
-                                console.log('creado: '+match[2]);
                                 return {
                                     email : match[2],
                                     name  : $.trim(match[1])
