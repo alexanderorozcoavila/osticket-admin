@@ -256,8 +256,8 @@ $dispatcher = patterns('',
     )),
     url('^/ccandcco', patterns('ajax.ccandcco.php:CcAndCcoAjaxAPI',
         url('^/(?P<id>\d+)/addcc$', 'addCc'),
-        url('^/(?P<id>\d+)/addcc$', 'addCco'),
-        url('^/(?P<id>\d+)/addcc$', 'addUser')
+        url('^/(?P<id>\d+)/addcco$', 'addCco'),
+        url('^/(?P<id>\d+)/adduser$', 'addUser')
     ))
 
 );
