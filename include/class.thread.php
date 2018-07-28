@@ -130,6 +130,9 @@ class Thread extends VerySimpleModel {
 
         if (isset($criteria['isactive']))
             $collaborators->filter(array('isactive' => $criteria['isactive']));
+        
+        if (isset($criteria['role']))
+            $collaborators->filter(array('role' => $criteria['role']));
 
         // TODO: sort by name of the user
         $collaborators->order_by('user__name');
