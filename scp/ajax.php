@@ -202,7 +202,6 @@ $dispatcher = patterns('',
         url_get('^(?P<tid>\d+)/add-collaborator/(?P<uid>\d+)$', 'addCollaborator'),
         url_get('^(?P<tid>\d+)/add-collaborator/auth:(?P<bk>\w+):(?P<id>.+)$', 'addRemoteCollaborator'),
         url('^(?P<tid>\d+)/add-collaborator$', 'addCollaborator'),
-        url('^(?P<tid>\d+)/agregar-colaborador$', 'agregarColaborador'),
         url_get('^(?P<tid>\d+)/collaborators/(?P<cid>\d+)/view$', 'viewCollaborator'),
         url_post('^(?P<tid>\d+)/collaborators/(?P<cid>\d+)$', 'updateCollaborator')
     )),
@@ -254,7 +253,13 @@ $dispatcher = patterns('',
         url('^/reset-permissions', 'resetPermissions'),
         url('^/change-department', 'changeDepartment'),
         url('^/(?P<id>\d+)/avatar/change', 'setAvatar')
+    )),
+    url('^/ccandcco', patterns('ajax.ccandcco.php:CcAndCcoAjaxAPI',
+        url('^/(?P<id>\d+)/addcc$', 'addCc'),
+        url('^/(?P<id>\d+)/addcc$', 'addCco'),
+        url('^/(?P<id>\d+)/addcc$', 'addUser')
     ))
+
 );
 
 Signal::send('ajax.scp', $dispatcher);
