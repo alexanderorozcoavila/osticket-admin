@@ -86,7 +86,15 @@ class ThreadAjaxAPI extends AjaxController {
     }
 
     //Collaborators utils
+
+    function agregarColaborador($tid, $uid=0){
+        print "add colaborador";
+        exit;
+    }
+
     function addCollaborator($tid, $uid=0) {
+        // print "add colaborador";
+        // exit;
         global $thisstaff;
 
         if (!($thread=Thread::lookup($tid))
@@ -265,7 +273,7 @@ class ThreadAjaxAPI extends AjaxController {
     function _collaborators($thread, $info=array()) {
 
 
-        print "add colaborador";
+        print "list colaborador";
         exit;
 
         ob_start();
