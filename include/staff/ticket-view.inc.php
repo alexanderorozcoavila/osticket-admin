@@ -684,6 +684,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                             $.ajax({
                                 url: 'ajax.php/users/local?q=' + encodeURIComponent(query),
                                 type: 'GET',
+                                async:false,
                                 dataType: 'json',
                                 error: function() {
                                     callback();
@@ -727,6 +728,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                             $.ajax({
                                 url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/addcc',
                                 type: 'POST',
+                                async:false,
                                 data: { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: input, role:"M" },
                                 dataType: 'json',
                                 error: function() {
@@ -794,6 +796,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                             $.ajax({
                                 url: 'ajax.php/users/local?q=' + encodeURIComponent(query),
                                 type: 'GET',
+                                async:false,
                                 dataType: 'json',
                                 error: function() {
                                     callback();
@@ -837,6 +840,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                             $.ajax({
                                 url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/addcco',
                                 type: 'POST',
+                                async:false,
                                 data: { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: input, role:"O" },
                                 // dataType: 'json',
                                 error: function() {
@@ -852,26 +856,29 @@ if ($errors['err'] && isset($_POST['a'])) {
                         create: function(input) {
                             
                             if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
-                                // $.ajax({
-                                //     url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/adduser',
-                                //     type: 'POST',
-                                //     data: { name: input, email:input },
-                                //     // dataType: 'json',
-                                //     error: function() {
-                                //         console.log('error');
-                                //     },
-                                //     success: function(res) {
+                                idusernew = 0;
+                                $.ajax({
+                                    url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/adduser',
+                                    type: 'POST',
+                                    async:false,
+                                    data: { name: input, email:input },
+                                    // dataType: 'json',
+                                    error: function() {
+                                        console.log('error');
+                                    },
+                                    success: function(res) {
+                                        idusernew = res;
                                         
-                                //     }
-                                // }); 
-                                return {email: input, id:'34'};
+                                    }
+                                }); 
+                                return {email: input, id:idusernew}; 
+                                
                             }
                             var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
                             if (match) {
                                 return {
                                     email : match[2],
-                                    name  : $.trim(match[1]),
-                                    id    : '35'
+                                    name  : $.trim(match[1])
                                 };
                             }
                             alert('Invalid email address.');
