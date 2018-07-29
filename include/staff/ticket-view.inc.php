@@ -568,7 +568,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                     $emailReply = (!isset($info['emailreply']) || $info['emailreply']);
                     ?>
                     <select id="emailreply" name="emailreply" placeholder="Agregar">
-                    <option value="<?php echo $emailto1; ?>" selected="selected"></option>
+                    <option value="0" selected="selected"><?php echo $emailto1; ?></option>
                     </select>
                     <script>
                     var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
@@ -662,7 +662,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                         $collabs2=$thread2->getCollaborators(array('role'=>'M'));
                         $colaboradores2 = "";
                         foreach($collabs2 as $collab2) {
-                            $colaboradores2 = $colaboradores2 . '<option value="'.$collab2->getEmail().'" selected></option>';
+                            $colaboradores2 = $colaboradores2 . '<option value="'.$collab2->getId().'" selected>'.$collab2->getEmail().'</option>';
                         }
                     ?>
                     <select id="select-to" class="contacts" placeholder="Agregar"  multiple>
@@ -709,7 +709,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                     $collabs2=$thread2->getCollaborators(array('role'=>'O'));
                     $colaboradores2 = "";
                     foreach($collabs2 as $collab2) {
-                        $colaboradores2 = $colaboradores2 . '<option value="'.$collab2->getEmail().'" selected></option>';
+                        $colaboradores2 = $colaboradores2 . '<option value="'.$collab2->getId().'" selected>'.$collab2->getEmail().'</option>';
                     }
                 ?>
                 <select id="select-to2" class="contacts" placeholder="Agregar">
