@@ -27,9 +27,14 @@ include_once INCLUDE_DIR . 'class.thread_actions.php';
 class CcAndCcoAjaxAPI extends AjaxController {
 
     function addCc($tid, $uid=0) {
-        print $_POST['location'];
-        $colaborador = Collaborator::create2();
-        print $colaborador;
+        $collab = Collaborator::create(array(
+            'isactive' => isset($info['isactive']) ? $info['isactive'] : 0,
+            'thread_id' => $info['threadId'],
+            'user_id' => $info['userId'],
+            'role' => $_POST['role'],
+        ));
+        if ($collab->save(true))
+            return $collab;
     }
 
     function addCco($tid, $uid=0) {

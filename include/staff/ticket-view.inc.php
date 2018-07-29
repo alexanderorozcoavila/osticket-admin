@@ -577,7 +577,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                     $('#emailreply').selectize({
                         persist: false,
                         maxItems: 1,
-                        valueField: 'email',
+                        valueField: 'id',
                         labelField: 'name',
                         searchField: ['name', 'email'],
                         options: [],
@@ -671,7 +671,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                     <script>
                     $('#select-to').selectize({
                         maxItems: null,
-                        valueField: 'email',
+                        valueField: 'id',
                         // currentValue:['jose@gmail.com','maria@gmail.com'],
                         labelField: 'email',
                         searchField: ['name', 'email'],
@@ -722,7 +722,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                     $('#select-to2').selectize({
                         persist: true,
                         maxItems: null,
-                        valueField: 'email',
+                        valueField: 'id',
                         labelField: 'email',
                         searchField: ['name', 'email'],
                         options: [],

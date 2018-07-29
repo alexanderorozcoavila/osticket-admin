@@ -120,10 +120,6 @@ implements EmailContact, ITicketUser {
         return $inst;
     }
 
-    static function create2(){
-        return 'hola';
-    }
-
     function save($refetch=false) {
         if ($this->dirty)
             $this->updated = SqlFunction::NOW();
