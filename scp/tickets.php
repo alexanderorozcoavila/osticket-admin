@@ -82,12 +82,9 @@ if($_POST && !$errors):
         case 'reply':
             if (!$role || !$role->hasPerm(TicketModel::PERM_REPLY)) {
                 $errors['err'] = __('Action denied. Contact admin for access');
-                
             }
             else {
                 $vars = $_POST;
-                print var_dump($vars);
-                exit;
                 $vars['cannedattachments'] = $response_form->getField('attachments')->getClean();
                 $vars['response'] = ThreadEntryBody::clean($vars['response']);
                 if(!$vars['response'])
@@ -120,9 +117,7 @@ if($_POST && !$errors):
                             sprintf('<a href="tickets.php?id=%d"><b>%s</b></a>',
                                 $ticket->getId(), $ticket->getNumber()))
                         );
-                
-                print "llego";
-                exit;
+
                 // Clear attachment list
                 $response_form->setSource(array());
                 $response_form->getField('attachments')->reset();

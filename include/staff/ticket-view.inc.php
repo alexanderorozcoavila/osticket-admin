@@ -559,90 +559,18 @@ if ($errors['err'] && isset($_POST['a'])) {
                     <label><strong><?php echo __('To'); ?>:</strong></label>
                 </td>
                 <td>
-                    <?php
+                <?php
+                    # XXX: Add user-to-name and user-to-email HTML ID#s
                     $to =sprintf('%s &lt;%s&gt;',
                             Format::htmlchars($ticket->getName()),
                             $ticket->getReplyToEmail());
-
-                    $emailto1 = $ticket->getReplyToEmail();
                     $emailReply = (!isset($info['emailreply']) || $info['emailreply']);
                     ?>
-                    <select id="emailreply" name="emailreply" placeholder="Agregar">
-                    <option value="0" selected="selected"><?php echo $emailto1; ?></option>
+                    <select id="emailreply" name="emailreply">
+                        <option value="1" <?php echo $emailReply ?  'selected="selected"' : ''; ?>><?php echo $to; ?></option>
+                        <option value="0" <?php echo !$emailReply ? 'selected="selected"' : ''; ?>
+                        >&mdash; <?php echo __('Do Not Email Reply'); ?> &mdash;</option>
                     </select>
-                    <script>
-                    var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
-                  '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
-
-                    $('#emailreply').selectize({
-                        persist: false,
-                        maxItems: 1,
-                        valueField: 'id',
-                        labelField: 'name',
-                        searchField: ['name', 'email'],
-                        options: [],
-                        load: function(query, callback) {
-                            if (!query.length) return callback();
-                            $.ajax({
-                                url: 'ajax.php/users/local?q=' + encodeURIComponent(query),
-                                type: 'GET',
-                                dataType: 'json',
-                                error: function() {
-                                    callback();
-                                },
-                                success: function(res) {
-                                    console.log(res);
-                                    callback(res);
-                                }
-                            });
-                        },
-                        render: {
-                            item: function(item, escape) {
-                                return '<div>' +
-                                    (item.name ? '<span class="name">' + escape(item.name) + '</span>' : '') +
-                                    (item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
-                                '</div>';
-                            },
-                            option: function(item, escape) {
-                                var label = item.name || item.email;
-                                var caption = item.name ? item.email : null;
-                                return '<div>' +
-                                    '<span class="label">' + escape(label) + '</span>' +
-                                    (caption ? '<span class="caption">' + escape(caption) + '</span>' : '') +
-                                '</div>';
-                            }
-                        },
-                        createFilter: function(input) {
-                            var match, regex;
-
-                            // email@address.com
-                            regex = new RegExp('^' + REGEX_EMAIL + '$', 'i');
-                            match = input.match(regex);
-                            if (match) return !this.options.hasOwnProperty(match[0]);
-
-                            // name <email@address.com>
-                            regex = new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i');
-                            match = input.match(regex);
-                            if (match) return !this.options.hasOwnProperty(match[2]);
-
-                            return false;
-                        },
-                        create: function(input) {
-                            if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
-                                return {email: input};
-                            }
-                            var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
-                            if (match) {
-                                return {
-                                    email : match[2],
-                                    name  : $.trim(match[1])
-                                };
-                            }
-                            alert('Invalid email address.');
-                            return false;
-                        }
-                    });
-                    </script>
                 </td>
             </tr>
             </tbody>
@@ -654,6 +582,7 @@ if ($errors['err'] && isset($_POST['a'])) {
              <tr>
                 <td width="120">
                     <label><strong><?php echo __('CC'); ?>:</strong></label>
+                    <input type='checkbox' value='1' name="emailcollab" id="t<?php echo $ticket->getThreadId(); ?>-emailcollab" <?php echo ((!$info['emailcollab'] && !$errors) || isset($info['emailcollab']))?'checked="checked"':''; ?> style="display:none;">
                 </td>
                 <td>
                     <?php
