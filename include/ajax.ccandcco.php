@@ -35,7 +35,7 @@ class CcAndCcoAjaxAPI extends AjaxController {
             'role' => $_POST['role'],
         ));
         if ($collab->save(true))
-            return $collab;
+            return true;
     }
 
     function addCco($tid, $uid=0) {
@@ -46,7 +46,7 @@ class CcAndCcoAjaxAPI extends AjaxController {
             'role' => $_POST['role'],
         ));
         if ($collab->save(true))
-            return $collab;
+            return true;
     }
 
     function addUser($tid, $uid=0) {
@@ -58,7 +58,7 @@ class CcAndCcoAjaxAPI extends AjaxController {
             // of the detached emails is fixed.
             'default_email' => UserEmail::ensure($_POST['email'])
         ));
-        print var_dump($user);
+        return true;
     }
 
 }

@@ -838,7 +838,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                                 url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/addcco',
                                 type: 'POST',
                                 data: { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: input, role:"O" },
-                                dataType: 'json',
+                                // dataType: 'json',
                                 error: function() {
                                     console.log('error');
                                 },
@@ -856,7 +856,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                                     url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/adduser',
                                     type: 'POST',
                                     data: { name: input, email:input },
-                                    dataType: 'json',
+                                    // dataType: 'json',
                                     error: function() {
                                         console.log('error');
                                     },
