@@ -616,12 +616,12 @@ if ($errors['err'] && isset($_POST['a'])) {
                     <select id="cc-colaboradores" class="contacts" placeholder="Agregar"  multiple style="width: 90%;">
                         <?php echo $colaboradores2; ?>
                     </select>
-                    <span style="
+                    <a style="
                     float: right;
                     top: 0px;
                     right: 0px;
                     margin-right: 10px;
-                    margin-top: -27px;" id="span-cco">CCO</span>
+                    margin-top: -27px;cursor:pointer;" id="span-cco">CCO</a>
                     </div>
                     <script>
                     var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
