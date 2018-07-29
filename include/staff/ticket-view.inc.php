@@ -770,11 +770,10 @@ if ($errors['err'] && isset($_POST['a'])) {
                         },
                         onItemAdd: function(input,item){
                             console.log(item);
-                            console.log(input);
                             $.ajax({
                                 url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/addcc',
                                 type: 'POST',
-                                data: { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: item.id, role:"O" },
+                                data: { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: item, role:"O" },
                                 dataType: 'json',
                                 error: function() {
                                     console.log('error');
