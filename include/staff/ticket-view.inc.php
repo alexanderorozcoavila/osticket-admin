@@ -684,7 +684,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                             $.ajax({
                                 url: 'ajax.php/users/local?q=' + encodeURIComponent(query),
                                 type: 'GET',
-                                async:false,
+                                // async:false,
                                 dataType: 'json',
                                 error: function() {
                                     callback();
@@ -726,11 +726,11 @@ if ($errors['err'] && isset($_POST['a'])) {
                             console.log(input);
                             //data = { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: input, role:"O" }
                             $.ajax({
-                                url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/addcc',
+                                url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/addcco',
                                 type: 'POST',
-                                async:false,
+                                // async:false,
                                 data: { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: input, role:"M" },
-                                dataType: 'json',
+                                // dataType: 'json',
                                 error: function() {
                                     console.log('error');
                                 },
@@ -744,8 +744,23 @@ if ($errors['err'] && isset($_POST['a'])) {
                         create: function(input) {
                             
                             if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
-                                console.log('creado: '+input);
-                                return {email: input};
+                                idusernew = 0;
+                                $.ajax({
+                                    url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/adduser',
+                                    type: 'POST',
+                                    async:false,
+                                    data: { name: input, email:input },
+                                    // dataType: 'json',
+                                    error: function() {
+                                        console.log('error');
+                                    },
+                                    success: function(res) {
+                                        idusernew = res;
+                                        
+                                    }
+                                }); 
+                                return {email: input, id:idusernew}; 
+                                
                             }
                             var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
                             if (match) {
@@ -796,7 +811,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                             $.ajax({
                                 url: 'ajax.php/users/local?q=' + encodeURIComponent(query),
                                 type: 'GET',
-                                async:false,
+                                // async:false,
                                 dataType: 'json',
                                 error: function() {
                                     callback();
@@ -840,7 +855,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                             $.ajax({
                                 url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/addcco',
                                 type: 'POST',
-                                async:false,
+                                // async:false,
                                 data: { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: input, role:"O" },
                                 // dataType: 'json',
                                 error: function() {
