@@ -758,7 +758,21 @@ if ($errors['err'] && isset($_POST['a'])) {
                             console.log('eliminado:' + input);
                         },
                         onItemAdd: function(input,item){
+                            $.ajax({
+                                url: 'ajax.php/ccandcco/1/addcc',
+                                type: 'POST',
+                                data: { name: "John", location: "Boston" }
+                                dataType: 'json',
+                                error: function() {
+                                    callback();
+                                },
+                                success: function(res) {
+                                    console.log(res);
+                                    callback(res);
+                                }
+                            });
                             console.log('agregador:' + input);
+
                         },
                         create: function(input) {
                             
