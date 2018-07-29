@@ -28,7 +28,8 @@ class CcAndCcoAjaxAPI extends AjaxController {
 
     function addCc($tid, $uid=0) {
         print $_POST['location'];
-        print "addCc test".$tid;
+        $colaborador = Collaborator::create2();
+        print $colaborador;
     }
 
     function addCco($tid, $uid=0) {

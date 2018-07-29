@@ -703,7 +703,18 @@ if ($errors['err'] && isset($_POST['a'])) {
                     <label><strong><?php echo __('CCO'); ?>:</strong></label>
                 </td>
                 <td>
-                <select id="select-to2" class="contacts" placeholder="Agregar"></select>
+                <?php
+                    $ticket2=Ticket::lookup($ticket->getId());
+                    $thread2 = $ticket2->getThread();
+                    $collabs2=$thread2->getCollaborators(array('role'=>'O'));
+                    $colaboradores2 = "";
+                    foreach($collabs2 as $collab2) {
+                        $colaboradores2 = $colaboradores2 . '<option value="'.$collab2->getEmail().'" selected></option>';
+                    }
+                ?>
+                <select id="select-to2" class="contacts" placeholder="Agregar">
+                <?php echo $colaboradores2; ?>
+                </select>
                     <script>
                     var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
                   '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
