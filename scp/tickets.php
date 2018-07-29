@@ -80,6 +80,8 @@ if($_POST && !$errors):
         $role = $thisstaff->getRole($ticket->getDeptId());
         switch(strtolower($_POST['a'])):
         case 'reply':
+            print "llego2";
+            exit;
             if (!$role || !$role->hasPerm(TicketModel::PERM_REPLY)) {
                 $errors['err'] = __('Action denied. Contact admin for access');
             }
