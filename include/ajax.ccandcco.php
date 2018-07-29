@@ -27,8 +27,8 @@ include_once INCLUDE_DIR . 'class.thread_actions.php';
 class CcAndCcoAjaxAPI extends AjaxController {
 
     function addCc($tid, $uid=0) {
-        print var_dump($_POST);
-        print "addCc";
+        print $_POST['location'];
+        print "addCc test".$tid;
     }
 
     function addCco($tid, $uid=0) {
