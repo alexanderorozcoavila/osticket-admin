@@ -864,13 +864,14 @@ if ($errors['err'] && isset($_POST['a'])) {
                                         
                                 //     }
                                 // }); 
-                                return {email: input};
+                                return {email: input, id:'34'};
                             }
                             var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
                             if (match) {
                                 return {
                                     email : match[2],
-                                    name  : $.trim(match[1])
+                                    name  : $.trim(match[1]),
+                                    id    : '35'
                                 };
                             }
                             alert('Invalid email address.');
