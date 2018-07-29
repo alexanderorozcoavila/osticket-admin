@@ -1220,9 +1220,11 @@ $(function() {
 
     <?php if ($role->hasPerm(Ticket::PERM_CCANDCCO)) { ?>
 
+        <?php if ($colaboradores2 == "" ){ ?>
         $( document ).ready(function() {
             $("#tr-cco").hide()
         });
+        <?php } ?>
 
 
     $(document).on('click', 'a.change-user', function(e) {
