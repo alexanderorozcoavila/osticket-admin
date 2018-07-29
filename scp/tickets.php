@@ -72,7 +72,7 @@ $note_form = new SimpleForm(array(
 
 //At this stage we know the access status. we can process the post.
 if($_POST && !$errors):
-    // print "texto";
+
     if($ticket && $ticket->getId()) {
         //More coffee please.
         $errors=array();
@@ -90,7 +90,7 @@ if($_POST && !$errors):
                 if(!$vars['response'])
                     $errors['response']=__('Response required');
 
-                if ($cfg->isTicketLockEnabled()) {
+                if ($cfg->getLockTime()) {
                     if (!$lock) {
                         $errors['err'] = sprintf('%s %s', __('This action requires a lock.'), __('Please try again!'));
                     }
@@ -147,7 +147,7 @@ if($_POST && !$errors):
                 $vars['cannedattachments'] ?: array(), $attachments);
             $vars['note'] = ThreadEntryBody::clean($vars['note']);
 
-            if ($cfg->isTicketLockEnabled()) {
+            if ($cfg->getLockTime()) {
                 if (!$lock) {
                     $errors['err'] = sprintf('%s %s', __('This action requires a lock.'), __('Please try again!'));
                 }
@@ -444,8 +444,8 @@ if ($thisstaff->hasPerm(TicketModel::PERM_CREATE, false)) {
 }
 
 
-$ost->addExtraHeader('<script type="text/javascript" src="js/ticket.js?035fd0a"></script>');
-$ost->addExtraHeader('<script type="text/javascript" src="js/thread.js?035fd0a"></script>');
+$ost->addExtraHeader('<script type="text/javascript" src="js/ticket.js?8c848b5"></script>');
+$ost->addExtraHeader('<script type="text/javascript" src="js/thread.js?8c848b5"></script>');
 $ost->addExtraHeader('<meta name="tip-namespace" content="tickets.queue" />',
     "$('#content').data('tipNamespace', 'tickets.queue');");
 
