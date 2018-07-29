@@ -724,7 +724,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                                 url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/delete',
                                 type: 'POST',
                                 // async:false,
-                                data: { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: input },
+                                data: {id: input },
                                 // dataType: 'json',
                                 error: function() {
                                     console.log('error');
@@ -864,7 +864,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                                 url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/delete',
                                 type: 'POST',
                                 // async:false,
-                                data: { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: input },
+                                data: { id: input },
                                 // dataType: 'json',
                                 error: function() {
                                     console.log('error');
