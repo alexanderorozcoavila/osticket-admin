@@ -58,7 +58,17 @@ class CcAndCcoAjaxAPI extends AjaxController {
             // of the detached emails is fixed.
             'default_email' => UserEmail::ensure($_POST['email'])
         ));
-        return true;
+
+        list($mailbox, $domain) = explode('@', $vars['email'], 2);
+        try {
+            $user->save(true);
+            $user->emails->add($user->default_email);
+            // Attach initial custom fields
+        }
+        catch (OrmException $e) {
+            return null;
+        }
+        return $user->getId();
     }
 
 }
