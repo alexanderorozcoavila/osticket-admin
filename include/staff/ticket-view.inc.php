@@ -720,7 +720,19 @@ if ($errors['err'] && isset($_POST['a'])) {
                             return false;
                         },
                         onItemRemove: function(input) {
-                            console.log('eliminado:' + input);
+                            $.ajax({
+                                url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/delete',
+                                type: 'POST',
+                                // async:false,
+                                data: { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: input },
+                                // dataType: 'json',
+                                error: function() {
+                                    console.log('error');
+                                },
+                                success: function(res) {
+                                    console.log(res);
+                                }
+                            });
                         },
                         onItemAdd: function(input,item){
                             console.log(input);
@@ -848,6 +860,19 @@ if ($errors['err'] && isset($_POST['a'])) {
                         },
                         onItemRemove: function(input) {
                             console.log('eliminado:' + input);
+                            $.ajax({
+                                url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/delete',
+                                type: 'POST',
+                                // async:false,
+                                data: { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: input },
+                                // dataType: 'json',
+                                error: function() {
+                                    console.log('error');
+                                },
+                                success: function(res) {
+                                    console.log(res);
+                                }
+                            });
                         },
                         onItemAdd: function(input,item){
                             console.log(input);

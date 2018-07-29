@@ -71,4 +71,13 @@ class CcAndCcoAjaxAPI extends AjaxController {
         return $user->getId();
     }
 
+    function delete(){
+        Collaborator::objects()
+            ->filter(array('thread_id'=>$_POST['threadId'],'user_id'=>$_POST['userId']))
+            ->delete();
+        return true;
+    }
+
+
+
 }
