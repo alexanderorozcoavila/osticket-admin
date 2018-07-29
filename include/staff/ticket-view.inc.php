@@ -665,61 +665,14 @@ if ($errors['err'] && isset($_POST['a'])) {
                             $colaboradores2 = $colaboradores2 . '<option value="'.$collab2->getId().'" selected>'.$collab2->getEmail().'</option>';
                         }
                     ?>
-                    <select id="select-to" class="contacts" placeholder="Agregar"  multiple>
+                    <select id="cc-colaboradores" class="contacts" placeholder="Agregar"  multiple>
                         <?php echo $colaboradores2; ?>
                     </select>
-                    <script>
-                    $('#select-to').selectize({
-                        maxItems: null,
-                        valueField: 'id',
-                        // currentValue:['jose@gmail.com','maria@gmail.com'],
-                        labelField: 'email',
-                        searchField: ['name', 'email'],
-                        // options: ['jose@gmail.com','maria@gmail.com'],
-                        load: function(query, callback) {
-                            if (!query.length) return callback();
-                            $.ajax({
-                                url: 'ajax.php/users/local?q=' + encodeURIComponent(query),
-                                type: 'GET',
-                                dataType: 'json',
-                                error: function() {
-                                    callback();
-                                },
-                                success: function(res) {
-                                    console.log(res);
-                                    callback(res);
-                                }
-                            });
-                        },
-                        create: true
-                    });
-                    </script>
-
-
-                </td>
-             </tr>
-             <tr>
-                <td width="120">
-                    <label><strong><?php echo __('CCO'); ?>:</strong></label>
-                </td>
-                <td>
-                <?php
-                    $ticket2=Ticket::lookup($ticket->getId());
-                    $thread2 = $ticket2->getThread();
-                    $collabs2=$thread2->getCollaborators(array('role'=>'O'));
-                    $colaboradores2 = "";
-                    foreach($collabs2 as $collab2) {
-                        $colaboradores2 = $colaboradores2 . '<option value="'.$collab2->getId().'" selected>'.$collab2->getEmail().'</option>';
-                    }
-                ?>
-                <select id="select-to2" class="contacts" placeholder="Agregar">
-                <?php echo $colaboradores2; ?>
-                </select>
                     <script>
                     var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
                   '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
 
-                    $('#select-to2').selectize({
+                    $('#cc-colaboradores').selectize({
                         persist: true,
                         maxItems: null,
                         valueField: 'id',
@@ -770,6 +723,117 @@ if ($errors['err'] && isset($_POST['a'])) {
                         },
                         onItemAdd: function(input,item){
                             console.log(input);
+                            //data = { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: input, role:"O" }
+                            $.ajax({
+                                url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/addcc',
+                                type: 'POST',
+                                data: { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: input, role:"O" },
+                                dataType: 'json',
+                                error: function() {
+                                    console.log('error');
+                                },
+                                success: function(res) {
+                                    console.log(res);
+                                }
+                            });
+                            console.log('agregador:' + input);
+
+                        },
+                        create: function(input) {
+                            
+                            if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
+                                console.log('creado: '+input);
+                                return {email: input};
+                            }
+                            var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
+                            if (match) {
+                                return {
+                                    email : match[2],
+                                    name  : $.trim(match[1])
+                                };
+                            }
+                            alert('Invalid email address.');
+                            return false;
+                        }
+                    });
+                    </script>
+
+
+                </td>
+             </tr>
+             <tr>
+                <td width="120">
+                    <label><strong><?php echo __('CCO'); ?>:</strong></label>
+                </td>
+                <td>
+                <?php
+                    $ticket2=Ticket::lookup($ticket->getId());
+                    $thread2 = $ticket2->getThread();
+                    $collabs2=$thread2->getCollaborators(array('role'=>'O'));
+                    $colaboradores2 = "";
+                    foreach($collabs2 as $collab2) {
+                        $colaboradores2 = $colaboradores2 . '<option value="'.$collab2->getId().'" selected>'.$collab2->getEmail().'</option>';
+                    }
+                ?>
+                <select id="cco-colaboradores" class="contacts" placeholder="Agregar">
+                <?php echo $colaboradores2; ?>
+                </select>
+                    <script>
+                    var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
+                  '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
+
+                    $('#cco-colaboradores').selectize({
+                        persist: true,
+                        maxItems: null,
+                        valueField: 'id',
+                        labelField: 'email',
+                        searchField: ['name', 'email'],
+                        options: [],
+                        load: function(query, callback) {
+                            if (!query.length) return callback();
+                            $.ajax({
+                                url: 'ajax.php/users/local?q=' + encodeURIComponent(query),
+                                type: 'GET',
+                                dataType: 'json',
+                                error: function() {
+                                    callback();
+                                },
+                                success: function(res) {
+                                    console.log(res);
+                                    callback(res);
+                                }
+                            });
+                        },
+                        render: {
+                            item: function(item, escape) {
+                                //console.log(item.name + '1');
+                                return '<div>' +
+                                    (item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
+                                '</div>';
+
+                            }
+                        },
+                        createFilter: function(input) {
+                            var match, regex;
+
+                            // email@address.com
+                            regex = new RegExp('^' + REGEX_EMAIL + '$', 'i');
+                            match = input.match(regex);
+                            if (match) return !this.options.hasOwnProperty(match[0]);
+
+                            // name <email@address.com>
+                            regex = new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i');
+                            match = input.match(regex);
+                            if (match) return !this.options.hasOwnProperty(match[2]);
+
+                            return false;
+                        },
+                        onItemRemove: function(input) {
+                            console.log('eliminado:' + input);
+                        },
+                        onItemAdd: function(input,item){
+                            console.log(input);
+                            //data = { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: input, role:"O" }
                             $.ajax({
                                 url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/addcc',
                                 type: 'POST',
