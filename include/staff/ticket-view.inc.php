@@ -1249,7 +1249,13 @@ $(function() {
 
 
     $(document).on('click', '#span-cco', function(e) {
-        $("#tr-cco").show()
+        <?php if ($colaboradores2 == "" ){ ?>
+        if ($("#tr-cco").is(':visible')) {
+            $("#tr-cco").hide();
+        }else{
+            $("#tr-cco").show();
+        }
+        <?php } ?>
         console.log('open tr');
     });
 
