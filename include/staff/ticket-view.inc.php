@@ -772,7 +772,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                             $.ajax({
                                 url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/addcc',
                                 type: 'POST',
-                                data: { name: "John", location: "Boston" },
+                                data: { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: item.id, role:"O" },
                                 dataType: 'json',
                                 error: function() {
                                     console.log('error');
