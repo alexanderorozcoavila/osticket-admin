@@ -759,7 +759,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                         },
                         onItemAdd: function(input,item){
                             $.ajax({
-                                url: 'ajax.php/ccandcco/'+ $ticket->getThreadId() +'/addcc',
+                                url: 'ajax.php/ccandcco/'+ <?php echo $ticket->getThreadId(); ?> +'/addcc',
                                 type: 'POST',
                                 data: { name: "John", location: "Boston" },
                                 dataType: 'json',
