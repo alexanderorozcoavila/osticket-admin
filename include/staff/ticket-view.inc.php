@@ -662,7 +662,8 @@ if ($errors['err'] && isset($_POST['a'])) {
                         $collabs2=$thread2->getCollaborators(array('role'=>'M'));
                         $colaboradores2 = "";
                         foreach($collabs2 as $collab2) {
-                            $colaboradores2 = $colaboradores2 . '<option value="'.$collab2->getId().'" selected>'.$collab2->getEmail().'</option>';
+                            $usercc = $collab2->getUser();
+                            $colaboradores2 = $colaboradores2 . '<option value="'.$usercc->getId().'" selected>'.$collab2->getEmail().'</option>';
                         }
                     ?>
                     <select id="cc-colaboradores" class="contacts" placeholder="Agregar"  multiple>
@@ -724,7 +725,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                                 url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/delete',
                                 type: 'POST',
                                 // async:false,
-                                data: {id: input },
+                                data: { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: input },
                                 // dataType: 'json',
                                 error: function() {
                                     console.log('error');
@@ -801,7 +802,8 @@ if ($errors['err'] && isset($_POST['a'])) {
                     $collabs2=$thread2->getCollaborators(array('role'=>'O'));
                     $colaboradores2 = "";
                     foreach($collabs2 as $collab2) {
-                        $colaboradores2 = $colaboradores2 . '<option value="'.$collab2->getId().'" selected>'.$collab2->getEmail().'</option>';
+                        $usercco = $collab2->getUser();
+                        $colaboradores2 = $colaboradores2 . '<option value="'.$usercco->getId().'" selected>'.$collab2->getEmail().'</option>';
                     }
                 ?>
                 <select id="cco-colaboradores" class="contacts" placeholder="Agregar" multiple>
@@ -864,7 +866,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                                 url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/delete',
                                 type: 'POST',
                                 // async:false,
-                                data: { id: input },
+                                data: { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: input },
                                 // dataType: 'json',
                                 error: function() {
                                     console.log('error');
