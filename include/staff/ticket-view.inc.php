@@ -759,16 +759,15 @@ if ($errors['err'] && isset($_POST['a'])) {
                         },
                         onItemAdd: function(input,item){
                             $.ajax({
-                                url: 'ajax.php/ccandcco/1/addcc',
+                                url: 'ajax.php/ccandcco/'+ $ticket->getThreadId() +'/addcc',
                                 type: 'POST',
                                 data: { name: "John", location: "Boston" },
                                 dataType: 'json',
                                 error: function() {
-                                    callback();
+                                    console.log('error');
                                 },
                                 success: function(res) {
                                     console.log(res);
-                                    callback(res);
                                 }
                             });
                             console.log('agregador:' + input);
