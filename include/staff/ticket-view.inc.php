@@ -852,18 +852,19 @@ if ($errors['err'] && isset($_POST['a'])) {
                         create: function(input) {
                             
                             if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
-                                $.ajax({
-                                    url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/adduser',
-                                    type: 'POST',
-                                    data: { name: input, email:input },
-                                    // dataType: 'json',
-                                    error: function() {
-                                        console.log('error');
-                                    },
-                                    success: function(res) {
-                                        return {email: input,id:34};
-                                    }
-                                }); 
+                                // $.ajax({
+                                //     url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/adduser',
+                                //     type: 'POST',
+                                //     data: { name: input, email:input },
+                                //     // dataType: 'json',
+                                //     error: function() {
+                                //         console.log('error');
+                                //     },
+                                //     success: function(res) {
+                                        
+                                //     }
+                                // }); 
+                                return {email: input};
                             }
                             var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
                             if (match) {
