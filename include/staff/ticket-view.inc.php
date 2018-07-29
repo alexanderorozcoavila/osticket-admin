@@ -792,7 +792,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                         $colaboradores2 = $colaboradores2 . '<option value="'.$collab2->getId().'" selected>'.$collab2->getEmail().'</option>';
                     }
                 ?>
-                <select id="cco-colaboradores" class="contacts" placeholder="Agregar">
+                <select id="cco-colaboradores" class="contacts" placeholder="Agregar" multiple>
                 <?php echo $colaboradores2; ?>
                 </select>
                     <script>
