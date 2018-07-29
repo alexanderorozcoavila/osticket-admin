@@ -861,10 +861,9 @@ if ($errors['err'] && isset($_POST['a'])) {
                                         console.log('error');
                                     },
                                     success: function(res) {
-                                        console.log(res);
+                                        return {email: input,id:34};
                                     }
-                                });
-                                return {email: input};
+                                }); 
                             }
                             var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
                             if (match) {
