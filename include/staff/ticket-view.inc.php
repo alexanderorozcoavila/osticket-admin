@@ -761,7 +761,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                             $.ajax({
                                 url: 'ajax.php/ccandcco/1/addcc',
                                 type: 'POST',
-                                data: { name: "John", location: "Boston" }
+                                data: { name: "John", location: "Boston" },
                                 dataType: 'json',
                                 error: function() {
                                     callback();
