@@ -82,13 +82,12 @@ if($_POST && !$errors):
         case 'reply':
             if (!$role || !$role->hasPerm(TicketModel::PERM_REPLY)) {
                 $errors['err'] = __('Action denied. Contact admin for access');
-                print "llego2";
-                exit;
+                
             }
             else {
-                print "llego3";
-                exit;
                 $vars = $_POST;
+                print var_dump($vars);
+                exit;
                 $vars['cannedattachments'] = $response_form->getField('attachments')->getClean();
                 $vars['response'] = ThreadEntryBody::clean($vars['response']);
                 if(!$vars['response'])
