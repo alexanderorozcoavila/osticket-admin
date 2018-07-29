@@ -769,6 +769,8 @@ if ($errors['err'] && isset($_POST['a'])) {
                             console.log('eliminado:' + input);
                         },
                         onItemAdd: function(input,item){
+                            console.log(item);
+                            console.log(input);
                             $.ajax({
                                 url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/addcc',
                                 type: 'POST',
