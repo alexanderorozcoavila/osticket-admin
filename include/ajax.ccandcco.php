@@ -27,7 +27,7 @@ include_once INCLUDE_DIR . 'class.thread_actions.php';
 class CcAndCcoAjaxAPI extends AjaxController {
 
     function addCc($tid, $uid=0) {
-        print var_dump($_POST);
+        //print var_dump($_POST);
         $collab = Collaborator::create(array(
             'isactive' => '1',
             'thread_id' => $_POST['threadId'],
@@ -39,11 +39,26 @@ class CcAndCcoAjaxAPI extends AjaxController {
     }
 
     function addCco($tid, $uid=0) {
-        print "addCco";
+        $collab = Collaborator::create(array(
+            'isactive' => '1',
+            'thread_id' => $_POST['threadId'],
+            'user_id' => $_POST['userId'],
+            'role' => $_POST['role'],
+        ));
+        if ($collab->save(true))
+            return $collab;
     }
 
     function addUser($tid, $uid=0) {
-        print "addUser";
+        $user = new User(array(
+            'name' => Format::htmldecode(Format::sanitize($_POST['name'], false)),
+            'created' => new SqlFunction('NOW'),
+            'updated' => new SqlFunction('NOW'),
+            //XXX: Do plain create once the cause
+            // of the detached emails is fixed.
+            'default_email' => UserEmail::ensure($_POST['email'])
+        ));
+        print var_dump($user);
     }
 
 }

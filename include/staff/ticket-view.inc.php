@@ -727,7 +727,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                             $.ajax({
                                 url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/addcc',
                                 type: 'POST',
-                                data: { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: input, role:"O" },
+                                data: { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: input, role:"M" },
                                 dataType: 'json',
                                 error: function() {
                                     console.log('error');
@@ -835,7 +835,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                             console.log(input);
                             //data = { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: input, role:"O" }
                             $.ajax({
-                                url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/addcc',
+                                url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/addcco',
                                 type: 'POST',
                                 data: { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: input, role:"O" },
                                 dataType: 'json',
@@ -852,7 +852,18 @@ if ($errors['err'] && isset($_POST['a'])) {
                         create: function(input) {
                             
                             if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
-                                console.log('creado: '+input);
+                                $.ajax({
+                                    url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/adduser',
+                                    type: 'POST',
+                                    data: { name: input, email:input },
+                                    dataType: 'json',
+                                    error: function() {
+                                        console.log('error');
+                                    },
+                                    success: function(res) {
+                                        console.log(res);
+                                    }
+                                });
                                 return {email: input};
                             }
                             var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
