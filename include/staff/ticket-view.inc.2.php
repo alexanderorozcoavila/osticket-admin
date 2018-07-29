@@ -581,7 +581,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                 style="display:<?php echo $emailReply?  'table-row-group':'none'; ?>;">
              <tr>
                 <td width="120">
-                    <label><strong><?php echo __('CC'); ?>:</strong></label>
+                    <label><strong><?php echo __('Collaborators'); ?>:</strong></label>
                 </td>
                 <td>
                     <input type='checkbox' value='1' name="emailcollab"
@@ -599,30 +599,9 @@ if ($errors['err'] && isset($_POST['a'])) {
                             $colaboradores2 = $colaboradores2 . '<option value="'.$usercc->getId().'" selected>'.$collab2->getEmail().'</option>';
                         }
                     ?>
-                    <div style="
-                    float:left;
-                    border: 1px solid #d0d0d0;
-                    padding: 10px 10px;
-                    width: 100%;
-                    background: #fff;
-                    -webkit-box-sizing: border-box;
-                    -moz-box-sizing: border-box;
-                    box-sizing: border-box;
-                    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
-                    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
-                    -webkit-border-radius: 3px;
-                    -moz-border-radius: 3px;
-                    border-radius: 3px;">
-                    <select id="cc-colaboradores" class="contacts" placeholder="Agregar"  multiple style="width: 90%;">
+                    <select id="cc-colaboradores" class="contacts" placeholder="Agregar"  multiple>
                         <?php echo $colaboradores2; ?>
                     </select>
-                    <span style="
-                    float: right;
-                    top: 0px;
-                    right: 0px;
-                    margin-right: 10px;
-                    margin-top: -27px;" id="span-cco">CCO</span>
-                    </div>
                     <script>
                     var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
                   '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
@@ -630,7 +609,6 @@ if ($errors['err'] && isset($_POST['a'])) {
                     $('#cc-colaboradores').selectize({
                         persist: true,
                         maxItems: null,
-                        plugins: ['remove_button'],
                         valueField: 'id',
                         labelField: 'email',
                         searchField: ['name', 'email'],
@@ -744,7 +722,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                     </script>
                 </td>
              </tr>
-             <tr id="tr-cco">
+             <tr>
                 <td width="120">
                     <label><strong><?php echo __('CCO'); ?>:</strong></label>
                 </td>
@@ -759,24 +737,9 @@ if ($errors['err'] && isset($_POST['a'])) {
                         $colaboradores2 = $colaboradores2 . '<option value="'.$usercco->getId().'" selected>'.$collab2->getEmail().'</option>';
                     }
                 ?>
-                <div style="
-                    float:left;
-                    border: 1px solid #d0d0d0;
-                    padding: 10px 10px;
-                    width: 100%;
-                    background: #fff;
-                    -webkit-box-sizing: border-box;
-                    -moz-box-sizing: border-box;
-                    box-sizing: border-box;
-                    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
-                    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
-                    -webkit-border-radius: 3px;
-                    -moz-border-radius: 3px;
-                    border-radius: 3px;">
-                <select id="cco-colaboradores" class="contacts" placeholder="Agregar" multiple style="width: 90%;">
+                <select id="cco-colaboradores" class="contacts" placeholder="Agregar" multiple>
                 <?php echo $colaboradores2; ?>
                 </select>
-                </div>
                     <script>
                     var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
                   '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
@@ -786,7 +749,6 @@ if ($errors['err'] && isset($_POST['a'])) {
                         maxItems: null,
                         valueField: 'id',
                         labelField: 'email',
-                        plugins: ['remove_button'],
                         searchField: ['name', 'email'],
                         options: [],
                         load: function(query, callback) {
@@ -1217,14 +1179,7 @@ if ($errors['err'] && isset($_POST['a'])) {
 </div>
 <script type="text/javascript">
 $(function() {
-
     <?php if ($role->hasPerm(Ticket::PERM_CCANDCCO)) { ?>
-
-        $( document ).ready(function() {
-            $("#tr-cco").hide()
-        });
-
-
     $(document).on('click', 'a.change-user', function(e) {
         e.preventDefault();
         var tid = <?php echo $ticket->getOwnerId(); ?>;
@@ -1243,12 +1198,6 @@ $(function() {
                 .parent('div').show().trigger('click');
             }
         });
-    });
-
-
-    $(document).on('click', '#span-cco', function(e) {
-        $("#tr-cco").show()
-        console.log('open tr');
     });
 
 <?php } ?>
