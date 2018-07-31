@@ -633,7 +633,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                         plugins: ['remove_button'],
                         valueField: 'id',
                         labelField: 'email',
-                        searchField: ['name', 'email'],
+                        searchField: ['name', 'email','phone'],
                         options: [],
                         load: function(query, callback) {
                             if (!query.length) return callback();
@@ -787,7 +787,7 @@ if ($errors['err'] && isset($_POST['a'])) {
                         valueField: 'id',
                         labelField: 'email',
                         plugins: ['remove_button'],
-                        searchField: ['name', 'email'],
+                        searchField: ['name', 'email','phone'],
                         options: [],
                         load: function(query, callback) {
                             if (!query.length) return callback();
