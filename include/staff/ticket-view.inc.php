@@ -62,8 +62,7 @@ if($ticket->isOverdue())
             // || $role->hasPerm(TicketModel::PERM_EDIT)
             // || ($dept && $dept->isManager($thisstaff))) {
 
-            if ($thisstaff->hasPerm(Email::PERM_BANLIST)
-                    || ($dept && $dept->isManager($thisstaff))) { ?>
+            if (true) { ?>
             <span class="action-button pull-right" data-placement="bottom" data-dropdown="#action-dropdown-more" data-toggle="tooltip" title="<?php echo __('More');?>">
                 <i class="icon-caret-down pull-right"></i>
                 <span ><i class="icon-cog"></i></span>
