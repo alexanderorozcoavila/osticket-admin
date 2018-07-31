@@ -747,11 +747,6 @@ if ($errors['err'] && isset($_POST['a'])) {
                     </script>
                 </td>
              </tr>
-             <tr id="tr-cco">
-                <td width="120">
-                    <label><strong><?php echo __('CCO'); ?>:</strong></label>
-                </td>
-                <td>
                 <?php
                     $ticket2=Ticket::lookup($ticket->getId());
                     $thread2 = $ticket2->getThread();
@@ -762,6 +757,15 @@ if ($errors['err'] && isset($_POST['a'])) {
                         $colaboradores2 = $colaboradores2 . '<option value="'.$usercco->getId().'" selected>'.$collab2->getEmail().'</option>';
                     }
                 ?>
+                <?php if($colaboradores2==""){ 
+                    ?><tr id="tr-cco" style="display:none;"><?php
+                }else{
+                    ?><tr id="tr-cco"><?php
+                }?>
+                <td width="120">
+                    <label><strong><?php echo __('CCO'); ?>:</strong></label>
+                </td>
+                <td>
                 <div style="
                     float:left;
                     border: 1px solid #d0d0d0;
@@ -1224,22 +1228,14 @@ if ($errors['err'] && isset($_POST['a'])) {
 $(function() {
 
     <?php if ($role->hasPerm(Ticket::PERM_CCANDCCO)) { ?>
-
-        <?php if ($colaboradores2 == "" ){ ?>
-        $( document ).ready(function() {
-            $("#tr-cco").css('display','none');
-        });
-        <?php } ?>
-
-        $(document).on('click', '#span-cco', function(e) {
-            if ($("#tr-cco").is(':visible')) {
-                $("#tr-cco").css('display','none');
-            }else{
+        $('#span-cco').click(function() {
+            if ($("#tr-cco").css('display') == 'none') {
                 $("#tr-cco").css('display','table-row');
+            }else{
+                $("#tr-cco").css('display','none');
             }
             console.log('open tr');
         });
-
     <?php } ?>
 
     
