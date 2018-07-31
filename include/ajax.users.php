@@ -101,6 +101,7 @@ class UsersAjaxAPI extends AjaxController {
                 }
                 $name = Format::htmlchars(new UsersName($name));
                 $matches[] = array('email'=>$email, 'name'=>$name, 'info'=>"$email - $name",
+                'phone' => $u['phone'],
                     "id" => $id, "/bin/true" => $_REQUEST['q']);
             }
             usort($matches, function($a, $b) { return strcmp($a['name'], $b['name']); });
