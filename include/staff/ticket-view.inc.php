@@ -811,7 +811,9 @@ if ($errors['err'] && isset($_POST['a'])) {
                                 return '<div>' +
                                     (item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
                                 '</div>';
-
+                            },
+                            option_create: function(item, escape) {
+                                return '<div class="create">Agregar <strong>' + escape(item.input) + '</strong>&hellip;</div>';
                             }
                         },
                         createFilter: function(input) {
