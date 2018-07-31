@@ -1232,13 +1232,11 @@ $(function() {
         <?php } ?>
 
         $(document).on('click', '#span-cco', function(e) {
-            <?php if ($colaboradores2 == "" ){ ?>
             if ($("#tr-cco").is(':visible')) {
-                $("#tr-cco").hide();
+                $("#tr-cco").css('display','none');
             }else{
-                $("#tr-cco").show();
+                $("#tr-cco").css('display','block');
             }
-            <?php } ?>
             console.log('open tr');
         });
 
