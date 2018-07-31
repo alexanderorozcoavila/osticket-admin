@@ -53,6 +53,7 @@ class UsersAjaxAPI extends AjaxController {
                     'phone' => $u['phone'],
                     'id' => "auth:".$u['id'], "/bin/true" => $q);
                 $emails[] = $u['email'];
+                $phone = $u['phone'];
             }
         }
 
@@ -101,7 +102,7 @@ class UsersAjaxAPI extends AjaxController {
                 }
                 $name = Format::htmlchars(new UsersName($name));
                 $matches[] = array('email'=>$email, 'name'=>$name, 'info'=>"$email - $name",
-                'phone' => $u['phone'],
+                'phone' => $phone,
                     "id" => $id, "/bin/true" => $_REQUEST['q']);
             }
             usort($matches, function($a, $b) { return strcmp($a['name'], $b['name']); });
