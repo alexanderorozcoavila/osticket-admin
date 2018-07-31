@@ -50,6 +50,7 @@ class UsersAjaxAPI extends AjaxController {
                 $name = new UsersName(array('first' => $u['first'], 'last' => $u['last']));
                 $matches[] = array('email' => $u['email'], 'name'=>(string) $name,
                     'info' => "{$u['email']} - $name (remote)",
+                    'phone' => $u['phone'],
                     'id' => "auth:".$u['id'], "/bin/true" => $q);
                 $emails[] = $u['email'];
             }
