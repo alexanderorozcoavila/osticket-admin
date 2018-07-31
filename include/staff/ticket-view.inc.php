@@ -1227,7 +1227,7 @@ $(function() {
 
         <?php if ($colaboradores2 == "" ){ ?>
         $( document ).ready(function() {
-            $("#tr-cco").hide()
+            $("#tr-cco").css('display':'none');
         });
         <?php } ?>
 
