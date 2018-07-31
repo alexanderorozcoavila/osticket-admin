@@ -1235,7 +1235,7 @@ $(function() {
             if ($("#tr-cco").is(':visible')) {
                 $("#tr-cco").css('display','none');
             }else{
-                $("#tr-cco").css('display','block');
+                $("#tr-cco").css('display','table-row');
             }
             console.log('open tr');
         });
