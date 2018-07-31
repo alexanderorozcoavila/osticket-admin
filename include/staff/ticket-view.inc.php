@@ -1239,7 +1239,7 @@ $(function() {
 
     <?php } ?>
 
-    <?php if ($role->hasPerm(Ticket::PERM_EDIT)) { ?>
+    
         $(document).on('click', 'a.change-user', function(e) {
             e.preventDefault();
             var tid = <?php echo $ticket->getOwnerId(); ?>;
@@ -1259,7 +1259,7 @@ $(function() {
                 }
             });
         });
-    <?php } ?>
+    
 
     // Post Reply or Note action buttons.
     $('a.post-response').click(function (e) {
