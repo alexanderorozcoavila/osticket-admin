@@ -22,7 +22,7 @@ if ($info['error']) {
     </div>
     <?php
     if ($ticket) { ?>
-        <?php if ($role->hasPerm(Ticket::PERM_CCANDCCO)) { ?>
+        <?php if ($role->hasPerm(Ticket::PERM_EDIT)) { ?>
     <a class="action-button pull-right change-user" style="overflow:inherit"
         href="#tickets/<?php echo $ticket->getId(); ?>/change-user" ><i class="icon-user"></i>
         <?php echo __('Change User'); ?></a>

@@ -1226,40 +1226,40 @@ $(function() {
         });
         <?php } ?>
 
-
-    $(document).on('click', 'a.change-user', function(e) {
-        e.preventDefault();
-        var tid = <?php echo $ticket->getOwnerId(); ?>;
-        var cid = <?php echo $ticket->getOwnerId(); ?>;
-        var url = 'ajax.php/'+$(this).attr('href').substr(1);
-        $.userLookup(url, function(user) {
-            if(cid!=user.id
-                    && $('.dialog#confirm-action #changeuser-confirm').length) {
-                $('#newuser').html(user.name +' &lt;'+user.email+'&gt;');
-                $('.dialog#confirm-action #action').val('changeuser');
-                $('#confirm-form').append('<input type=hidden name=user_id value='+user.id+' />');
-                $('#overlay').show();
-                $('.dialog#confirm-action .confirm-action').hide();
-                $('.dialog#confirm-action p#changeuser-confirm')
-                .show()
-                .parent('div').show().trigger('click');
+        $(document).on('click', '#span-cco', function(e) {
+            <?php if ($colaboradores2 == "" ){ ?>
+            if ($("#tr-cco").is(':visible')) {
+                $("#tr-cco").hide();
+            }else{
+                $("#tr-cco").show();
             }
+            <?php } ?>
+            console.log('open tr');
         });
-    });
 
+    <?php } ?>
 
-    $(document).on('click', '#span-cco', function(e) {
-        <?php if ($colaboradores2 == "" ){ ?>
-        if ($("#tr-cco").is(':visible')) {
-            $("#tr-cco").hide();
-        }else{
-            $("#tr-cco").show();
-        }
-        <?php } ?>
-        console.log('open tr');
-    });
-
-<?php } ?>
+    <?php if ($role->hasPerm(Ticket::PERM_EDIT)) { ?>
+        $(document).on('click', 'a.change-user', function(e) {
+            e.preventDefault();
+            var tid = <?php echo $ticket->getOwnerId(); ?>;
+            var cid = <?php echo $ticket->getOwnerId(); ?>;
+            var url = 'ajax.php/'+$(this).attr('href').substr(1);
+            $.userLookup(url, function(user) {
+                if(cid!=user.id
+                        && $('.dialog#confirm-action #changeuser-confirm').length) {
+                    $('#newuser').html(user.name +' &lt;'+user.email+'&gt;');
+                    $('.dialog#confirm-action #action').val('changeuser');
+                    $('#confirm-form').append('<input type=hidden name=user_id value='+user.id+' />');
+                    $('#overlay').show();
+                    $('.dialog#confirm-action .confirm-action').hide();
+                    $('.dialog#confirm-action p#changeuser-confirm')
+                    .show()
+                    .parent('div').show().trigger('click');
+                }
+            });
+        });
+    <?php } ?>
 
     // Post Reply or Note action buttons.
     $('a.post-response').click(function (e) {
