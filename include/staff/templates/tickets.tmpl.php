@@ -210,7 +210,7 @@ if ($total) { ?>
                         $colaboradores = "";
                         foreach($collabs as $collab) {
                             if($colaboradores == ""){
-                                $colaboradores = $colaboradores.$collab->getEmail().'&#10;';
+                                $colaboradores = $colaboradores.$collab->getEmail();
                             }else{
                                 $colaboradores = ',&nbsp;&#10;'.$colaboradores.$collab->getEmail();
                             }
