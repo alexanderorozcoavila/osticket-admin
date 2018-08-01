@@ -217,7 +217,7 @@ if ($total) { ?>
                                 $colaboradores = ',&nbsp;'.$colaboradores.$collab->getEmail();
                             }
                         }
-                        echo '<span class="faded-more" data-toggle="tooltip" title="'.$colaboradores.'"><i class="icon-group"></i></span>';
+                        //echo '<span class="faded-more" data-toggle="tooltip" title="'.$colaboradores.'"><i class="icon-group"></i></span>';
                     }else{
 
                     }
