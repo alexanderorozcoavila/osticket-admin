@@ -209,7 +209,11 @@ if ($total) { ?>
                         $collabs=$thread->getCollaborators();
                         $colaboradores = "";
                         foreach($collabs as $collab) {
-                            $colaboradores = $colaboradores.$collab->getEmail().',&nbsp;&#10;';
+                            if($colaboradores == ""){
+                                $colaboradores = $colaboradores.$collab->getEmail().'&#10;';
+                            }else{
+                                $colaboradores = ',&nbsp;&#10;'.$colaboradores.$collab->getEmail();
+                            }
                         }
                         echo '<span class="faded-more" data-toggle="tooltip" title="'.$colaboradores.'"><i class="icon-group"></i></span>';
                     }else{
