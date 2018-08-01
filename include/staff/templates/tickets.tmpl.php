@@ -208,7 +208,7 @@ if ($total) { ?>
                         $thread = $ticket->getThread();
                         $collabs=$thread->getCollaborators();
                         $colaboradores = "";
-                        $coma = ',&nbsp;&#10;';
+                        $coma = '';
                         foreach($collabs as $collab) {
                             $colaboradores = $colaboradores.$coma.$collab->getEmail();
                             $coma = ',&nbsp;&#10;';
