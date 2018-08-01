@@ -208,16 +208,12 @@ if ($total) { ?>
                         $thread = $ticket->getThread();
                         $collabs=$thread->getCollaborators();
                         $colaboradores = null;
-                        $coma = false;
+                        $coma = '';
                         foreach($collabs as $collab) {
-                            if(!$coma){
-                                $colaboradores = $colaboradores.$collab->getEmail();
-                                $coma = true;
-                            }else{
-                                $colaboradores = ',&nbsp;'.$colaboradores.$collab->getEmail();
-                            }
+                                $colaboradores = $coma.$colaboradores.$collab->getEmail();
+                                $coma = ',&nbsp;';
                         }
-                        //echo '<span class="faded-more" data-toggle="tooltip" title="'.$colaboradores.'"><i class="icon-group"></i></span>';
+                        echo '<span class="faded-more" data-toggle="tooltip" title="'.$colaboradores.'"><i class="icon-group"></i></span>';
                     }else{
 
                     }
