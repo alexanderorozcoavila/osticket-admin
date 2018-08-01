@@ -207,12 +207,14 @@ if ($total) { ?>
                         $ticket=Ticket::lookup($T['ticket_id']);
                         $thread = $ticket->getThread();
                         $collabs=$thread->getCollaborators();
-                        $colaboradores = "";
+                        $colaboradores = null;
+                        $coma = false;
                         foreach($collabs as $collab) {
-                            if($colaboradores == ""){
+                            if(!$coma){
                                 $colaboradores = $colaboradores.$collab->getEmail();
+                                $coma = true;
                             }else{
-                                $colaboradores = ',&nbsp;&#10;'.$colaboradores.$collab->getEmail();
+                                $colaboradores = ',&nbsp;'.$colaboradores.$collab->getEmail();
                             }
                         }
                         echo '<span class="faded-more" data-toggle="tooltip" title="'.$colaboradores.'"><i class="icon-group"></i></span>';
