@@ -210,11 +210,8 @@ if ($total) { ?>
                         $colaboradores = "";
                         $coma = ',&nbsp;&#10;';
                         foreach($collabs as $collab) {
-                            if($collab === end($collabs)){
-                                $coma = '';
-                            }
-                            $colaboradores = $colaboradores.$collab->getEmail().$coma;
-                            
+                            $colaboradores = $colaboradores.$coma.$collab->getEmail();
+                            $coma = ',&nbsp;&#10;';
                         }
                         echo '<span class="faded-more" data-toggle="tooltip" title="'.$colaboradores.'"><i class="icon-group"></i></span>';
                     }else{
