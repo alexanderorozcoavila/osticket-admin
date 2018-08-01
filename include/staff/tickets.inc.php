@@ -592,8 +592,10 @@ return false;">
                         $thread = $ticket->getThread();
                         $collabs=$thread->getCollaborators();
                         $colaboradores = "";
+                        $coma = '';
                         foreach($collabs as $collab) {
-                            $colaboradores = $colaboradores.$collab->getEmail().',&nbsp;&#10;';
+                            $colaboradores = $colaboradores.$coma.$collab->getEmail();
+                            $coma = ',&nbsp;&#10;';
                         }
                         echo '<span class="pull-right faded-more" data-toggle="tooltip" title="'.$colaboradores.'"><i class="icon-group"></i></span>';
                     }else{
