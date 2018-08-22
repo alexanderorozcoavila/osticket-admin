@@ -226,7 +226,7 @@ if($ticket->isOverdue())
                 <div id="action-dropdown-post-reply" class="action-dropdown anchor-right">
                     <ul>
                         
-                        <li><a class="post-response action-button"
+                        <li><a class="post-response"
                             data-placement="bottom" data-toggle="tooltip"
                             href="#post-reply"><i class="icon-mail-reply"></i> Publicar Repuesta</a>
                         <li><a class="no-pjax ticket-action"
