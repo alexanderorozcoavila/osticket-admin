@@ -214,7 +214,7 @@ if($ticket->isOverdue())
                 title="<?php echo __('Post Reply'); ?>"><i class="icon-mail-reply"></i></a>-->
 
                 <span class="action-button"
-                data-dropdown="#action-dropdown-assign"
+                data-dropdown="#action-dropdown-post-reply"
                 data-placement="bottom"
                 data-toggle="tooltip"
                 title="<?php echo __('Post Reply'); ?>"
@@ -224,7 +224,7 @@ if($ticket->isOverdue())
                     data-redirect="tickets.php"
                     href="#post-reply"><i class="icon-mail-reply"></i></a>
                 </span>
-                <div id="action-dropdown-assign" class="action-dropdown anchor-right">
+                <div id="action-dropdown-post-reply" class="action-dropdown anchor-right">
                     <ul>
                         
                         <li><a class="no-pjax ticket-action"
