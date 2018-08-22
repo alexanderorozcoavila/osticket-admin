@@ -213,7 +213,7 @@ if($ticket->isOverdue())
                 data-placement="bottom" data-toggle="tooltip"
                 title="<?php echo __('Post Reply'); ?>"><i class="icon-mail-reply"></i></a>-->
 
-                <span class="action-button pull-right"
+                <span class="action-button"
                 data-dropdown="#action-dropdown-assign"
                 data-placement="bottom"
                 data-toggle="tooltip"
