@@ -341,8 +341,8 @@ print $response_form->getField('attachments')->render();
 <script type="text/javascript">
 $(function() {
     $('#new-ticket').click(function(){
-        alert('paso');
-        return true;
+        var opcion = confirm("Clicka en Aceptar o Cancelar");
+        return opcion;
     });
     $('input#user-email').typeahead({
         source: function (typeahead, query) {
