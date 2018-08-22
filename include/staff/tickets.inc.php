@@ -416,6 +416,12 @@ $tickets->constrain(array('lock' => array(
 <!-- SEARCH FORM START -->
 <div id='basic_search'>
     <div class="pull-right" style="height:25px">
+        <span class="valign-helper"></span>
+        <?php
+        require STAFFINC_DIR.'templates/queue-sort.tmpl.php';
+        ?>
+    </div>
+    <div class="pull-right" style="height:25px">
         <span class="action-button muted" data-dropdown="#prew-line-ticket" data-toggle="tooltip" title="" data-original-title="Prioridad + Actualizados recientemente">
         <i class="icon-caret-down pull-right"></i>
         <span><i class="icon-sort-by-attributes-alt "></i> Previsualización</span>
@@ -441,12 +447,7 @@ $tickets->constrain(array('lock' => array(
 
 
     </div>
-  <div class="pull-right" style="height:25px">
-    <span class="valign-helper"></span>
-    <?php
-    require STAFFINC_DIR.'templates/queue-sort.tmpl.php';
-    ?>
-  </div>
+  
     <form action="tickets.php" method="get" onsubmit="javascript:
   $.pjax({
     url:$(this).attr('action') + '?' + $(this).serialize(),
