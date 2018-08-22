@@ -144,45 +144,6 @@ if ($_POST)
             </td>
         </tr>
         <tr>
-            <td width="160" class="required">
-                <?php echo __('Help Topic'); ?>:
-            </td>
-            <td>
-                <select name="topicId" onchange="javascript:
-                        var data = $(':input[name]', '#dynamic-form').serialize();
-                        $.ajax(
-                          'ajax.php/form/help-topic/' + this.value,
-                          {
-                            data: data,
-                            dataType: 'json',
-                            success: function(json) {
-                              $('#dynamic-form').empty().append(json.html);
-                              $(document.head).append(json.media);
-                            }
-                          });">
-                    <?php
-                    if ($topics=Topic::getHelpTopics(false, false, true)) {
-                        if (count($topics) == 1)
-                            $selected = 'selected="selected"';
-                        else { ?>
-                        <option value="" selected >&mdash; <?php echo __('Select Help Topic'); ?> &mdash;</option>
-<?php                   }
-                        foreach($topics as $id =>$name) {
-                            echo sprintf('<option value="%d" %s %s>%s</option>',
-                                $id, ($info['topicId']==$id)?'selected="selected"':'',
-                                $selected, $name);
-                        }
-                        if (count($topics) == 1 && !$forms) {
-                            if (($T = Topic::lookup($id)))
-                                $forms =  $T->getForms();
-                        }
-                    }
-                    ?>
-                </select>
-                &nbsp;<font class="error"><b>*</b>&nbsp;<?php echo $errors['topicId']; ?></font>
-            </td>
-        </tr>
-        <tr>
             <td width="160">
                 <?php echo __('Department'); ?>:
             </td>
@@ -207,46 +168,6 @@ if ($_POST)
                 &nbsp;<font class="error"><?php echo $errors['deptId']; ?></font>
             </td>
         </tr>
-
-         <tr>
-            <td width="160">
-                <?php echo __('SLA Plan');?>:
-            </td>
-            <td>
-                <select name="slaId">
-                    <option value="0" selected="selected" >&mdash; <?php echo __('System Default');?> &mdash;</option>
-                    <?php
-                    if($slas=SLA::getSLAs()) {
-                        foreach($slas as $id =>$name) {
-                            echo sprintf('<option value="%d" %s>%s</option>',
-                                    $id, ($info['slaId']==$id)?'selected="selected"':'',$name);
-                        }
-                    }
-                    ?>
-                </select>
-                &nbsp;<font class="error">&nbsp;<?php echo $errors['slaId']; ?></font>
-            </td>
-         </tr>
-
-         <tr>
-            <td width="160">
-                <?php echo __('Due Date');?>:
-            </td>
-            <td>
-                <input class="dp" id="duedate" name="duedate" value="<?php echo Format::htmlchars($info['duedate']); ?>" size="12" autocomplete=OFF>
-                &nbsp;&nbsp;
-                <?php
-                $min=$hr=null;
-                if($info['time'])
-                    list($hr, $min)=explode(':', $info['time']);
-
-                echo Misc::timeDropdown($hr, $min, 'time');
-                ?>
-                &nbsp;<font class="error">&nbsp;<?php echo $errors['duedate']; ?> &nbsp; <?php echo $errors['time']; ?></font>
-                <em><?php echo __('Time is based on your time zone');?> (GMT <?php echo Format::date(false, false, 'ZZZ'); ?>)</em>
-            </td>
-        </tr>
-
         <?php
         if($thisstaff->hasPerm(TicketModel::PERM_ASSIGN, false)) { ?>
         <tr>
@@ -436,18 +357,6 @@ $(function() {
         },
         property: "/bin/true"
     });
-
-   <?php
-    // Popup user lookup on the initial page load (not post) if we don't have a
-    // user selected
-    if (!$_POST && !$user) {?>
-    setTimeout(function() {
-      $.userLookup('ajax.php/users/lookup/form', function (user) {
-        window.location.href = window.location.href+'&uid='+user.id;
-      });
-    }, 100);
-    <?php
-    } ?>
 });
 </script>
 
