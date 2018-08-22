@@ -209,7 +209,7 @@ if($ticket->isOverdue())
             </div>
                 <?php
                 if ($role->hasPerm(TicketModel::PERM_REPLY)) { ?>
-                <!--<a href="#post-reply" class="post-response action-button" #}
+                <!--<a href="#post-reply" class="post-response action-button" 
                 data-placement="bottom" data-toggle="tooltip"
                 title="<?php echo __('Post Reply'); ?>"><i class="icon-mail-reply"></i></a>-->
 
@@ -221,14 +221,13 @@ if($ticket->isOverdue())
                 >
                 <i class="icon-caret-down pull-right"></i>
                 <a class="ticket-action" id="ticket-assign"
-                    data-redirect="tickets.php"
                     href="#post-reply"><i class="icon-mail-reply"></i></a>
                 </span>
                 <div id="action-dropdown-post-reply" class="action-dropdown anchor-right">
                     <ul>
                         
                         <li><a class="no-pjax ticket-action"
-                            data-redirect="tickets.php"
+                            data-placement="bottom" data-toggle="tooltip"
                             href="#post-reply"><i class="icon-mail-reply"></i> Publicar Repuesta</a>
                         <li><a class="no-pjax ticket-action"
                             data-redirect="tickets.php"
