@@ -415,6 +415,32 @@ $tickets->constrain(array('lock' => array(
 
 <!-- SEARCH FORM START -->
 <div id='basic_search'>
+    <div class="pull-right" style="height:25px">
+        <span class="action-button muted" data-dropdown="#prew-line-ticket" data-toggle="tooltip" title="" data-original-title="Prioridad + Actualizados recientemente">
+        <i class="icon-caret-down pull-right"></i>
+        <span><i class="icon-sort-by-attributes-alt "></i> Previsualización</span>
+        </span>
+
+        <div id="prew-line-ticket" class="action-dropdown anchor-right" onclick="javascript:
+            var query = addSearchParam({'sort': $(event.target).data('mode'), 'dir': $(event.target).data('dir')});
+            $.pjax({
+                url: '?' + query,
+                timeout: 2000,
+                container: '#pjax-container'});" style="display: none;">
+            <ul class="bleed-left">
+                <li class="active">
+                    <a href="#" data-mode="priority,updated" data-dir="1">
+                    <i class="icon-fixed-width icon-hand-down"></i> Previsualizar 1 linea del ticket</a>
+                </li>
+                <li>
+                    <a href="#" data-mode="updated" data-dir="0">
+                    <i class="icon-fixed-width "></i> Previsualizar 2 lineas del ticket</a>
+                </li>
+                </ul>
+            </div>
+
+
+    </div>
   <div class="pull-right" style="height:25px">
     <span class="valign-helper"></span>
     <?php
@@ -462,6 +488,7 @@ return false;">
         </div>
     </div>
 </div>
+
 <div class="clear"></div>
 <form action="tickets.php" method="POST" name='tickets' id="tickets">
 <?php csrf_token(); ?>
