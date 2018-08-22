@@ -3245,7 +3245,7 @@ implements RestrictedAccess, Threadable {
         }
 
         if (!$form->isValid($field_filter('ticket')))
-            print var_dump($errors += $form->errors());exit;
+            #print var_dump($errors += $form->errors());exit;
 
         if ($vars['topicId']) {
             if ($topic=Topic::lookup($vars['topicId'])) {
