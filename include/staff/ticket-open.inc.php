@@ -340,6 +340,10 @@ print $response_form->getField('attachments')->render();
 </form>
 <script type="text/javascript">
 $(function() {
+    $('#new-ticket').click(function(){
+        alert('paso');
+        return true;
+    });
     $('input#user-email').typeahead({
         source: function (typeahead, query) {
             $.ajax({
