@@ -231,7 +231,7 @@ if($ticket->isOverdue())
                             href="#post-reply"><i class="icon-mail-reply"></i> Publicar Repuesta</a>
                         <li><a class="no-pjax ticket-action"
                             data-redirect="tickets.php"
-                            href="#tickets/<?php echo $ticket->getId(); ?>/assign/teams"><i class="icon-mail-reply"></i> <?php echo __('Team'); ?></a>
+                            href="#tickets/<?php echo $ticket->getId(); ?>/assign/teams"><i class="icon-arrow-right"></i> Reenviar</a>
                     </ul>
                 </div>
 
