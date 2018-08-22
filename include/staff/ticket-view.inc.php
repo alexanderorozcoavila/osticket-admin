@@ -224,7 +224,17 @@ if($ticket->isOverdue())
                     data-redirect="tickets.php"
                     href="#post-reply"><i class="icon-mail-reply"></i></a>
                 </span>
-
+                <div id="action-dropdown-assign" class="action-dropdown anchor-right">
+                    <ul>
+                        
+                        <li><a class="no-pjax ticket-action"
+                            data-redirect="tickets.php"
+                            href="#post-reply"><i class="icon-mail-reply"></i> Publicar Repuesta</a>
+                        <li><a class="no-pjax ticket-action"
+                            data-redirect="tickets.php"
+                            href="#tickets/<?php echo $ticket->getId(); ?>/assign/teams"><i class="icon-mail-reply"></i> <?php echo __('Team'); ?></a>
+                    </ul>
+                </div>
 
                 <?php
                 } ?>
