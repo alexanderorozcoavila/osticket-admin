@@ -424,7 +424,7 @@ $tickets->constrain(array('lock' => array(
     <div class="pull-right" style="height:25px">
         <span class="action-button muted" data-dropdown="#prew-line-ticket" data-toggle="tooltip" title="" data-original-title="Prioridad + Actualizados recientemente">
         <i class="icon-caret-down pull-right"></i>
-        <span><i class="icon-sort-by-attributes-alt "></i> Previsualización</span>
+        <span><i class="icon-eye-open"></i> Previsualización</span>
         </span>
 
         <div id="prew-line-ticket" class="action-dropdown anchor-right" onclick="javascript:
