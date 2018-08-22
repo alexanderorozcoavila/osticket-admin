@@ -220,9 +220,9 @@ if($ticket->isOverdue())
                 title="<?php echo __('Post Reply'); ?>"
                 >
                 <i class="icon-caret-down pull-right"></i>
-                <a href="#post-reply" class="post-response action-button" #}
-                data-placement="bottom" data-toggle="tooltip"
-                title="<?php echo __('Post Reply'); ?>"><i class="icon-mail-reply"></i></a>
+                <a class="ticket-action" id="ticket-assign"
+                    data-redirect="tickets.php"
+                    href="#post-reply"><i class="icon-mail-reply"></i></a>
                 </span>
 
 
