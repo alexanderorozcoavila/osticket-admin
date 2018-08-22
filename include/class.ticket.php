@@ -3117,11 +3117,11 @@ implements RestrictedAccess, Threadable {
         $fields=array();
         switch (strtolower($origin)) {
             case 'web':
-                $fields['topicId']  = array('type'=>'int',  'required'=>1, 'error'=>__('Select a Help Topic'));
+                $fields['topicId']  = array('type'=>'int',  'required'=>0, 'error'=>__('Select a Help Topic'));
                 break;
             case 'staff':
                 $fields['deptId']   = array('type'=>'int',  'required'=>0, 'error'=>__('Department selection is required'));
-                $fields['topicId']  = array('type'=>'int',  'required'=>1, 'error'=>__('Help topic selection is required'));
+                $fields['topicId']  = array('type'=>'int',  'required'=>0, 'error'=>__('Help topic selection is required'));
                 $fields['duedate']  = array('type'=>'date', 'required'=>0, 'error'=>__('Invalid date format - must be MM/DD/YY'));
             case 'api':
                 $fields['source']   = array('type'=>'string', 'required'=>1, 'error'=>__('Indicate ticket source'));
