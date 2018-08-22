@@ -2767,8 +2767,8 @@ implements RestrictedAccess, Threadable {
 
         if (!Validator::process($fields, $vars, $errors) && !$errors['err'])
             $errors['err'] = sprintf('%s — %s',
-                __('Missing or invalid data'),
-                __('Correct any errors below and try again'));
+                __('Missing or invalid data 3'),
+                __('Correct any errors below and try again 2'));
 
         $vars['note'] = ThreadEntryBody::clean($vars['note']);
 
@@ -3136,8 +3136,8 @@ implements RestrictedAccess, Threadable {
 
         if(!Validator::process($fields, $vars, $errors) && !$errors['err'])
             $errors['err'] = sprintf('%s — %s',
-                __('Missing or invalid data'),
-                __('Correct any errors below and try again'));
+                __('Missing or invalid data 4'),
+                __('Correct any errors below and try again 5'));
 
         // Make sure the due date is valid
         if ($vars['duedate']) {
