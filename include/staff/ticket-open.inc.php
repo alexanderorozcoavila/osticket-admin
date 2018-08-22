@@ -341,7 +341,7 @@ print $response_form->getField('attachments')->render();
 <script type="text/javascript">
 $(function() {
     $('#new-ticket').click(function(){
-        var opcion = confirm("Clicka en Aceptar o Cancelar");
+        var opcion = confirm("¿Seguro que desea salir? \nCualquier cambio o información que hayas introducido \nserán descartados");
         return opcion;
     });
     $('input#user-email').typeahead({
