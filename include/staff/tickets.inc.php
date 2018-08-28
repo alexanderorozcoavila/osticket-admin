@@ -647,8 +647,8 @@ return false;">
             </tr>
             <tr>
                 <td colspan="7">
-                <span class="preview_1">texto 1</span>
-                <span class="preview_2">texto 2</span>
+                <span class="preview_1">texto 1</span><br>
+                <span class="preview_2" style="display:none;">texto 2</span>
                 </td>
             </tr>
             <?php
