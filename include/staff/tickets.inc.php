@@ -648,7 +648,7 @@ return false;">
             <tr>
                 <td colspan="7">
                 <?php
-                $tcount = $T->getThreadEntries();
+                $tcount = $T->getThread();
                 ?>
                 <span class="preview_1">texto 1</span><br>
                 <span class="preview_2" style="display:none;">
