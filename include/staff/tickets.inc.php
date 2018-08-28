@@ -654,8 +654,12 @@ return false;">
                 <span class="preview_1">texto 1</span><br>
                 <span class="preview_2" style="display:none;">
                 <?php 
+                $i=0;
                 foreach ($tcount as $EN){
-                    print $EN->getBody();
+                    if($i == 0){
+                        print $EN->getBody();
+                        $i = 1;
+                    }
                 }
                 ?>
                 </span>
