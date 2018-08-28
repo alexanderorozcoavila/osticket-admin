@@ -429,11 +429,11 @@ $tickets->constrain(array('lock' => array(
 
         <div id="prew-line-ticket" class="action-dropdown anchor-right" style="display: none;">
             <ul class="bleed-left">
-                <li class="active">
+                <li class="active" id="li-pre-1">
                     <a href="#" id="btn-pre-1">
                     <i class="icon-fixed-width icon-hand-down" id="ico-pre-1"></i> Previsualizar 1 linea del ticket</a>
                 </li>
-                <li>
+                <li id="li-pre-2">
                     <a href="#" id="btn-pre-2">
                     <i class="icon-fixed-width" id="ico-pre-2"></i> Previsualizar 2 lineas del ticket</a>
                 </li>
@@ -716,10 +716,16 @@ $(function() {
 $('#btn-pre-1').click(function(){
     $('.preview_2').hide();
     $('#ico-pre-1').addClass('icon-hand-down');
+    $('#ico-pre-2').removeClass('icon-hand-down');
+    $('#li-pre-2').removeClass('active');
+    $('#li-pre-1').addClass('active');
 });
 $('#btn-pre-2').click(function(){
     $('.preview_2').show();
     $('#ico-pre-2').addClass('icon-hand-down');
+    $('#ico-pre-1').removeClass('icon-hand-down');
+    $('#li-pre-1').removeClass('active');
+    $('#li-pre-2').addClass('active');
 });
 </script>
 
