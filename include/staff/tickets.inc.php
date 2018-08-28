@@ -427,19 +427,14 @@ $tickets->constrain(array('lock' => array(
         <span><i class="icon-eye-open"></i> Previsualización</span>
         </span>
 
-        <div id="prew-line-ticket" class="action-dropdown anchor-right" onclick="javascript:
-            var query = addSearchParam({'sort': $(event.target).data('mode'), 'dir': $(event.target).data('dir')});
-            $.pjax({
-                url: '?' + query,
-                timeout: 2000,
-                container: '#pjax-container'});" style="display: none;">
+        <div id="prew-line-ticket" class="action-dropdown anchor-right" style="display: none;">
             <ul class="bleed-left">
                 <li class="active">
-                    <a href="#" data-mode="priority,updated" data-dir="1">
+                    <a href="#" id="btn-pre-1">
                     <i class="icon-fixed-width icon-hand-down"></i> Previsualizar 1 linea del ticket</a>
                 </li>
                 <li>
-                    <a href="#" data-mode="updated" data-dir="0">
+                    <a href="#" id="btn-pre-2">
                     <i class="icon-fixed-width "></i> Previsualizar 2 lineas del ticket</a>
                 </li>
                 </ul>
@@ -650,9 +645,14 @@ return false;">
                 <td nowrap><span class="truncate" style="max-width: 169px"><?php
                     echo Format::htmlchars($lc); ?></span></td>
             </tr>
-            <tr id="preview_<?php echo $T['ticket_id']; ?>">
+            <tr class="preview_1">
                 <td colspan="7">
-                texto
+                texto 1
+                </td>
+            </tr>
+            <tr class="preview_2" style="display:none;">
+                <td colspan="7">
+                texto 2
                 </td>
             </tr>
             <?php
@@ -716,6 +716,12 @@ return false;">
 <script type="text/javascript">
 $(function() {
     $('[data-toggle=tooltip]').tooltip();
+});
+$('#btn-pre-1').click(function(){
+    $('.preview_2').hidden();
+});
+$('#btn-pre-2').click(function(){
+    $('.preview_2').show();
 });
 </script>
 
