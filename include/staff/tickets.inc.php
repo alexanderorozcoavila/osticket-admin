@@ -647,8 +647,15 @@ return false;">
             </tr>
             <tr>
                 <td colspan="7">
+                <?php
+                $tcount = $ticket->getThreadEntries();
+                ?>
                 <span class="preview_1">texto 1</span><br>
-                <span class="preview_2" style="display:none;">texto 2</span>
+                <span class="preview_2" style="display:none;">
+                <?php 
+                    print var_dump($tcount);
+                ?>
+                </span>
                 </td>
             </tr>
             <?php
