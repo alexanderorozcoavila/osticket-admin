@@ -651,17 +651,26 @@ return false;">
                 $ticketprew=Ticket::lookup($T['ticket_id']);
                 $tcount = $ticketprew->getThreadEntries();
                 ?>
-                <span class="preview_1">texto 1</span><br>
-                <span class="preview_2" style="display:none;">
                 <?php 
                 $i=0;
                 foreach ($tcount as $EN){
                     if($i == 0){
-                        print $EN->getBody();
+                        $lineas = $EN->getBody();
                         $i = 1;
                     }
                 }
+
+                $allowed_tags = array("html", "body", "b", "br", "em", "hr", "i", "li", "ol", "p", "s", "span", "table", "tr", "td", "u", "ul","div");
+                $descripcion = "";
+                foreach($allowed_tags as $tag ){
+                    $descripcion = strip_tags($lineas, $tag);
+                }
+                $linea1 = substr($descripcion, 0, 150);
+                $linea2 = substr($descripcion, 151, 301);
                 ?>
+                <span class="preview_1"><?php echo $linea1; ?></span><br>
+                <span class="preview_2" style="display:none;">
+                <?php echo $linea2; ?>
                 </span>
                 </td>
             </tr>
