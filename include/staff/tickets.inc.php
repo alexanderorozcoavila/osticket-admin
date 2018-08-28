@@ -654,7 +654,7 @@ return false;">
                 <span class="preview_1">texto 1</span><br>
                 <span class="preview_2" style="display:none;">
                 <?php 
-                    print var_dump($tcount);
+                    print $tcount->getBody();
 
                 ?>
                 </span>
