@@ -718,7 +718,7 @@ $(function() {
     $('[data-toggle=tooltip]').tooltip();
 });
 $('#btn-pre-1').click(function(){
-    $('.preview_2').hidden();
+    $('.preview_2').hide();
 });
 $('#btn-pre-2').click(function(){
     $('.preview_2').show();
