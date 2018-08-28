@@ -648,7 +648,7 @@ return false;">
             <tr>
                 <td colspan="7">
                 <?php
-                $ticketprew=Ticket::lookup($T['id']);
+                $ticketprew=Ticket::lookup($T['ticket_id']);
                 $tcount = $ticketprew->getThread();
                 ?>
                 <span class="preview_1">texto 1</span><br>
