@@ -650,6 +650,11 @@ return false;">
                 <td nowrap><span class="truncate" style="max-width: 169px"><?php
                     echo Format::htmlchars($lc); ?></span></td>
             </tr>
+            <tr id="preview_<?php echo $T['ticket_id']; ?>">
+                <td colspan="7">
+                texto
+                </td>
+            </tr>
             <?php
             } //end of foreach
         if (!$total)
