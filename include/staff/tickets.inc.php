@@ -645,14 +645,10 @@ return false;">
                 <td nowrap><span class="truncate" style="max-width: 169px"><?php
                     echo Format::htmlchars($lc); ?></span></td>
             </tr>
-            <tr class="preview_1">
+            <tr>
                 <td colspan="7">
-                texto 1
-                </td>
-            </tr>
-            <tr class="preview_2" style="display:none;">
-                <td colspan="7">
-                texto 2
+                <span class="preview_1">texto 1</span>
+                <span class="preview_2">texto 2</span>
                 </td>
             </tr>
             <?php
