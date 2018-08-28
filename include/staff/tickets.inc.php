@@ -665,8 +665,8 @@ return false;">
                 foreach($allowed_tags as $tag ){
                     $descripcion = strip_tags($lineas, $tag);
                 }
-                $linea1 = substr($descripcion, 0, 150);
-                $linea2 = substr($descripcion, 151, 301);
+                $linea1 = substr($descripcion, 0, 100);
+                $linea2 = substr($descripcion, 101, 202);
                 ?>
                 <span class="preview_1"><?php echo $linea1; ?></span><br>
                 <span class="preview_2" style="display:none;">
