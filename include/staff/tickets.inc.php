@@ -665,10 +665,10 @@ return false;">
                 foreach($allowed_tags as $tag ){
                     $descripcion = strip_tags($lineas, $tag);
                 }
-                $linea1 = substr($descripcion, 0, 200);
+                $linea1 = substr($descripcion, 0, 250);
                 // $linea2 = substr($descripcion, 101, 202);
                 ?>
-                <div class="preview_1 preview-line-hide"><?php echo $linea1; ?></div>
+                <div class="preview_1 preview-line-hide" style="width: 891px;"><?php echo $linea1; ?></div>
                 <!-- <span class="preview_2" style="display:none;">
                 <?php //echo $linea2; ?>
                 </span> -->
