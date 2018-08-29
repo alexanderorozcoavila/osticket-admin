@@ -665,13 +665,13 @@ return false;">
                 foreach($allowed_tags as $tag ){
                     $descripcion = strip_tags($lineas, $tag);
                 }
-                $linea1 = substr($descripcion, 0, 100);
-                $linea2 = substr($descripcion, 101, 202);
+                $linea1 = substr($descripcion, 0, 200);
+                // $linea2 = substr($descripcion, 101, 202);
                 ?>
-                <span class="preview_1"><?php echo $linea1; ?></span><br>
-                <span class="preview_2" style="display:none;">
-                <?php echo $linea2; ?>
-                </span>
+                <div class="preview_1 preview-line-hide"><?php echo $linea1; ?></div>
+                <!-- <span class="preview_2" style="display:none;">
+                <?php //echo $linea2; ?>
+                </span> -->
                 </td>
             </tr>
             <?php
@@ -737,14 +737,16 @@ $(function() {
     $('[data-toggle=tooltip]').tooltip();
 });
 $('#btn-pre-1').click(function(){
-    $('.preview_2').hide();
+    //$('.preview_2').hide();
+    $('.preview_1').addClass('preview-line-hide');
     $('#ico-pre-1').addClass('icon-hand-down');
     $('#ico-pre-2').removeClass('icon-hand-down');
     $('#li-pre-2').removeClass('active');
     $('#li-pre-1').addClass('active');
 });
 $('#btn-pre-2').click(function(){
-    $('.preview_2').show();
+    //$('.preview_2').show();
+    $('.preview_1').removeClass('preview-line-hide');
     $('#ico-pre-2').addClass('icon-hand-down');
     $('#ico-pre-1').removeClass('icon-hand-down');
     $('#li-pre-1').removeClass('active');
