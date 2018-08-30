@@ -281,7 +281,7 @@ $(function() {
                     this.$editor.attr('spellcheck', 'true');
                     var lang = this.$editor.closest('[lang]').attr('lang');
                     if (lang)
-                        this.$editor.attr('lang', 'es_ES,en_US');
+                        this.$editor.attr('lang', 'es_ES, en_US');
                 },
                 'linkSize': 100000,
                 'definedLinks': 'ajax.php/config/links'
@@ -325,7 +325,7 @@ $(function() {
         getConfig().then(function(c) {
             if (c.lang && c.lang.toLowerCase() != 'en_us' &&
                     $.Redactor.opts.langs[c.short_lang])
-                options['lang'] = c.short_lang;
+                options['lang'] = 'es_ES, en_US';
             //if (c.has_rtl)
               //  options['plugins'].push('textdirection');
             if (el.find('rtl').length)
