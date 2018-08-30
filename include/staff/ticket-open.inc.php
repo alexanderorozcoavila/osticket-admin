@@ -21,8 +21,7 @@ if ($info['topicId'] && ($topic=Topic::lookup($info['topicId']))) {
         $forms[] = $F;
     }
 }
-echo $thisstaff->dept;
-exit;
+
 if ($_POST)
     $info['duedate'] = Format::date(strtotime($info['duedate']), false, false, 'UTC');
 ?>
@@ -161,7 +160,7 @@ if ($_POST)
                                 continue;
                             }
                             echo sprintf('<option value="%d" %s>%s</option>',
-                                    $id, ($info['deptId']==$id)?'selected="selected"':'',$name);
+                                    $id, ($thisstaff->dept==$name)?'selected="selected"':'',$name);
                         }
                     }
                     ?>
