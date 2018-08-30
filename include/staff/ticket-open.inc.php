@@ -250,7 +250,7 @@ if ($_POST)
                     name="response" id="response" cols="21" rows="8"
                     style="width:80%;" <?php
     list($draft, $attrs) = Draft::getDraftAndDataAttrs('ticket.staff.response', false, $info['response']);
-    echo $attrs; ?>><?php echo $_POST ? $info['response'] : $draft;
+    echo $attrs; ?>><?php echo $attrs;
                 ?></textarea>
                     <div class="attachments">
 <?php
