@@ -21,7 +21,8 @@ if ($info['topicId'] && ($topic=Topic::lookup($info['topicId']))) {
         $forms[] = $F;
     }
 }
-
+echo $thisstaff->dept;
+exit;
 if ($_POST)
     $info['duedate'] = Format::date(strtotime($info['duedate']), false, false, 'UTC');
 ?>
