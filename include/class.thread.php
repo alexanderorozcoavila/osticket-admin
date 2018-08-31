@@ -1740,6 +1740,7 @@ class ThreadEvent extends VerySimpleModel {
             'team_id' => '0',
             'dept_id' => '0',
             'topic_id' => '0',
+            'state'=>$state,
         ), $user);
         return $inst;
     }
@@ -1865,8 +1866,6 @@ class ThreadEvents extends InstrumentedList {
         $this->add($event);
 
         // Save event immediately
-        print "llego aca";
-        exit;
         return $event->save();
     }
 }
