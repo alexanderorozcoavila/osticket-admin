@@ -1734,6 +1734,16 @@ class ThreadEvent extends VerySimpleModel {
         return $inst;
     }
 
+    static function forTicketConflict($ticket, $state, $user=false) {
+        $inst = self::create(array(
+            'staff_id' => '0',
+            'team_id' => '0',
+            'dept_id' => '0',
+            'topic_id' => '0',
+        ), $user);
+        return $inst;
+    }
+
     function getTypedEvent() {
         static $subclasses;
 
@@ -1776,8 +1786,6 @@ class ThreadEvents extends InstrumentedList {
 
         if ($object instanceof Ticket){
             // TODO: Use $object->createEvent() (nolint)
-            print var_dump($object);
-            exit;
             $event = ThreadEvent::forTicket($object, $state, $user);
         }else{
             $event = ThreadEvent::create(false, $user);
@@ -1809,6 +1817,42 @@ class ThreadEvents extends InstrumentedList {
         }
         $event->username = $username;
         $event->state = $state;
+
+        if ($data) {
+            if (is_array($data))
+                $data = JsonDataEncoder::encode($data);
+            if (!is_string($data))
+                throw new InvalidArgumentException('Data must be string or array');
+            $event->data = $data;
+        }
+
+        $this->add($event);
+
+        // Save event immediately
+        return $event->save();
+    }
+
+    function logConflict($object, $state, $data=null, $user=null, $annul=null) {
+        global $thisstaff, $thisclient;
+
+        if ($object instanceof Ticket){
+            // TODO: Use $object->createEvent() (nolint)
+            $event = ThreadEvent::forTicketConflict($object, $state, $user);
+        }
+        # Annul previous entries if requested (for instance, reopening a
+        # ticket will annul an 'closed' entry). This will be useful to
+        # easily prevent repeated statistics.
+
+        $username = $user;
+        $user = is_object($user) ? $user : $thisclient ?: $thisstaff;
+        if (!is_string($username)) {
+            if ($user instanceof Staff) {
+                $username = $user->getUserName();
+            }
+            // XXX: Use $user here
+        }
+        $event->username = $username;
+        $event->state = 'notedited';
 
         if ($data) {
             if (is_array($data))

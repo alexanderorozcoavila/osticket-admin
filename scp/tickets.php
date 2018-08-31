@@ -190,6 +190,9 @@ if($_POST && !$errors):
             }
             break;
         case 'edit':
+            print 'editando';
+            exit;
+            break;
         case 'update':
             if(!$ticket || !$role->hasPerm(TicketModel::PERM_EDIT))
                 $errors['err']=__('Permission Denied. You are not allowed to edit tickets');
