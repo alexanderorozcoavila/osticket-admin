@@ -461,7 +461,7 @@ if($ticket) {
         
         //print "editando";
         //$ticket->logConflictTikcet();
-        $th = $ticket->getThread();
+        $th = $ticket->getThread()->getEvents();
         print var_dump($th);
         exit;
         $inc = 'ticket-edit.inc.php';
