@@ -1719,8 +1719,8 @@ class ThreadEvent extends VerySimpleModel {
             $inst->uid_type = 'U';
             $inst->uid = $user->getId();
         }
-        print var_dump($inst);
-        exit;
+        // print var_dump($inst);
+        // exit;
         return $inst;
     }
 
@@ -1774,12 +1774,16 @@ class ThreadEvents extends InstrumentedList {
     function log($object, $state, $data=null, $user=null, $annul=null) {
         global $thisstaff, $thisclient;
 
-        if ($object instanceof Ticket)
+        if ($object instanceof Ticket){
             // TODO: Use $object->createEvent() (nolint)
+            print "aca";
+            exit;
             $event = ThreadEvent::forTicket($object, $state, $user);
-        else
+        }else{
+            print "no aca";
+            exit;
             $event = ThreadEvent::create(false, $user);
-
+        }
         # Annul previous entries if requested (for instance, reopening a
         # ticket will annul an 'closed' entry). This will be useful to
         # easily prevent repeated statistics.
