@@ -1719,7 +1719,8 @@ class ThreadEvent extends VerySimpleModel {
             $inst->uid_type = 'U';
             $inst->uid = $user->getId();
         }
-
+        print var_dump($inst);
+        exit;
         return $inst;
     }
 
