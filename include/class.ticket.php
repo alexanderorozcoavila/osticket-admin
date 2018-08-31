@@ -2604,7 +2604,7 @@ implements RestrictedAccess, Threadable {
     function logConflictTikcet(){
         $user = $thisstaff ?: $user;
         $annul = null;
-        $data = null;
+        $data = 'notedit';
         $state = 'notedit';
         $this->getThread()->getEvents()->logConflict($this, $state, $data, $user, $annul);
     }

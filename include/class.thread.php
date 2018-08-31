@@ -1854,14 +1854,7 @@ class ThreadEvents extends InstrumentedList {
         }
         $event->username = $username;
         $event->state = $state;
-
-        if ($data) {
-            if (is_array($data))
-                $data = JsonDataEncoder::encode($data);
-            if (!is_string($data))
-                throw new InvalidArgumentException('Data must be string or array');
-            $event->data = $data;
-        }
+        $event->data = $data;
 
         $this->add($event);
 
