@@ -1776,12 +1776,10 @@ class ThreadEvents extends InstrumentedList {
 
         if ($object instanceof Ticket){
             // TODO: Use $object->createEvent() (nolint)
-            print "aca";
+            print var_dump($object);
             exit;
             $event = ThreadEvent::forTicket($object, $state, $user);
         }else{
-            print "no aca";
-            exit;
             $event = ThreadEvent::create(false, $user);
         }
         # Annul previous entries if requested (for instance, reopening a
