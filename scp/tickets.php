@@ -460,8 +460,10 @@ if($ticket) {
             && $ticket->checkStaffPerm($thisstaff, TicketModel::PERM_EDIT)) {
         
         //print "editando";
-        $ticket->logConflictTikcet();
-        //exit;
+        //$ticket->logConflictTikcet();
+        $th = $ticket->getThread()->filter(array('thread_id'=>$ticket->getId()));
+        print var_dump($th);
+        exit;
         $inc = 'ticket-edit.inc.php';
         if (!$forms) $forms=DynamicFormEntry::forTicket($ticket->getId());
         // Auto add new fields to the entries
