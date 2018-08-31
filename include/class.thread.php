@@ -270,7 +270,12 @@ class Thread extends VerySimpleModel {
         $sql="SELECT * FROM os_thread_event WHERE thread_id = ".db_input($thread)."
         AND data = 'notedit' and username LIKE ".db_input($user);
         //return $sql;
-        return db_fetch_array(db_query($sql));
+        if(db_fetch_array(db_query($sql))){
+            print "si";
+        }else{
+            print "no";
+        }
+        return true;
     }
 
 
