@@ -1865,6 +1865,8 @@ class ThreadEvents extends InstrumentedList {
         $this->add($event);
 
         // Save event immediately
+        print "llego aca";
+        exit;
         return $event->save();
     }
 }
