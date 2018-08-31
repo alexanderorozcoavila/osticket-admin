@@ -458,6 +458,9 @@ if($ticket) {
     $inc = 'ticket-view.inc.php';
     if ($_REQUEST['a']=='edit'
             && $ticket->checkStaffPerm($thisstaff, TicketModel::PERM_EDIT)) {
+        
+        print "editando";
+        exit;
         $inc = 'ticket-edit.inc.php';
         if (!$forms) $forms=DynamicFormEntry::forTicket($ticket->getId());
         // Auto add new fields to the entries
