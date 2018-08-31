@@ -266,7 +266,7 @@ class Thread extends VerySimpleModel {
         return $this->events;
     }
 
-    function getLogConflict($thread,$username) {
+    function getLogConflictUser($thread) {
         global $thisstaff, $thisclient;
         $username = $user;
         $user = is_object($user) ? $user : $thisclient ?: $thisstaff;
@@ -281,11 +281,21 @@ class Thread extends VerySimpleModel {
         AND data = 'notedit' and username LIKE ".db_input($username);
         //return $sql;
         if(db_fetch_array(db_query($sql))){
-            print "si";
+            return true;
         }else{
-            print "no";
+            return false;   
         }
-        return true;
+    }
+
+    function getLogConflict($thread) {
+        $sql="SELECT * FROM os_thread_event WHERE thread_id = ".db_input($thread)."
+        AND data = 'notedit'";
+        //return $sql;
+        if(db_fetch_array(db_query($sql))){
+            return true;
+        }else{
+            return false;   
+        }
     }
 
 

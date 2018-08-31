@@ -462,9 +462,15 @@ if($ticket) {
         //print "editando";
         //$ticket->logConflictTikcet();
         
-        $th = $ticket->getThread()->getLogConflict($ticket->getId(),'');
-        print var_dump($th);
-        exit;
+        // $th = $ticket->getThread()->getLogConflictUser($ticket->getId());
+        // print var_dump($th);
+        if($ticket->getThread()->getLogConflict($ticket->getId())){
+            if($ticket->getThread()->getLogConflictUser($ticket->getId())){
+
+            }else{
+                Http::redirect('tickets.php');
+            }
+        }
         $inc = 'ticket-edit.inc.php';
         if (!$forms) $forms=DynamicFormEntry::forTicket($ticket->getId());
         // Auto add new fields to the entries
