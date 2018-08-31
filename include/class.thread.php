@@ -267,6 +267,16 @@ class Thread extends VerySimpleModel {
     }
 
     function getLogConflict($thread,$username) {
+        global $thisstaff, $thisclient;
+        $username = $user;
+        $user = is_object($user) ? $user : $thisclient ?: $thisstaff;
+        if (!is_string($username)) {
+            if ($user instanceof Staff) {
+                $username = $user->getUserName();
+            }
+            // XXX: Use $user here
+        }
+
         $sql="SELECT * FROM os_thread_event WHERE thread_id = ".db_input($thread)."
         AND data = 'notedit' and username LIKE ".db_input($username);
         //return $sql;
