@@ -269,8 +269,8 @@ class Thread extends VerySimpleModel {
     function getLogConflict($hread,$user) {
         $sql="SELECT * FROM os_thread_event WHERE thread_id = ".db_input($thread)."
         AND username LIKE ".db_input($user);
-
-        return db_fetch_array(db_query($sql));
+        return $sql;
+        //return db_fetch_array(db_query($sql));
     }
 
 
