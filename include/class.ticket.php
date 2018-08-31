@@ -2606,7 +2606,7 @@ implements RestrictedAccess, Threadable {
         $annul = null;
         $data = null;
         $state = 'notedit';
-        $this->getThread()->getEvents()->log($this, $state, $data, $user, $annul);
+        $this->getThread()->getEvents()->logConflict($this, $state, $data, $user, $annul);
     }
 
     //Insert Internal Notes
