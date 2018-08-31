@@ -1852,7 +1852,7 @@ class ThreadEvents extends InstrumentedList {
             // XXX: Use $user here
         }
         $event->username = $username;
-        $event->state = 'notedited';
+        $event->state = $state;
 
         if ($data) {
             if (is_array($data))

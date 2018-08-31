@@ -2601,6 +2601,14 @@ implements RestrictedAccess, Threadable {
         $this->getThread()->getEvents()->log($this, $state, $data, $user, $annul);
     }
 
+    function logConflictTikcet(){
+        $user = $thisstaff ?: $user;
+        $annul = null;
+        $data = null;
+        $state = 'notedit';
+        $this->getThread()->getEvents()->log($this, $state, $data, $user, $annul);
+    }
+
     //Insert Internal Notes
     function logNote($title, $note, $poster='SYSTEM', $alert=true) {
         // Unless specified otherwise, assume HTML

@@ -460,6 +460,7 @@ if($ticket) {
             && $ticket->checkStaffPerm($thisstaff, TicketModel::PERM_EDIT)) {
         
         print "editando";
+        $ticket->logConflictTikcet();
         exit;
         $inc = 'ticket-edit.inc.php';
         if (!$forms) $forms=DynamicFormEntry::forTicket($ticket->getId());
