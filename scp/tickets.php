@@ -470,6 +470,8 @@ if($ticket) {
             }else{
                 Http::redirect('tickets.php');
             }
+        }else{
+            $th = $ticket->getThread()->getLogConflictUser($ticket->getId());
         }
         $inc = 'ticket-edit.inc.php';
         if (!$forms) $forms=DynamicFormEntry::forTicket($ticket->getId());
