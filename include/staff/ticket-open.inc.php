@@ -162,7 +162,9 @@ if ($_POST)
                                         
                                     }
                                 }); 
-                                return {email: input, id:idusernew}; 
+                                var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
+
+                                return {email: input, id:idusernew,name  : $.trim(match[1])}; 
                                 
                             }
                             var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
