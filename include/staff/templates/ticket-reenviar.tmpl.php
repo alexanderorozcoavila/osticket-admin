@@ -12,8 +12,7 @@ if (!$info['title'])
 <div id="ticket-status" style="display:block; margin:5px;">
     <form method="post" name="status" id="status" action="<?php echo $action; ?>">
     <table>
-    <tbody id="cc_sec"
-                style="display:<?php echo $emailReply?  'table-row-group':'none'; ?>;">
+    <tbody id="cc_sec">
              <tr>
                 <td width="120">
                     <label><strong><?php echo __('CC'); ?>:</strong></label>
