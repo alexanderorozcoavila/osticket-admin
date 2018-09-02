@@ -71,6 +71,11 @@ if($ticket->isOverdue())
             <?php
             }
             
+            // global $thisstaff, $thisclient;
+            $username = $user;
+            $user = is_object($user) ? $user : $thisclient ?: $thisstaff;
+            print var_dump($user);
+            exit;
             if(isset($_GET['status'])){
                 if($_GET['status'] == "assigned"){
                     $statusLista = 'open';
