@@ -51,6 +51,10 @@ class CcAndCcoAjaxAPI extends AjaxController {
 
     function ticketReenviar($tid) {
         $idTicketAssign = $tid;
+        $ticketresult = Ticket::objects()
+            ->filter(array('ticket_id'=>$idTicketAssign));
+        print var_dump($ticketresult);
+        exit;
         include(STAFFINC_DIR . 'templates/ticket-reenviar.tmpl.php');
     }
 

@@ -77,22 +77,6 @@ if (!$info['title'])
 
                             return false;
                         },
-                        onItemRemove: function(input) {
-                            $.ajax({
-                                url: 'ajax.php/ccandcco/<?php echo $idTicketAssign; ?>/delete',
-                                type: 'POST',
-                                // async:false,
-                                data: { threadId:"<?php echo $idTicketAssign; ?>",userId: input },
-                                // dataType: 'json',
-                                error: function() {
-                                    console.log('error');
-                                },
-                                success: function(res) {
-                                    console.log(res);
-                                }
-                            });
-                        },
-                        
                         create: function(input) {
                             
                             if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
@@ -212,40 +196,6 @@ if (!$info['title'])
 
                             return false;
                         },
-                        onItemRemove: function(input) {
-                            $.ajax({
-                                url: 'ajax.php/ccandcco/<?php echo $idTicketAssign; ?>/delete',
-                                type: 'POST',
-                                // async:false,
-                                data: { threadId:"<?php echo $idTicketAssign; ?>",userId: input },
-                                // dataType: 'json',
-                                error: function() {
-                                    console.log('error');
-                                },
-                                success: function(res) {
-                                    console.log(res);
-                                }
-                            });
-                        },
-                        onItemAdd: function(input,item){
-                            console.log(input);
-                            //data = { threadId:"<?php echo $idTicketAssign; ?>",userId: input, role:"O" }
-                            $.ajax({
-                                url: 'ajax.php/ccandcco/<?php echo $idTicketAssign; ?>/addcco',
-                                type: 'POST',
-                                // async:false,
-                                data: { threadId:"<?php echo $idTicketAssign; ?>",userId: input, role:"M" },
-                                // dataType: 'json',
-                                error: function() {
-                                    console.log('error');
-                                },
-                                success: function(res) {
-                                    console.log(res);
-                                }
-                            });
-                            console.log('agregador:' + input);
-
-                        },
                         create: function(input) {
                             
                             if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
@@ -358,41 +308,6 @@ if (!$info['title'])
                             if (match) return !this.options.hasOwnProperty(match[2]);
 
                             return false;
-                        },
-                        onItemRemove: function(input) {
-                            console.log('eliminado:' + input);
-                            $.ajax({
-                                url: 'ajax.php/ccandcco/<?php echo $idTicketAssign; ?>/delete',
-                                type: 'POST',
-                                // async:false,
-                                data: { threadId:"<?php echo $idTicketAssign; ?>",userId: input },
-                                // dataType: 'json',
-                                error: function() {
-                                    console.log('error');
-                                },
-                                success: function(res) {
-                                    console.log(res);
-                                }
-                            });
-                        },
-                        onItemAdd: function(input,item){
-                            console.log(input);
-                            //data = { threadId:"<?php echo $idTicketAssign; ?>",userId: input, role:"O" }
-                            $.ajax({
-                                url: 'ajax.php/ccandcco/<?php echo $idTicketAssign; ?>/addcco',
-                                type: 'POST',
-                                // async:false,
-                                data: { threadId:"<?php echo $idTicketAssign; ?>",userId: input, role:"O" },
-                                // dataType: 'json',
-                                error: function() {
-                                    console.log('error');
-                                },
-                                success: function(res) {
-                                    console.log(res);
-                                }
-                            });
-                            console.log('agregador:' + input);
-
                         },
                         create: function(input) {
                             
