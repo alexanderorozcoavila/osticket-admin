@@ -732,6 +732,22 @@ return false;">
      </p>
     <div class="clear"></div>
 </div>
+
+
+<div class="dialog" id="alert2" style="top: 114.714px; left: 470px; display: block;">
+    <h3><i class="icon-warning-sign"></i> <span id="title">Alert</span></h3>
+    <a class="close" href=""><i class="icon-remove-circle"></i></a>
+    <hr>
+    <div id="body" style="min-height: 20px;">Please make at least 1 selections. 0 checked so far.</div>
+    <hr style="margin-top:3em">
+    <p class="full-width">
+        <span class="buttons pull-right">
+            <input type="button" value="OK" class="close ok">
+        </span>
+     </p>
+    <div class="clear"></div>
+</div>
+
 <script type="text/javascript">
 $(function() {
     $('[data-toggle=tooltip]').tooltip();
