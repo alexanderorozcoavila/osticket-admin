@@ -166,8 +166,8 @@ if ($_POST)
                                         
                                     }
                                 }); 
-                                name = input.split('@');
-                                $('#user-name').val(name[0]);
+                                name1 = input.split('@');
+                                $('#user-name').val(name1[0]);
                                 return {email: input, id:idusernew, name:""}; 
                                 
                             }
