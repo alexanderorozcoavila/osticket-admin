@@ -72,7 +72,11 @@ if($ticket->isOverdue())
             }
             
             if(isset($_GET['status'])){
-                $statusLista = $_GET['status'];
+                if($_GET['status'] == "assigned"){
+                    $statusLista = 'open';
+                }else{
+                    $statusLista = $_GET['status'];
+                }
             }else{
                 $statusLista = 'open';
             }
@@ -81,17 +85,24 @@ if($ticket->isOverdue())
             //return $sql;
             $resultado = db_fetch_array(db_query($sql));
             if($resultado){
-                print var_dump($resultado);
+                $id_status = $resultado["id"];
             }else{
-                echo "error";
+                $id_status = "";
             }
-            exit;
-            
+
+            $idTicket = $_GET['id'];
+
+            //anterior
+            $sql1 = "SELECT ticket_id FROM os_ticket WHERE ticket_id = (select min(ticket_id) from table where ticket_id > '".$idTicket."' and status_id = '".$id_status."'";
+            $anterior = db_fetch_array(db_query($sql1));
+            //siguiente
+            $sql2 = "SELECT ticket_id FROM os_ticket WHERE ticket_id = (select max(ticket_id) from table where ticket_id < '".$idTicket."' and status_id = '".$id_status."'";
+            $siguiente = db_fetch_array(db_query($sql2));
             ?>
 
 
-            <span class="action-button pull-right"><a href="<?php echo $statusLista; ?>"><i class="icon-arrow-right"></i></a></span>
-            <span class="action-button pull-right"><a href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=edit"><i class="icon-arrow-left"></i></a></span>
+            <span class="action-button pull-right"><a href="<?php echo $anterior; ?>"><i class="icon-arrow-right"></i></a></span>
+            <span class="action-button pull-right"><a href="<?php echo $siguiente; ?>"><i class="icon-arrow-left"></i></a></span>
             <?php
             if ($role->hasPerm(TicketModel::PERM_EDIT)) { ?>
                 <span class="action-button pull-right"><a data-placement="bottom" data-toggle="tooltip" title="<?php echo __('Edit'); ?>" href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=edit"><i class="icon-edit"></i></a></span>
