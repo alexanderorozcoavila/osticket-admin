@@ -131,7 +131,7 @@ if (!$info['title'])
                     -webkit-border-radius: 3px;
                     -moz-border-radius: 3px;
                     border-radius: 3px;">
-                    <select id="cc-colaboradores-reenviar" name="cc" class="contacts" placeholder="Agregar"  multiple style="width: 90%;">
+                    <select id="cc-colaboradores-reenviar" name="cc[]" class="contacts" placeholder="Agregar"  multiple style="width: 90%;">
                         
                     </select>
                     <span style="
@@ -251,7 +251,7 @@ if (!$info['title'])
                     -webkit-border-radius: 3px;
                     -moz-border-radius: 3px;
                     border-radius: 3px;">
-                <select id="cco-colaboradores-reenviar" name="cco" class="contacts" placeholder="Agregar" multiple style="width: 90%;">
+                <select id="cco-colaboradores-reenviar" name="cco[]" class="contacts" placeholder="Agregar" multiple style="width: 90%;">
                 
                 </select>
                 </div>
