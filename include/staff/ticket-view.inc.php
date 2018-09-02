@@ -74,11 +74,14 @@ if($ticket->isOverdue())
             if(isset($_GET['status'])){
                 if($_GET['status'] == "assigned"){
                     $statusLista = 'open';
+                    $statusUrl = '&status=open';
                 }else{
                     $statusLista = $_GET['status'];
+                    $statusUrl = '&status='.$_GET['status'];
                 }
             }else{
                 $statusLista = 'open';
+                $statusUrl = '&status=open';
             }
 
             $sql="SELECT * FROM `os_ticket_status` WHERE `state` LIKE '".$statusLista."'";
@@ -106,7 +109,7 @@ if($ticket->isOverdue())
             <?php 
             if($anterior){
             ?>
-            <span class="action-button pull-right"><a href="<?php echo $anterior["ticket_id"]; ?>"><i class="icon-arrow-right"></i></a></span>
+            <span class="action-button pull-right"><a href="tickets.php?id=<?php echo $anterior["ticket_id"].$statusUrl; ?>"><i class="icon-arrow-right"></i></a></span>
             <?php
             }else{
             ?>
@@ -115,7 +118,7 @@ if($ticket->isOverdue())
             }
             if($siguiente){
             ?>
-            <span class="action-button pull-right"><a href="<?php echo $siguiente["ticket_id"]; ?>"><i class="icon-arrow-left"></i></a></span>            
+            <span class="action-button pull-right"><a href="tickets.php?id=<?php echo $siguiente["ticket_id"].$statusUrl; ?>"><i class="icon-arrow-left"></i></a></span>            
             <?php
             }else{
             ?>
