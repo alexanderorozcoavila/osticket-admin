@@ -232,6 +232,8 @@ if($ticket->isOverdue())
                         <li><a class="no-pjax ticket-action"
                             data-redirect="tickets.php"
                             href="#tickets/<?php echo $ticket->getId(); ?>/assign/teams"><i class="icon-arrow-right"></i> Reenviar</a>
+                        <li><a class="no-pjax ticket-action">
+                        <i class="icon-arrow-right"></i> Reenviar</a>
                     </ul>
                 </div>
 
