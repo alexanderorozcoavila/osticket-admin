@@ -71,11 +71,7 @@ if($ticket->isOverdue())
             <?php
             }
             
-            // global $thisstaff, $thisclient;
-            // $username = $user;
-            $user = is_object($user) ? $user : $thisclient ?: $thisstaff;
-            
-            print $user->getUserId();
+            print $thisstaff->getId();
             exit;
             if(isset($_GET['status'])){
                 if($_GET['status'] == "assigned"){
