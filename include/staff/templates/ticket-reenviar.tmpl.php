@@ -2,7 +2,7 @@
 global $cfg;
 
 if (!$info['title'])
-    $info['title'] = "Reenviar Ticket ".$idTicketAssign;
+    $info['title'] = "Reenviar Ticket #".$ticketresult->getNumber();
 
 ?>
 <h3 class="drag-handle"><?php echo $info['title']; ?></h3>
