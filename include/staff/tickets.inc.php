@@ -417,7 +417,7 @@ $tickets->constrain(array('lock' => array(
     <h3><span id="title">Conflicto de tramitación de ticket</span></h3>
     <a class="close" href=""><i class="icon-remove-circle"></i></a>
     <hr>
-    <div id="body" style="min-height: 20px;">El ticket selecciónado ya está siendo tramitado por el agente <?php echo $nombreagente; ?><br>
+    <div id="body" style="min-height: 20px;">El ticket selecciónado ya está siendo tramitado por el agente <a id="nombreagente"><a><br>
 No es posible que dos agentes realicen operaciones sobre un mismo ticket de forma simultánea. Para más información, contacte con dicho agente</div>
     <hr style="margin-top:3em">
     <p class="full-width">
@@ -622,8 +622,8 @@ return false;">
                 <?php
                 }else{
                 ?>
-                    <a class="Icon <?php echo strtolower($T['source']); ?>Ticket preview"
-                    title="Preview Ticket" onclick="javascript::$('.dialog#alert2').show();"
+                    <a class="Icon <?php echo strtolower($T['source']); ?>Ticket preview conflictoTicket"
+                    title="Preview Ticket" nombreagente="<?php echo $nombreagente; ?>"
                     ><?php echo $tid; ?></a>
                 <?php
                 }
@@ -796,6 +796,14 @@ $('#btn-pre-2').click(function(){
     $('#ico-pre-1').removeClass('icon-hand-down');
     $('#li-pre-1').removeClass('active');
     $('#li-pre-2').addClass('active');
+});
+
+$('.conflictoTicket').click(function(){
+    nombre = this.attr('nombreagente');
+    $('#nombreagente').text(nombre);
+    $('.dialog#alert2').show();
+
+
 });
 </script>
 
