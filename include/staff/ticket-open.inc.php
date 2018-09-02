@@ -199,13 +199,7 @@ if ($_POST)
                 <td width="120">
                     <label><strong><?php echo __('CC'); ?>:</strong></label>
                 </td>
-                <td>
-                    <input type='checkbox' value='1' name="emailcollab"
-                    id="t<?php echo $ticket->getThreadId(); ?>-emailcollab"
-                        <?php echo ((!$info['emailcollab'] && !$errors) || isset($info['emailcollab']))?'checked="checked"':''; ?>
-                        style="display:none;"
-                        >
-                        
+                <td>    
                     <div style="
                     float:left;
                     border: 1px solid #d0d0d0;
