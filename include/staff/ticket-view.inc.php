@@ -77,8 +77,14 @@ if($ticket->isOverdue())
                 $statusLista = 'open';
             }
 
-            $statusTicket = TicketStatus::lookup(array('state' => $statusLista));
-            print var_dump($statusTicket);
+            $sql="SELECT * FROM `os_ticket_status` WHERE `state` LIKE '".$statusLista."'";
+            //return $sql;
+            $resultado = db_fetch_array(db_query($sql));
+            if($resultado){
+                print var_dump($resultado);
+            }else{
+                echo "error";
+            }
             exit;
             
             ?>
