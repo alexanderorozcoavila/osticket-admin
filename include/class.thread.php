@@ -291,11 +291,8 @@ class Thread extends VerySimpleModel {
         $sql="SELECT username FROM os_thread_event WHERE thread_id = ".db_input($thread)."
         AND data = 'notedit'";
         //return $sql;
-        if($d=db_fetch_array(db_query($sql))){
-            return $d['username'];
-        }else{
-            return false;   
-        }
+        $d=db_fetch_array(db_query($sql));
+        return $d;
     }
 
     function getLogConflict($thread) {
