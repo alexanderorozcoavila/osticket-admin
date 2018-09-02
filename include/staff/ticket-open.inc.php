@@ -85,9 +85,112 @@ if ($_POST)
             <td>
                 <div class="attached input">
                     <input type="text" size=45 name="email" id="user-email2" class="attached"
-                        autocomplete="off" autocorrect="off" value="<?php echo $info['email']; ?>" /> </span>
-                <a href="?a=open&amp;uid={id}" data-dialog="ajax.php/users/lookup/form"
-                    class="attached button"><i class="icon-search"></i></a>
+                        autocomplete="off" autocorrect="off" value="<?php echo $info['email']; ?>" />
+                        <script>
+                    var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
+                  '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
+
+                    $('#user-email2').selectize({
+                        persist: true,
+                        maxItems: 1,
+                        plugins: ['remove_button'],
+                        valueField: 'email',
+                        labelField: 'email',
+                        searchField: ['name', 'email','phone'],
+                        options: [],
+                        load: function(query, callback) {
+                            if (!query.length) return callback();
+                            $.ajax({
+                                url: 'ajax.php/users/local?q=' + encodeURIComponent(query),
+                                type: 'GET',
+                                // async:false,
+                                dataType: 'json',
+                                error: function() {
+                                    callback();
+                                },
+                                success: function(res) {
+                                    console.log(res);
+                                    callback(res);
+                                }
+                            });
+                        },
+                        render: {
+                            item: function(item, escape) {
+                                //console.log(item.name + '1');
+                                return '<div>' +
+                                    (item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
+                                '</div>';
+
+                            },
+                            option_create: function(item, escape) {
+                                return '<div class="create">Agregar <strong>' + escape(item.input) + '</strong>&hellip;</div>';
+                            }
+                        },
+                        createFilter: function(input) {
+                            var match, regex;
+
+                            // email@address.com
+                            regex = new RegExp('^' + REGEX_EMAIL + '$', 'i');
+                            match = input.match(regex);
+                            if (match) return !this.options.hasOwnProperty(match[0]);
+
+                            // name <email@address.com>
+                            regex = new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i');
+                            match = input.match(regex);
+                            if (match) return !this.options.hasOwnProperty(match[2]);
+
+                            return false;
+                        },
+                        onItemRemove: function(input) {
+                            $.ajax({
+                                url: 'ajax.php/ccandcco/<?php echo $idTicketAssign; ?>/delete',
+                                type: 'POST',
+                                // async:false,
+                                data: { threadId:"<?php echo $idTicketAssign; ?>",userId: input },
+                                // dataType: 'json',
+                                error: function() {
+                                    console.log('error');
+                                },
+                                success: function(res) {
+                                    console.log(res);
+                                }
+                            });
+                        },
+                        
+                        create: function(input) {
+                            
+                            if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
+                                idusernew = 0;
+                                $.ajax({
+                                    url: 'ajax.php/ccandcco/<?php echo $idTicketAssign; ?>/adduser',
+                                    type: 'POST',
+                                    async:false,
+                                    data: { name: input, email:input },
+                                    // dataType: 'json',
+                                    error: function() {
+                                        console.log('error');
+                                    },
+                                    success: function(res) {
+                                        idusernew = res;
+                                        
+                                    }
+                                }); 
+                                return {email: input, id:idusernew}; 
+                                
+                            }
+                            var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
+                            if (match) {
+                                return {
+                                    email : match[2],
+                                    name  : $.trim(match[1])
+                                };
+                            }
+                            alert('Invalid email address.');
+                            return false;
+                        }
+                    });
+                    </script>
+
                 </div>
                 <span class="error">*</span>
                 <div class="error"><?php echo $errors['email']; ?></div>
