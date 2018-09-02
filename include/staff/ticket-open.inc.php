@@ -189,6 +189,8 @@ if ($_POST)
                             return false;
                         }
                     });
+                    
+                    $('selectize-input').css('border','1px solid #d0d0d0;');
                     </script>
 
                 </div>
