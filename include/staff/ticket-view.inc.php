@@ -94,7 +94,10 @@ if($ticket->isOverdue())
 
             //anterior
             $sql1 = "SELECT ticket_id FROM os_ticket WHERE ticket_id = (select min(ticket_id) from table where ticket_id > '".$idTicket."' and status_id = '".$id_status."'";
+            print $sql1;
             $anterior = db_fetch_array(db_query($sql1));
+            print_r($anterior);
+            exit;
             //siguiente
             $sql2 = "SELECT ticket_id FROM os_ticket WHERE ticket_id = (select max(ticket_id) from table where ticket_id < '".$idTicket."' and status_id = '".$id_status."'";
             $siguiente = db_fetch_array(db_query($sql2));
