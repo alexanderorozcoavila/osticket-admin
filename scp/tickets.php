@@ -466,15 +466,12 @@ if($ticket) {
         // print var_dump($th);
         if($ticket->getThread()->getLogConflict($ticket->getId())){
             if($ticket->getThread()->getLogConflictUser($ticket->getId())){
-                print "paso 1";
-                exit;
+                
             }else{
                 Http::redirect('tickets.php');
             }
         }else{
-            $th = $ticket->getThread()->getLogConflictUser($ticket->getId());
-            print "paso 2";
-            exit;
+            $ticket->logConflictTikcet();
         }
         $inc = 'ticket-edit.inc.php';
         if (!$forms) $forms=DynamicFormEntry::forTicket($ticket->getId());
