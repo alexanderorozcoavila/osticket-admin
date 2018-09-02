@@ -72,15 +72,10 @@ if($ticket->isOverdue())
             }
             
             // global $thisstaff, $thisclient;
-            $username = $user;
+            // $username = $user;
             $user = is_object($user) ? $user : $thisclient ?: $thisstaff;
-            if (!is_string($username)) {
-                if ($user instanceof Staff) {
-                    $username = $user->getUserId();
-                }
-                // XXX: Use $user here
-            }
-            print var_dump($username);
+            
+            print $user->getUserId();
             exit;
             if(isset($_GET['status'])){
                 if($_GET['status'] == "assigned"){
