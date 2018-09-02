@@ -70,8 +70,21 @@ if($ticket->isOverdue())
             </span>
             <?php
             }
+            
+            if(isset($_GET['status'])){
+                $statusLista = $_GET['status'];
+            }else{
+                $statusLista = 'open';
+            }
+
+            $statusTicket = TicketStatus::lookup(array('state' => $statusLista));
+            print var_dump($statusTicket);
+            exit;
+            
             ?>
-            <span class="action-button pull-right"><a href="<?php echo $ticket->status; ?>"><i class="icon-arrow-right"></i></a></span>
+
+
+            <span class="action-button pull-right"><a href="<?php echo $statusLista; ?>"><i class="icon-arrow-right"></i></a></span>
             <span class="action-button pull-right"><a href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=edit"><i class="icon-arrow-left"></i></a></span>
             <?php
             if ($role->hasPerm(TicketModel::PERM_EDIT)) { ?>
