@@ -49,6 +49,10 @@ class CcAndCcoAjaxAPI extends AjaxController {
             return true;
     }
 
+    function ticketReenviar() {
+        include(STAFFINC_DIR . 'templates/ticket-reenviar.tmpl.php');
+    }
+
     function addUser($tid, $uid=0) {
         $user = new User(array(
             'name' => Format::htmldecode(Format::sanitize($_POST['name'], false)),
