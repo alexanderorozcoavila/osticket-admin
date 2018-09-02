@@ -285,7 +285,7 @@ if ($_POST)
                             if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
                                 idusernew = 0;
                                 $.ajax({
-                                    url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/adduser',
+                                    url: 'ajax.php/ccandcco/1/adduser',
                                     type: 'POST',
                                     async:false,
                                     data: { name: input, email:input },
@@ -398,7 +398,7 @@ if ($_POST)
                             if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
                                 idusernew = 0;
                                 $.ajax({
-                                    url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/adduser',
+                                    url: 'ajax.php/ccandcco/1/adduser',
                                     type: 'POST',
                                     async:false,
                                     data: { name: input, email:input },
