@@ -799,8 +799,7 @@ $('#btn-pre-2').click(function(){
 });
 
 $('.conflictoTicket').click(function(){
-    nombre = this.attr('nombreagente');
-    $('#nombreagente').text(nombre);
+    console.log('llego');
     $('.dialog#alert2').show();
 
 
