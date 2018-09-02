@@ -587,6 +587,12 @@ return false;">
                 ?>
             <tr id="<?php echo $T['ticket_id']; ?>">
             <?php
+                if(isset($_GET['status'])){
+                    $statusLista = '&status='.$_GET['status'];
+                }else{
+                    $statusLista = '&status=open';
+                }
+
                 $ticket=Ticket::lookup($T['ticket_id']);
                 if($ticket->getThread()->getLogConflict($T['ticket_id'])){
                     if($ticket->getThread()->getLogConflictUser($T['ticket_id'])){
@@ -617,7 +623,7 @@ return false;">
                 ?>
                     <a class="Icon <?php echo strtolower($T['source']); ?>Ticket preview"
                     title="Preview Ticket"
-                    href="tickets.php?id=<?php echo $T['ticket_id']; ?>"
+                    href="tickets.php?id=<?php echo $T['ticket_id'].$statusLista; ?>"
                     data-preview="#tickets/<?php echo $T['ticket_id']; ?>/preview"
                     ><?php echo $tid; ?></a>
                 <?php
@@ -644,7 +650,7 @@ return false;">
                     echo $base; ?>px; max-height: 1.2em"
                     class="<?php if ($flag) { ?>Icon <?php echo $flag; ?>Ticket <?php } ?>link truncate"
                     <?php if ($flag) { ?> title="<?php echo ucfirst($flag); ?> Ticket" <?php } ?>
-                    href="tickets.php?id=<?php echo $T['ticket_id']; ?>"><?php echo $subject; ?></div>
+                    href="tickets.php?id=<?php echo $T['ticket_id'].$statusLista; ?>"><?php echo $subject; ?></div>
 <?php               if ($T['attachment_count'])
                         echo '<i class="small icon-paperclip icon-flip-horizontal" data-toggle="tooltip" title="'
                             .$T['attachment_count'].'"></i>';
