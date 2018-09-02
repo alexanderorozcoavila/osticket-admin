@@ -50,6 +50,7 @@ class CcAndCcoAjaxAPI extends AjaxController {
     }
 
     function ticketReenviar() {
+        $idTicketAssign = "#7888999";
         include(STAFFINC_DIR . 'templates/ticket-reenviar.tmpl.php');
     }
 
