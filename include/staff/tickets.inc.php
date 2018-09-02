@@ -1,6 +1,7 @@
 <?php
 $search = SavedSearch::create();
 $tickets = TicketModel::objects();
+$ticket = TicketModel::objects();
 $clear_button = false;
 $view_all_tickets = $date_header = $date_col = false;
 
