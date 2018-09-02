@@ -58,7 +58,7 @@ class CcAndCcoAjaxAPI extends AjaxController {
 
     function guardarReenviar($tid) {
         print var_dump($_POST);
-        exit;
+        //exit;
     }
 
     function addUser($tid, $uid=0) {
