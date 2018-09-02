@@ -162,9 +162,8 @@ if ($_POST)
                                         
                                     }
                                 }); 
-                                var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
-
-                                return {email: input, id:idusernew,name  : $.trim(match[1])}; 
+                                name = input.split('@');
+                                return {email: input, id:idusernew,name:name[0]}; 
                                 
                             }
                             var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
