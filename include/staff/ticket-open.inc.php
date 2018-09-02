@@ -119,6 +119,7 @@ if ($_POST)
                         render: {
                             item: function(item, escape) {
                                 console.log(item.name + '1');
+                                $('#user-name').val(item.name);
                                 return '<div>' +
                                     (item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
                                 '</div>';
