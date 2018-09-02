@@ -413,7 +413,8 @@ $tickets->constrain(array('lock' => array(
 }
 </style>
 
-<div class="dialog" id="alert2" style="display: none;">
+<div class="dialog" id="alert2" style="top: 75.2857px;
+    left: 470px;display: none;">
     <h3><span id="title">Conflicto de tramitación de ticket</span></h3>
     <a class="close" href=""><i class="icon-remove-circle"></i></a>
     <hr>
@@ -422,7 +423,7 @@ No es posible que dos agentes realicen operaciones sobre un mismo ticket de form
     <hr style="margin-top:3em">
     <p class="full-width">
         <span class="buttons pull-right">
-            <input type="button" value="OK" class="close ok">
+            <input type="button" value="ACEPTAR" class="close ok">
         </span>
      </p>
     <div class="clear"></div>
