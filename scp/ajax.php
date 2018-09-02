@@ -259,7 +259,8 @@ $dispatcher = patterns('',
         url('^/(?P<id>\d+)/addcco$', 'addCco'),
         url('^/(?P<id>\d+)/adduser$', 'addUser'),
         url('^/(?P<id>\d+)/delete$', 'delete'),
-        url_get('^/(?P<id>\d+)/reenviar', 'ticketReenviar')
+        url_get('^/(?P<id>\d+)/reenviar', 'ticketReenviar'),
+        url_post('^/(?P<id>\d+)/reenviar/guardar', 'guardarReenviar')
 
     ))
 

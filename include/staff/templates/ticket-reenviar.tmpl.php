@@ -11,7 +11,7 @@ if (!$info['title'])
 <hr/>
 <div><p id="msg_info"><i class="icon-info-sign"></i>&nbsp; Buscar usuarios o añadir uno nuevo.</p></div>
 <div id="ticket-status" style="display:block; margin:5px;">
-    <form method="post" name="status" id="status" action="<?php echo $action; ?>">
+    <form method="post" name="status" id="status" action="#ccandcco/33/reenviar/guardar">
     <table style="width: 100%;">
     <tbody id="cc_sec">
             <tr>
