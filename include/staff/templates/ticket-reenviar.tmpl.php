@@ -19,7 +19,7 @@ if (!$info['title'])
                     <label><strong><?php echo __('Para'); ?>:</strong></label>
                 </td>
                 <td>
-                    <select id="cc-para-reenviar" class="contacts" placeholder="Agregar"  multiple style="width: 90%;">
+                    <select id="cc-para-reenviar" class="contacts" placeholder="Agregar"  multiple style="width: 100%;">
                         
                     </select>
                     <script>
