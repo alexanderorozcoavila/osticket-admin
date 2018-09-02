@@ -103,9 +103,26 @@ if($ticket->isOverdue())
             $siguiente = db_fetch_array(db_query($sql2));
             ?>
 
-
+            <?php 
+            if($anterior){
+            ?>
             <span class="action-button pull-right"><a href="<?php echo $anterior["ticket_id"]; ?>"><i class="icon-arrow-right"></i></a></span>
-            <span class="action-button pull-right"><a href="<?php echo $siguiente["ticket_id"]; ?>"><i class="icon-arrow-left"></i></a></span>
+            <?php
+            }else{
+            ?>
+            <span class="action-button pull-right"><a href="#"><i class="icon-arrow-right"></i></a></span>            
+            <?php
+            }
+            if($siguiente){
+            ?>
+            <span class="action-button pull-right"><a href="<?php echo $siguiente["ticket_id"]; ?>"><i class="icon-arrow-left"></i></a></span>            
+            <?php
+            }else{
+            ?>
+            <span class="action-button pull-right"><a href="#"><i class="icon-arrow-left"></i></a></span>            
+            <?php  
+            }
+            ?>
             <?php
             if ($role->hasPerm(TicketModel::PERM_EDIT)) { ?>
                 <span class="action-button pull-right"><a data-placement="bottom" data-toggle="tooltip" title="<?php echo __('Edit'); ?>" href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=edit"><i class="icon-edit"></i></a></span>
