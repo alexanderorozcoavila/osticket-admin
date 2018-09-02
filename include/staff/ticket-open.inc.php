@@ -84,7 +84,7 @@ if ($_POST)
             <td width="160" class="required"> <?php echo __('Email Address'); ?>: </td>
             <td>
                 <div class="attached input">
-                    <input type="text" size=45 name="email" id="user-email" class="attached"
+                    <input type="text" size=45 name="email" id="user-email2" class="attached"
                         autocomplete="off" autocorrect="off" value="<?php echo $info['email']; ?>" /> </span>
                 <a href="?a=open&amp;uid={id}" data-dialog="ajax.php/users/lookup/form"
                     class="attached button"><i class="icon-search"></i></a>
