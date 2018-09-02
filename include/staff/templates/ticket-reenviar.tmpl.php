@@ -19,20 +19,6 @@ if (!$info['title'])
                     <label><strong><?php echo __('Para'); ?>:</strong></label>
                 </td>
                 <td>
-                    <div style="
-                    float:left;
-                    border: 1px solid #d0d0d0;
-                    padding: 10px 10px;
-                    width: 100%;
-                    background: #fff;
-                    -webkit-box-sizing: border-box;
-                    -moz-box-sizing: border-box;
-                    box-sizing: border-box;
-                    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
-                    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
-                    -webkit-border-radius: 3px;
-                    -moz-border-radius: 3px;
-                    border-radius: 3px;">
                     <select id="cc-para-reenviar" class="contacts" placeholder="Agregar"  multiple style="width: 90%;">
                         
                     </select>
@@ -90,6 +76,21 @@ if (!$info['title'])
                             if (match) return !this.options.hasOwnProperty(match[2]);
 
                             return false;
+                        },
+                        onItemRemove: function(input) {
+                            $.ajax({
+                                url: 'ajax.php/ccandcco/<?php echo $idTicketAssign; ?>/delete',
+                                type: 'POST',
+                                // async:false,
+                                data: { threadId:"<?php echo $idTicketAssign; ?>",userId: input },
+                                // dataType: 'json',
+                                error: function() {
+                                    console.log('error');
+                                },
+                                success: function(res) {
+                                    console.log(res);
+                                }
+                            });
                         },
                         
                         create: function(input) {
