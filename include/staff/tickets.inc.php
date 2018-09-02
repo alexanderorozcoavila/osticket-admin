@@ -1,7 +1,7 @@
 <?php
 $search = SavedSearch::create();
 $tickets = TicketModel::objects();
-$ticket = TicketModel::objects();
+// $ticket = TicketModel::objects();
 $clear_button = false;
 $view_all_tickets = $date_header = $date_col = false;
 
@@ -586,6 +586,7 @@ return false;">
                 ?>
             <tr id="<?php echo $T['ticket_id']; ?>">
             <?php
+                $ticket=Ticket::lookup($T['ticket_id']);
                 if($ticket->getThread()->getLogConflict($T['ticket_id'])){
                     if($ticket->getThread()->getLogConflictUser($T['ticket_id'])){
                         $nombreagente = "";
