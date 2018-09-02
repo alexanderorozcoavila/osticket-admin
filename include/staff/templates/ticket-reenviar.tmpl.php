@@ -11,7 +11,7 @@ if (!$info['title'])
 <hr/>
 <div id="ticket-status" style="display:block; margin:5px;">
     <form method="post" name="status" id="status" action="<?php echo $action; ?>">
-    <table>
+    <table style="width: 100%;">
     <tbody id="cc_sec">
              <tr>
                 <td width="120">
