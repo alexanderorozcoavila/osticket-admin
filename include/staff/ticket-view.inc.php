@@ -70,13 +70,12 @@ if($ticket->isOverdue())
             </span>
             <?php
             }
-            
-            print $thisstaff->getId();
-            exit;
+            $extra = "";
             if(isset($_GET['status'])){
                 if($_GET['status'] == "assigned"){
                     $statusLista = 'open';
                     $statusUrl = '&status=open';
+                    $extra = " and staff_id='".$thisstaff->getId()."'";
                 }else{
                     $statusLista = $_GET['status'];
                     $statusUrl = '&status='.$_GET['status'];
@@ -98,13 +97,13 @@ if($ticket->isOverdue())
             $idTicket = $_GET['id'];
 
             //anterior
-            $sql1 = "SELECT ticket_id FROM os_ticket WHERE ticket_id = (select min(ticket_id) from os_ticket where ticket_id > '".$idTicket."' and status_id = '".$id_status."')";
+            $sql1 = "SELECT ticket_id FROM os_ticket WHERE ticket_id = (select min(ticket_id) from os_ticket where ticket_id > '".$idTicket."' and status_id = '".$id_status."' ".$extra.")";
             // print $sql1;
             $anterior = db_fetch_array(db_query($sql1));
             // print_r($anterior);
             // exit;
             //siguiente
-            $sql2 = "SELECT ticket_id FROM os_ticket WHERE ticket_id = (select max(ticket_id) from os_ticket where ticket_id < '".$idTicket."' and status_id = '".$id_status."')";
+            $sql2 = "SELECT ticket_id FROM os_ticket WHERE ticket_id = (select max(ticket_id) from os_ticket where ticket_id < '".$idTicket."' and status_id = '".$id_status."' ".$extra.")";
             $siguiente = db_fetch_array(db_query($sql2));
             ?>
 
