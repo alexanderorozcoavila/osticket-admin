@@ -195,6 +195,7 @@ if ($_POST)
             </td>
         </tr>
         <?php
+            $role = $thisstaff->getRole($thisstaff->dept);
             if ($role->hasPerm(Ticket::PERM_CCANDCCO)) {//Make CC optional feature? NO, for now.
                 ?>
         <tr>
