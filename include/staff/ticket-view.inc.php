@@ -74,7 +74,7 @@ if($ticket->isOverdue())
             if(isset($_GET['status'])){
                 if($_GET['status'] == "assigned"){
                     $statusLista = 'open';
-                    $statusUrl = '&status=open';
+                    $statusUrl = '&status=assigned';
                     $extra = " and staff_id='".$thisstaff->getId()."'";
                 }else{
                     $statusLista = $_GET['status'];
