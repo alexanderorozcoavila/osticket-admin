@@ -287,6 +287,17 @@ class Thread extends VerySimpleModel {
         }
     }
 
+    function getLogConflictUserAgente($thread) {
+        $sql="SELECT username FROM os_thread_event WHERE thread_id = ".db_input($thread)."
+        AND data = 'notedit'";
+        //return $sql;
+        if($d=db_fetch_array(db_query($sql))){
+            return $d['username'];
+        }else{
+            return false;   
+        }
+    }
+
     function getLogConflict($thread) {
         $sql="SELECT * FROM os_thread_event WHERE thread_id = ".db_input($thread)."
         AND data = 'notedit'";

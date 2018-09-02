@@ -413,10 +413,11 @@ $tickets->constrain(array('lock' => array(
 </style>
 
 <div class="dialog" id="alert2" style="display: none;">
-    <h3><i class="icon-warning-sign"></i> <span id="title">Alert</span></h3>
+    <h3><span id="title">Conflicto de tramitación de ticket</span></h3>
     <a class="close" href=""><i class="icon-remove-circle"></i></a>
     <hr>
-    <div id="body" style="min-height: 20px;">Please make at least 1 selections. 0 checked so far.</div>
+    <div id="body" style="min-height: 20px;">El ticket selecciónado ya está siendo tramitado por el agente <?php echo $nombreagente; ?><br>
+No es posible que dos agentes realicen operaciones sobre un mismo ticket de forma simultánea. Para más información, contacte con dicho agente</div>
     <hr style="margin-top:3em">
     <p class="full-width">
         <span class="buttons pull-right">
@@ -583,6 +584,18 @@ return false;">
                 }
                 ?>
             <tr id="<?php echo $T['ticket_id']; ?>">
+            <?php
+                if($ticket->getThread()->getLogConflict($T['ticket_id'])){
+                    if($ticket->getThread()->getLogConflictUser($T['ticket_id'])){
+                        $nombreagente = "";
+                    }else{
+                        $nombreagente = $ticket->getThread()->getLogConflictUserAgente($T['ticket_id']);
+                    }
+                }else{
+                    $nombreagente = "";
+                }
+
+            ?>
                 <?php if($thisstaff->canManageTickets()) {
 
                     $sel=false;
@@ -595,11 +608,26 @@ return false;">
                 </td>
                 <?php } ?>
                 <td title="<?php echo $T['user__default_email__address']; ?>" nowrap>
-                  <a class="Icon <?php echo strtolower($T['source']); ?>Ticket preview"
+                <?php 
+                if($nombreagente = ""){
+                ?>
+                    <a class="Icon <?php echo strtolower($T['source']); ?>Ticket preview"
                     title="Preview Ticket"
                     href="tickets.php?id=<?php echo $T['ticket_id']; ?>"
                     data-preview="#tickets/<?php echo $T['ticket_id']; ?>/preview"
-                    ><?php echo $tid; ?></a></td>
+                    ><?php echo $tid; ?></a>
+                <?php
+                }else{
+                ?>
+                    <a class="Icon <?php echo strtolower($T['source']); ?>Ticket preview"
+                    title="Preview Ticket" 
+                    ><?php echo $nombreagente; ?></a>
+                <?php
+                }
+                ?>
+                  
+                
+                </td>
                 <td align="center" nowrap><?php echo Format::datetime($T[$date_col ?: 'lastupdate']) ?: $date_fallback; ?></td>
                 <td><div style="max-width: <?php
                     $base = 279;
