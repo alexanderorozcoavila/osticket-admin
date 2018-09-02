@@ -163,7 +163,7 @@ if ($_POST)
                                     }
                                 }); 
                                 name = input.split('@');
-                                $('#user-name').val(item.name);
+                                $('#user-name').val(name[0]);
                                 return {email: input, id:idusernew}; 
                                 
                             }
