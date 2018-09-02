@@ -144,13 +144,12 @@ if ($_POST)
 
                             return false;
                         },
-                        
                         create: function(input) {
                             
                             if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
                                 idusernew = 0;
                                 $.ajax({
-                                    url: 'ajax.php/ccandcco/<?php echo $idTicketAssign; ?>/adduser',
+                                    url: 'ajax.php/ccandcco/1/adduser',
                                     type: 'POST',
                                     async:false,
                                     data: { name: input, email:input },
@@ -195,6 +194,9 @@ if ($_POST)
                 <div class="error"><?php echo $errors['name']; ?></div>
             </td>
         </tr>
+        <?php
+            if ($role->hasPerm(Ticket::PERM_CCANDCCO)) {//Make CC optional feature? NO, for now.
+                ?>
         <tr>
                 <td width="120">
                     <label><strong><?php echo __('CC'); ?>:</strong></label>
@@ -428,7 +430,9 @@ if ($_POST)
                     </script>
                 </td>
              </tr>
+
         <?php
+            }
         } ?>
 
         <?php
