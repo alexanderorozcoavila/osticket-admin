@@ -71,8 +71,8 @@ if($ticket->isOverdue())
             <?php
             }
             ?>
-            <span class="action-button pull-right"><a href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=edit"><i class="icon-arrow-left"></i></a></span>
             <span class="action-button pull-right"><a href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=edit"><i class="icon-arrow-right"></i></a></span>
+            <span class="action-button pull-right"><a href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=edit"><i class="icon-arrow-left"></i></a></span>
             <?php
             if ($role->hasPerm(TicketModel::PERM_EDIT)) { ?>
                 <span class="action-button pull-right"><a data-placement="bottom" data-toggle="tooltip" title="<?php echo __('Edit'); ?>" href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=edit"><i class="icon-edit"></i></a></span>
