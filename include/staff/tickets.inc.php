@@ -734,7 +734,7 @@ return false;">
 </div>
 
 
-<div class="dialog" id="alert2" style="top: 114.714px; left: 470px; display: none;">
+<div class="dialog" id="alert2" style="display: none;">
     <h3><i class="icon-warning-sign"></i> <span id="title">Alert</span></h3>
     <a class="close" href=""><i class="icon-remove-circle"></i></a>
     <hr>
