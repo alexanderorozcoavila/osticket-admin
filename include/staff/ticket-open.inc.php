@@ -118,7 +118,7 @@ if ($_POST)
                         },
                         render: {
                             item: function(item, escape) {
-                                //console.log(item.name + '1');
+                                console.log(item.name + '1');
                                 return '<div>' +
                                     (item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
                                 '</div>';
@@ -142,21 +142,6 @@ if ($_POST)
                             if (match) return !this.options.hasOwnProperty(match[2]);
 
                             return false;
-                        },
-                        onItemRemove: function(input) {
-                            $.ajax({
-                                url: 'ajax.php/ccandcco/<?php echo $idTicketAssign; ?>/delete',
-                                type: 'POST',
-                                // async:false,
-                                data: { threadId:"<?php echo $idTicketAssign; ?>",userId: input },
-                                // dataType: 'json',
-                                error: function() {
-                                    console.log('error');
-                                },
-                                success: function(res) {
-                                    console.log(res);
-                                }
-                            });
                         },
                         
                         create: function(input) {
