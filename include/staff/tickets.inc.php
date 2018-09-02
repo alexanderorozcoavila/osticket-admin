@@ -589,15 +589,13 @@ return false;">
                 $ticket=Ticket::lookup($T['ticket_id']);
                 if($ticket->getThread()->getLogConflict($T['ticket_id'])){
                     if($ticket->getThread()->getLogConflictUser($T['ticket_id'])){
-                        $nombreagente = "1";
+                        $nombreagente = "";
                     }else{
                         $nombreagentes = $ticket->getThread()->getLogConflictUserAgente($T['ticket_id']);
-                        print $nombreagentes["username"];
-                        exit;
-                        
+                        $nombreagente =  $nombreagentes["username"];   
                     }
                 }else{
-                    $nombreagente = "2";
+                    $nombreagente = "";
                 }
 
             ?>
@@ -614,7 +612,7 @@ return false;">
                 <?php } ?>
                 <td title="<?php echo $T['user__default_email__address']; ?>" nowrap>
                 <?php 
-                if($nombreagente = ""){
+                if($nombreagente == ""){
                 ?>
                     <a class="Icon <?php echo strtolower($T['source']); ?>Ticket preview"
                     title="Preview Ticket"
