@@ -589,12 +589,12 @@ return false;">
                 $ticket=Ticket::lookup($T['ticket_id']);
                 if($ticket->getThread()->getLogConflict($T['ticket_id'])){
                     if($ticket->getThread()->getLogConflictUser($T['ticket_id'])){
-                        $nombreagente = "";
+                        $nombreagente = "1";
                     }else{
                         $nombreagente = $ticket->getThread()->getLogConflictUserAgente($T['ticket_id']);
                     }
                 }else{
-                    $nombreagente = "";
+                    $nombreagente = "2";
                 }
 
             ?>
