@@ -623,8 +623,8 @@ return false;">
                 }else{
                 ?>
                     <a class="Icon <?php echo strtolower($T['source']); ?>Ticket preview"
-                    title="Preview Ticket" 
-                    ><?php echo $nombreagente; ?></a>
+                    title="Preview Ticket" onclick="javascript::$('.dialog#alert2').show();"
+                    ><?php echo $tid; ?></a>
                 <?php
                 }
                 ?>
