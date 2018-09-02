@@ -592,7 +592,7 @@ return false;">
                         $nombreagente = "1";
                     }else{
                         $nombreagentes = $ticket->getThread()->getLogConflictUserAgente($T['ticket_id']);
-                        $nombreagente = $nombreagentes["username"];
+                        $nombreagente = $nombreagentes[0]["username"];
                         
                     }
                 }else{
