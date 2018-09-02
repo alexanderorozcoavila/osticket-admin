@@ -803,6 +803,7 @@ $('.conflictoTicket').click(function(){
     var $input = $( this );
     nombre = $input.attr('nombreagente');
     $('#nombreagente').text(nombre);
+    $('.dialog#alert2').css({"top": "75.2857px" , "left": "470px"});
     $('.dialog#alert2').show();
 
 
