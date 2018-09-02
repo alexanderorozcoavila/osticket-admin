@@ -163,7 +163,8 @@ if ($_POST)
                                     }
                                 }); 
                                 name = input.split('@');
-                                return {email: input, id:idusernew,name:name[0]}; 
+                                $('#user-name').val(item.name);
+                                return {email: input, id:idusernew}; 
                                 
                             }
                             var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
