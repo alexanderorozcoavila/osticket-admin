@@ -440,6 +440,16 @@ if (!$info['title'])
              </tr>
             </tbody>
     </table>
+    <hr>
+        <p class="full-width">
+            <span class="buttons pull-left">
+                <input type="button" name="cancel" class="close"
+                value="<?php echo __('Cancel'); ?>">
+            </span>
+            <span class="buttons pull-right">
+                <input type="submit" value="Reenviar Ticket">
+            </span>
+         </p>
     </form>
 </div>
 <div class="clear"></div>
