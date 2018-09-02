@@ -119,7 +119,7 @@ if ($_POST)
                         render: {
                             item: function(item, escape) {
                                 console.log(item.name + '1');
-                                if(item.name == "undefined"){
+                                if(item.name == ""){
 
                                 }else{
                                     $('#user-name').val(item.name);
@@ -168,7 +168,7 @@ if ($_POST)
                                 }); 
                                 name = input.split('@');
                                 $('#user-name').val(name[0]);
-                                return {email: input, id:idusernew}; 
+                                return {email: input, id:idusernew, name:""}; 
                                 
                             }
                             var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
