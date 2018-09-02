@@ -84,8 +84,10 @@ if ($_POST)
             <td width="160" class="required"> <?php echo __('Email Address'); ?>: </td>
             <td>
                 <div class="attached input">
-                    <input type="text" size=45 name="email" id="user-email2" class="attached" style="width: 333px;border: 1px solid #aaa;"
+                    <div style="width: 333px;border: 1px solid #aaa;">
+                        <input type="text" size=45 name="email" id="user-email2" class="attached" style="width: 333px;border: 1px solid #aaa;"
                         autocomplete="off" autocorrect="off" value="<?php echo $info['email']; ?>" />
+                    </div>
                         <script>
                     var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
                   '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
