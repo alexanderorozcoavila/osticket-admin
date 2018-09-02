@@ -417,7 +417,7 @@ $tickets->constrain(array('lock' => array(
     <h3><span id="title">Conflicto de tramitación de ticket</span></h3>
     <a class="close" href=""><i class="icon-remove-circle"></i></a>
     <hr>
-    <div id="body" style="min-height: 20px;">El ticket selecciónado ya está siendo tramitado por el agente <a id="nombreagente"><a><br>
+    <div id="body" style="min-height: 20px;">El ticket selecciónado ya está siendo tramitado por el agente <a id="nombreagente"></a><br>
 No es posible que dos agentes realicen operaciones sobre un mismo ticket de forma simultánea. Para más información, contacte con dicho agente</div>
     <hr style="margin-top:3em">
     <p class="full-width">
@@ -799,7 +799,8 @@ $('#btn-pre-2').click(function(){
 });
 
 $('.conflictoTicket').click(function(){
-    console.log('llego');
+    nombre = this.attr('nombreagente');
+    $('#nombreagente').text(nombre);
     $('.dialog#alert2').show();
 
 
