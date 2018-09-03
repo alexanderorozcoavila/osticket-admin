@@ -57,8 +57,25 @@ class CcAndCcoAjaxAPI extends AjaxController {
     }
 
     function guardarReenviar($tid) {
-        print var_dump($_POST);
-        //exit;
+        if(isset($_POST['threadId']) and !empty($_POST['threadId'])){
+            print $_POST['threadId']."<br>";
+        }
+        if(isset($_POST['role']) and !empty($_POST['role'])){
+            print $_POST['role']."<br>";
+        }
+        if(isset($_POST['para']) and !empty($_POST['para'])){
+            print $_POST['para']."<br>";
+        }
+        if(isset($_POST['cc']) and !empty($_POST['cc'])){
+            foreach($_POST['cc'] as $cc){
+                print "*cc: ".$cc."<br>"
+            }
+        }
+        if(isset($_POST['cco']) and !empty($_POST['cco'])){
+            foreach($_POST['cco'] as $cco){
+                print "*cco: ".$cco."<br>"
+            }
+        }
     }
 
     function addUser($tid, $uid=0) {
