@@ -92,34 +92,28 @@ class CcAndCcoAjaxAPI extends AjaxController {
         }
         if(isset($_POST['para']) and !empty($_POST['para'])){
             $para = $_POST['para'];
-            $sql="UPDATE os_ticket SET user_id = '".$para."' WHERE ticket_id = ".$tid;
+            $ticket=Ticket::lookup($_POST['threadId']);
+            $user=User::lookup($_POST['para']);
+            //$sql="UPDATE os_ticket SET user_id = '".$para."' WHERE ticket_id = ".$tid;
             // $resultado = db_fetch_array(db_query($sql));
-            if(true){
+            if($ticket->changeOwner($user)){
                 foreach($_POST['cc'] as $cc){
                     //print $cc."<br>";
-                    if(self::addCcInternal($threadId,$cc)){
-                        print "agrego: ".$cc;
-                    }else{
-                        print "no agrego";
-                    }
+                    $r = self::addCcInternal($threadId,$cc);
                 }
                 foreach($_POST['cco'] as $cco){
-                    print $cco."<br>";
+                    $r = self::addCcoInternal($threadId,$cco);
                 }
                 if($r){
-                    print "paso 1";
-                    exit;
+                    Http::response(201, 'Exitoso');
                 }else{
-                    print "paso 2";
-                    exit;
+                    Http::response(404, 'No such ticket');
                 }
             }else{
-                print "error paso 1";
-                exit;
+                Http::response(404, 'No such ticket');
             }
         }else{
-            print "error paso 1";
-            exit;
+            Http::response(404, 'No such ticket');
         }
     }
 
