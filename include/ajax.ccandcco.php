@@ -83,6 +83,8 @@ class CcAndCcoAjaxAPI extends AjaxController {
     }
 
     function guardarReenviar($tid) {
+        print "aqui";
+        exit;
         if(isset($_POST['threadId']) and !empty($_POST['threadId'])){
             $threadId = $_POST['threadId'];
         }
@@ -116,7 +118,9 @@ class CcAndCcoAjaxAPI extends AjaxController {
                 $collab->save(true);
             }
         }
-        header('location: ticket.php');
+        print "aca";
+        exit;
+        //header('location: ticket.php');
     }
 
     function addUser($tid, $uid=0) {
