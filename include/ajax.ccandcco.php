@@ -105,17 +105,7 @@ class CcAndCcoAjaxAPI extends AjaxController {
                 $collab->save(true);
             }
         }
-        if(isset($_POST['cco']) and !empty($_POST['cco'])){
-            foreach($_POST['cco'] as $cco){
-                $collab = Collaborator::create(array(
-                    'isactive' => '1',
-                    'thread_id' => $threadId,
-                    'user_id' => $cco,
-                    'role' => 'O',
-                ));
-                $collab->save(true);
-            }
-        }
+        
         Http::response(201, 'Successfully processed');
     }
 
