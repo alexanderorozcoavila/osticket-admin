@@ -93,7 +93,8 @@ class CcAndCcoAjaxAPI extends AjaxController {
         if(isset($_POST['para']) and !empty($_POST['para'])){
             $para = $_POST['para'];
             $sql="UPDATE os_ticket SET user_id = '".$para."' WHERE ticket_id = ".$tid;
-            if(true){
+            $resultado = db_fetch_array(db_query($sql));
+            if($resultado){
                 foreach($_POST['cc'] as $cc){
                     print $cc."<br>";
                 }
