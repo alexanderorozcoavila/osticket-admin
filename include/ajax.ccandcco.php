@@ -46,10 +46,8 @@ class CcAndCcoAjaxAPI extends AjaxController {
             'user_id' => $userId,
             'role' => 'M',
         ));
-        print "paso<br>";
-
-        // if ($collab->save(true))
-        //     return true;
+        if ($collab->save(true))
+            return true;
     }
 
     function addCco($tid, $uid=0) {
@@ -70,9 +68,8 @@ class CcAndCcoAjaxAPI extends AjaxController {
             'user_id' => $userId,
             'role' => 'O',
         ));
-        print "paso<br>";
-        // if ($collab->save(true))
-        //     return true;
+        if ($collab->save(true))
+            return true;
     }
 
     function ticketReenviar($tid) {
