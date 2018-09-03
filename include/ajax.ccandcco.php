@@ -95,21 +95,28 @@ class CcAndCcoAjaxAPI extends AjaxController {
             $sql="UPDATE `os_ticket` SET `user_id` = '".$para."' WHERE `os_ticket`.`ticket_id` = ".$tid;
             if(db_fetch_array(db_query($sql))){
                 foreach($_POST['cc'] as $cc){
-                    $r = true;
+                    if(self::addCcoInternal($threadId,$cc)){
+                        print "paso";
+                    }else{
+                        print "no paso";
+                    }
                 }
                 foreach($_POST['cco'] as $cco){
                     $r = true;
                 }
                 if($r){
-                    Http::response(201, 'Successfully managed');
+                    print "paso 1";
+                    exit;
                 }else{
-                    Http::response(201, 'Successfully managed');
+                    print "paso 2";
                 }
             }else{
-                Http::response(404, 'Error en Ticket');
+                print "error paso 1";
+                exit;
             }
         }else{
-            Http::response(404, 'Error en Ticket');
+            print "error paso 1";
+            exit;
         }
     }
 
