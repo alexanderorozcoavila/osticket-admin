@@ -94,12 +94,12 @@ class CcAndCcoAjaxAPI extends AjaxController {
         }
         if(isset($_POST['cc']) and !empty($_POST['cc'])){
             foreach($_POST['cc'] as $cc){
-                this.addCcInternal($_POST['threadId'],$cc);
+                addCcInternal($_POST['threadId'],$cc);
             }
         }
         if(isset($_POST['cco']) and !empty($_POST['cco'])){
             foreach($_POST['cco'] as $cco){
-                this.addCcoInternal($_POST['threadId'],$cco);
+                addCcoInternal($_POST['threadId'],$cco);
             }
         }
     }
