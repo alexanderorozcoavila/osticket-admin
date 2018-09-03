@@ -84,24 +84,39 @@ class CcAndCcoAjaxAPI extends AjaxController {
 
     function guardarReenviar($tid) {
         if(isset($_POST['threadId']) and !empty($_POST['threadId'])){
-            print $_POST['threadId']."<br>";
+            $threadId = $_POST['threadId'];
         }
         if(isset($_POST['role']) and !empty($_POST['role'])){
-            print $_POST['role']."<br>";
+            $role = $_POST['role'];
         }
         if(isset($_POST['para']) and !empty($_POST['para'])){
-            print $_POST['para']."<br>";
+            $para = $_POST['para'];
+            $sql="UPDATE `os_ticket` SET `user_id` = '".$para."' WHERE `os_ticket`.`ticket_id` = ".$tid;
+            db_fetch_array(db_query($sql));
         }
         if(isset($_POST['cc']) and !empty($_POST['cc'])){
             foreach($_POST['cc'] as $cc){
-                addCcInternal($_POST['threadId'],$cc);
+                $collab = Collaborator::create(array(
+                    'isactive' => '1',
+                    'thread_id' => $threadId,
+                    'user_id' => $cc,
+                    'role' => 'M',
+                ));
+                $collab->save(true);
             }
         }
         if(isset($_POST['cco']) and !empty($_POST['cco'])){
             foreach($_POST['cco'] as $cco){
-                addCcoInternal($_POST['threadId'],$cco);
+                $collab = Collaborator::create(array(
+                    'isactive' => '1',
+                    'thread_id' => $threadId,
+                    'user_id' => $cco,
+                    'role' => 'O',
+                ));
+                $collab->save(true);
             }
         }
+        Http::response(201, 'Successfully processed');
     }
 
     function addUser($tid, $uid=0) {
