@@ -68,12 +68,12 @@ class CcAndCcoAjaxAPI extends AjaxController {
         }
         if(isset($_POST['cc']) and !empty($_POST['cc'])){
             foreach($_POST['cc'] as $cc){
-                print "*cc: ".$cc."<br>"
+                print "*cc: ".$cc."<br>";
             }
         }
         if(isset($_POST['cco']) and !empty($_POST['cco'])){
             foreach($_POST['cco'] as $cco){
-                print "*cco: ".$cco."<br>"
+                print "*cco: ".$cco."<br>";
             }
         }
     }
