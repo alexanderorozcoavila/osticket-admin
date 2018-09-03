@@ -83,45 +83,26 @@ class CcAndCcoAjaxAPI extends AjaxController {
     }
 
     function guardarReenviar($tid) {
-        print "aqui";
+        // exit;
+        if(isset($_POST['threadId']) and !empty($_POST['threadId'])){
+            $threadId = $_POST['threadId'];
+        }
+        if(isset($_POST['para']) and !empty($_POST['para'])){
+            $para = $_POST['para'];
+            $sql="UPDATE `os_ticket` SET `user_id` = '".$para."' WHERE `os_ticket`.`ticket_id` = ".$tid;
+            db_fetch_array(db_query($sql));
+        }
+        if(isset($_POST['cc']) and !empty($_POST['cc'])){
+            foreach($_POST['cc'] as $cc){
+                self::addCcInternal($threadId,$cc);
+            }
+        }
+        if(isset($_POST['cco']) and !empty($_POST['cco'])){
+            foreach($_POST['cco'] as $cco){
+                self::addCcoInternal($threadId,$cco);
+            }
+        }
         Http::response(201, 'Successfully processed');
-        // exit;
-        // if(isset($_POST['threadId']) and !empty($_POST['threadId'])){
-        //     $threadId = $_POST['threadId'];
-        // }
-        // if(isset($_POST['role']) and !empty($_POST['role'])){
-        //     $role = $_POST['role'];
-        // }
-        // if(isset($_POST['para']) and !empty($_POST['para'])){
-        //     $para = $_POST['para'];
-        //     $sql="UPDATE `os_ticket` SET `user_id` = '".$para."' WHERE `os_ticket`.`ticket_id` = ".$tid;
-        //     db_fetch_array(db_query($sql));
-        // }
-        // if(isset($_POST['cc']) and !empty($_POST['cc'])){
-        //     foreach($_POST['cc'] as $cc){
-        //         $collab = Collaborator::create(array(
-        //             'isactive' => '1',
-        //             'thread_id' => $tid,
-        //             'user_id' => $cc,
-        //             'role' => 'M',
-        //         ));
-        //         $collab->save(true);
-        //     }
-        // }
-        // if(isset($_POST['cco']) and !empty($_POST['cco'])){
-        //     foreach($_POST['cco'] as $cco){
-        //         $collab = Collaborator::create(array(
-        //             'isactive' => '1',
-        //             'thread_id' => $tid,
-        //             'user_id' => $cco,
-        //             'role' => 'O',
-        //         ));
-        //         $collab->save(true);
-        //     }
-        // }
-        // print "aca";
-        // exit;
-        //header('location: ticket.php');
     }
 
     function addUser($tid, $uid=0) {
