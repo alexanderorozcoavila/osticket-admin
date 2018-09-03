@@ -93,10 +93,15 @@ class CcAndCcoAjaxAPI extends AjaxController {
         if(isset($_POST['para']) and !empty($_POST['para'])){
             $para = $_POST['para'];
             $sql="UPDATE os_ticket SET user_id = '".$para."' WHERE ticket_id = ".$tid;
-            $resultado = db_fetch_array(db_query($sql));
-            if($resultado){
+            // $resultado = db_fetch_array(db_query($sql));
+            if(true){
                 foreach($_POST['cc'] as $cc){
-                    print $cc."<br>";
+                    //print $cc."<br>";
+                    if(self::addCcInternal($threadId,$cc)){
+                        print "agrego: ".$cc;
+                    }else{
+                        print "no agrego";
+                    }
                 }
                 foreach($_POST['cco'] as $cco){
                     print $cco."<br>";
