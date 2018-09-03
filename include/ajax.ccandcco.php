@@ -95,20 +95,17 @@ class CcAndCcoAjaxAPI extends AjaxController {
             $sql="UPDATE `os_ticket` SET `user_id` = '".$para."' WHERE `os_ticket`.`ticket_id` = ".$tid;
             if(db_fetch_array(db_query($sql))){
                 foreach($_POST['cc'] as $cc){
-                    if(self::addCcoInternal($threadId,$cc)){
-                        print "paso";
-                    }else{
-                        print "no paso";
-                    }
+                    print $cc."<br>";
                 }
                 foreach($_POST['cco'] as $cco){
-                    $r = true;
+                    print $cco."<br>";
                 }
                 if($r){
                     print "paso 1";
                     exit;
                 }else{
                     print "paso 2";
+                    exit;
                 }
             }else{
                 print "error paso 1";
