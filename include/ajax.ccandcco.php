@@ -98,7 +98,7 @@ class CcAndCcoAjaxAPI extends AjaxController {
             foreach($_POST['cc'] as $cc){
                 $collab = Collaborator::create(array(
                     'isactive' => '1',
-                    'thread_id' => $threadId,
+                    'thread_id' => $tid,
                     'user_id' => $cc,
                     'role' => 'M',
                 ));
@@ -109,7 +109,7 @@ class CcAndCcoAjaxAPI extends AjaxController {
             foreach($_POST['cco'] as $cco){
                 $collab = Collaborator::create(array(
                     'isactive' => '1',
-                    'thread_id' => $threadId,
+                    'thread_id' => $tid,
                     'user_id' => $cco,
                     'role' => 'O',
                 ));
