@@ -94,17 +94,7 @@ class CcAndCcoAjaxAPI extends AjaxController {
             $sql="UPDATE `os_ticket` SET `user_id` = '".$para."' WHERE `os_ticket`.`ticket_id` = ".$tid;
             db_fetch_array(db_query($sql));
         }
-        if(isset($_POST['cc']) and !empty($_POST['cc'])){
-            foreach($_POST['cc'] as $cc){
-                $collab = Collaborator::create(array(
-                    'isactive' => '1',
-                    'thread_id' => $threadId,
-                    'user_id' => $cc,
-                    'role' => 'M',
-                ));
-                //$collab->save(true);
-            }
-        }
+        
         
         Http::response(201, 'Successfully processed');
     }
