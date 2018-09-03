@@ -38,6 +38,20 @@ class CcAndCcoAjaxAPI extends AjaxController {
             return true;
     }
 
+    function addCcInternal($threadId,$userId) {
+        //print var_dump($_POST);
+        $collab = Collaborator::create(array(
+            'isactive' => '1',
+            'thread_id' => $threadId,
+            'user_id' => $userId,
+            'role' => 'M',
+        ));
+        print "paso<br>";
+
+        // if ($collab->save(true))
+        //     return true;
+    }
+
     function addCco($tid, $uid=0) {
         $collab = Collaborator::create(array(
             'isactive' => '1',
@@ -47,6 +61,18 @@ class CcAndCcoAjaxAPI extends AjaxController {
         ));
         if ($collab->save(true))
             return true;
+    }
+
+    function addCcoInternal($threadId,$userId) {
+        $collab = Collaborator::create(array(
+            'isactive' => '1',
+            'thread_id' => $threadId,
+            'user_id' => $userId,
+            'role' => 'O',
+        ));
+        print "paso<br>";
+        // if ($collab->save(true))
+        //     return true;
     }
 
     function ticketReenviar($tid) {
@@ -68,12 +94,12 @@ class CcAndCcoAjaxAPI extends AjaxController {
         }
         if(isset($_POST['cc']) and !empty($_POST['cc'])){
             foreach($_POST['cc'] as $cc){
-                print "*cc: ".$cc."<br>";
+                this.addCcInternal($_POST['threadId'],$cc);
             }
         }
         if(isset($_POST['cco']) and !empty($_POST['cco'])){
             foreach($_POST['cco'] as $cco){
-                print "*cco: ".$cco."<br>";
+                this.addCcoInternal($_POST['threadId'],$cco);
             }
         }
     }
