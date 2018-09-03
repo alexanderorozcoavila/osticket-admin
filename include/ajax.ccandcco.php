@@ -102,7 +102,7 @@ class CcAndCcoAjaxAPI extends AjaxController {
                     'user_id' => $cc,
                     'role' => 'M',
                 ));
-                $collab->save(true);
+                //$collab->save(true);
             }
         }
         
