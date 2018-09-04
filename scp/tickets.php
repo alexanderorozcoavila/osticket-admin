@@ -316,8 +316,6 @@ if($_POST && !$errors):
 
         switch($_POST['a']) {
             case 'open':
-                print var_dump($_REQUEST);
-                exit;
                 $ticket=null;
                 if (!$thisstaff ||
                         !$thisstaff->hasPerm(TicketModel::PERM_CREATE, false)) {
@@ -332,6 +330,26 @@ if($_POST && !$errors):
                     $vars['cannedattachments'] = $response_form->getField('attachments')->getClean();
 
                     if(($ticket=Ticket::open($vars, $errors))) {
+                        foreach($_POST['cc-colaboradores'] as $cc){
+                            $collab = Collaborator::create(array(
+                                'isactive' => '1',
+                                'thread_id' => $ticket->getThreadId(),
+                                'user_id' => $cc,
+                                'role' => 'M',
+                            ));
+                            $collab->save(true);
+                        }
+
+                        foreach($_POST['cco-colaboradores'] as $cco){
+                            $collab = Collaborator::create(array(
+                                'isactive' => '1',
+                                'thread_id' => $ticket->getThreadId(),
+                                'user_id' => $cco,
+                                'role' => 'O',
+                            ));
+                            $collab->save(true);
+                        }
+
                         $msg=__('Ticket created successfully');
                         $_REQUEST['a']=null;
                         if (!$ticket->checkStaffPerm($thisstaff) || $ticket->isClosed())
