@@ -190,18 +190,18 @@ if($_POST && !$errors):
             }
             break;
         case 'edit':
-            $id = $_GET['id'];
-            if(isset($event)){
-                print "si";
-                $event->filter(array('thread_id' => $id,'data'=>'notedit'));
-                print $event->uid;
+            // $id = $_GET['id'];
+            // if(isset($event)){
+            //     print "si";
+            //     $event->filter(array('thread_id' => $id,'data'=>'notedit'));
+            //     print $event->uid;
 
-                print var_dump($event);
+            //     print var_dump($event);
                 
-            }else{
-                print "no";
-            }
-            exit;
+            // }else{
+            //     print "no";
+            // }
+            // exit;
         case 'update':
             if(!$ticket || !$role->hasPerm(TicketModel::PERM_EDIT))
                 $errors['err']=__('Permission Denied. You are not allowed to edit tickets');
