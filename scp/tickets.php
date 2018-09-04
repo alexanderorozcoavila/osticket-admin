@@ -316,6 +316,8 @@ if($_POST && !$errors):
 
         switch($_POST['a']) {
             case 'open':
+                print var_dump($_REQUEST);
+                exit;
                 $ticket=null;
                 if (!$thisstaff ||
                         !$thisstaff->hasPerm(TicketModel::PERM_CREATE, false)) {
