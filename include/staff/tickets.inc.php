@@ -629,8 +629,11 @@ return false;">
                 <?php
                 }else{
                 ?>
+                    
                     <a class="Icon <?php echo strtolower($T['source']); ?>Ticket preview conflictoTicket"
-                    title="Preview Ticket" nombreagente="<?php echo $nombreagente; ?>"
+                    title="Preview Ticket" 
+                    nombreagente="<?php echo $nombreagente; ?>"
+                    href="tickets.php?id=<?php echo $T['ticket_id'].$statusLista; ?>"
                     data-preview="#tickets/<?php echo $T['ticket_id']; ?>/preview"
                     ><?php echo $tid; ?></a>
                 <?php
