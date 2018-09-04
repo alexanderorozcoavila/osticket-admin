@@ -1875,6 +1875,8 @@ class ThreadEvents extends InstrumentedList {
         return $event->save();
     }
 
+    
+
     function logConflict($object, $state, $data=null, $user=null, $annul=null) {
         global $thisstaff, $thisclient;
 
