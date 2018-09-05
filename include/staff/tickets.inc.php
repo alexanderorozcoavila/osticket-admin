@@ -662,7 +662,7 @@ return false;">
                 <?php
                 }else{
                 ?>
-                <div style="max-width: <?php
+                <span style="max-width: <?php
                     $base = 279;
                     // Make room for the paperclip and some extra
                     if ($T['attachment_count']) $base -= 18;
@@ -674,7 +674,7 @@ return false;">
                     class="<?php if ($flag) { ?>Icon <?php echo $flag; ?>Ticket <?php } ?>link truncate conflictoTicket"
                     <?php if ($flag) { ?> title="<?php echo ucfirst($flag); ?> Ticket" <?php } ?>
                     nombreagente="<?php echo $nombreagente; ?>"
-                    ><?php echo $subject; ?></div>
+                    ><?php echo $subject; ?></span>
                 <?php
                 }
                 ?>
