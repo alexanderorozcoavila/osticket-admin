@@ -661,9 +661,18 @@ return false;">
                     href="tickets.php?id=<?php echo $T['ticket_id'].$statusLista; ?>"><?php echo $subject; ?></div>
                 <?php
                 }else{
+                    $base = 279;
+                    // Make room for the paperclip and some extra
+                    if ($T['attachment_count']) $base -= 18;
+                    // Assume about 8px per digit character
+                    if ($threadcount > 1) $base -= 20 + ((int) log($threadcount, 10) + 1) * 8;
+                    // Make room for overdue flag and friends
+                    if ($flag) $base -= 20;
+                    
                 ?>
-                <span class="Icon <?php echo strtolower($T['source']); ?>Ticket conflictoTicket"
+                <span class="Icon <?php echo strtolower($T['source']); ?>Ticket truncate conflictoTicket"
                     title="Preview Ticket" 
+                    style="<?php echo $base; ?>px; max-height: 1.2em"
                     nombreagente="<?php echo $nombreagente; ?>"><?php echo $subject; ?></span>
                 <?php
                 }
