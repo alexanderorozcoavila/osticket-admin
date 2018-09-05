@@ -438,7 +438,7 @@ No es posible que dos agentes realicen operaciones sobre un mismo ticket de form
         ?>
     </div>
     <div class="pull-right" style="height:25px">
-        <span class="action-button muted" data-dropdown="#prew-line-ticket" data-toggle="tooltip" title="" data-original-title="Prioridad + Actualizados recientemente">
+        <span class="action-button muted" data-dropdown="#prew-line-ticket" data-toggle="tooltip" title="" >
         <i class="icon-caret-down pull-right"></i>
         <span><i class="icon-eye-open"></i> Previsualización</span>
         </span>
@@ -633,7 +633,7 @@ return false;">
                     <a class="Icon <?php echo strtolower($T['source']); ?>Ticket preview conflictoTicket"
                     title="Preview Ticket" 
                     nombreagente="<?php echo $nombreagente; ?>"
-                    href="tickets.php?id=<?php echo $T['ticket_id'].$statusLista; ?>"
+                    
                     data-preview="#tickets/<?php echo $T['ticket_id']; ?>/preview"
                     ><?php echo $tid; ?></a>
                 <?php
@@ -643,7 +643,11 @@ return false;">
                 
                 </td>
                 <td align="center" nowrap><?php echo Format::datetime($T[$date_col ?: 'lastupdate']) ?: $date_fallback; ?></td>
-                <td><div style="max-width: <?php
+                <td>
+                <?php 
+                if($nombreagente == ""){
+                ?>
+                <div style="max-width: <?php
                     $base = 279;
                     // Make room for the paperclip and some extra
                     if ($T['attachment_count']) $base -= 18;
@@ -655,6 +659,26 @@ return false;">
                     class="<?php if ($flag) { ?>Icon <?php echo $flag; ?>Ticket <?php } ?>link truncate"
                     <?php if ($flag) { ?> title="<?php echo ucfirst($flag); ?> Ticket" <?php } ?>
                     href="tickets.php?id=<?php echo $T['ticket_id'].$statusLista; ?>"><?php echo $subject; ?></div>
+                <?php
+                }else{
+                ?>
+                <div style="max-width: <?php
+                    $base = 279;
+                    // Make room for the paperclip and some extra
+                    if ($T['attachment_count']) $base -= 18;
+                    // Assume about 8px per digit character
+                    if ($threadcount > 1) $base -= 20 + ((int) log($threadcount, 10) + 1) * 8;
+                    // Make room for overdue flag and friends
+                    if ($flag) $base -= 20;
+                    echo $base; ?>px; max-height: 1.2em"
+                    class="<?php if ($flag) { ?>Icon <?php echo $flag; ?>Ticket <?php } ?>link truncate conflictoTicket"
+                    <?php if ($flag) { ?> title="<?php echo ucfirst($flag); ?> Ticket" <?php } ?>
+                    nombreagente="<?php echo $nombreagente; ?>"
+                    ><?php echo $subject; ?></div>
+                <?php
+                }
+                ?>
+
 <?php               if ($T['attachment_count'])
                         echo '<i class="small icon-paperclip icon-flip-horizontal" data-toggle="tooltip" title="'
                             .$T['attachment_count'].'"></i>';
