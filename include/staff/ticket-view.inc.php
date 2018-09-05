@@ -49,6 +49,16 @@ if (!$errors['err']) {
 
 $unbannable=($emailBanned) ? BanList::includes($ticket->getEmail()) : false;
 
+if($ticket->getThread()->getLogConflict($ticket->getId())){
+    if($ticket->getThread()->getLogConflictUser($ticket->getId())){
+        
+    }else{
+        #Http::redirect('tickets.php');
+    }
+}else{
+    $ticket->logConflictTikcet();
+}
+
 if($ticket->isOverdue())
     $warn.='&nbsp;&nbsp;<span class="Icon overdueTicket">'.__('Marked overdue!').'</span>';
 
