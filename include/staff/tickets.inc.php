@@ -664,9 +664,7 @@ return false;">
                 ?>
                 <span class="Icon <?php echo strtolower($T['source']); ?>Ticket conflictoTicket"
                     title="Preview Ticket" 
-                    nombreagente="<?php echo $nombreagente; ?>"
-                    
-                    ><<?php echo $subject; ?></span>
+                    nombreagente="<?php echo $nombreagente; ?>"><?php echo $subject; ?></span>
                 <?php
                 }
                 ?>
