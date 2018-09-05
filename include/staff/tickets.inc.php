@@ -662,19 +662,11 @@ return false;">
                 <?php
                 }else{
                 ?>
-                <span style="max-width: <?php
-                    $base = 279;
-                    // Make room for the paperclip and some extra
-                    if ($T['attachment_count']) $base -= 18;
-                    // Assume about 8px per digit character
-                    if ($threadcount > 1) $base -= 20 + ((int) log($threadcount, 10) + 1) * 8;
-                    // Make room for overdue flag and friends
-                    if ($flag) $base -= 20;
-                    echo $base; ?>px; max-height: 1.2em"
-                    class="<?php if ($flag) { ?>Icon <?php echo $flag; ?>Ticket <?php } ?>link truncate conflictoTicket"
-                    <?php if ($flag) { ?> title="<?php echo ucfirst($flag); ?> Ticket" <?php } ?>
+                <span class="Icon <?php echo strtolower($T['source']); ?>Ticket conflictoTicket"
+                    title="Preview Ticket" 
                     nombreagente="<?php echo $nombreagente; ?>"
-                    ><?php echo $subject; ?></span>
+                    
+                    ><<?php echo $subject; ?></span>
                 <?php
                 }
                 ?>
