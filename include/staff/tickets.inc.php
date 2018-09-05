@@ -632,6 +632,7 @@ return false;">
                     
                     <span class="Icon <?php echo strtolower($T['source']); ?>Ticket preview conflictoTicket"
                     title="Preview Ticket" 
+                    style="cursor:pointer"
                     nombreagente="<?php echo $nombreagente; ?>"
                     href="tickets.php?id=<?php echo $T['ticket_id'].$statusLista; ?>"
                     data-preview="#tickets/<?php echo $T['ticket_id']; ?>/preview"
@@ -672,7 +673,7 @@ return false;">
                 ?>
                 <span class="Icon <?php echo strtolower($T['source']); ?>Ticket truncate conflictoTicket"
                     title="Preview Ticket" 
-                    style="width:<?php echo $base; ?>px; max-height: 1.2em"
+                    style="width:<?php echo $base; ?>px; max-height: 1.2em; cursor:pointer"
                     nombreagente="<?php echo $nombreagente; ?>"><?php echo $subject; ?></span>
                 <?php
                 }
