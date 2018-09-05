@@ -672,7 +672,7 @@ return false;">
                 ?>
                 <span class="Icon <?php echo strtolower($T['source']); ?>Ticket truncate conflictoTicket"
                     title="Preview Ticket" 
-                    style="<?php echo $base; ?>px; max-height: 1.2em"
+                    style="width:<?php echo $base; ?>px; max-height: 1.2em"
                     nombreagente="<?php echo $nombreagente; ?>"><?php echo $subject; ?></span>
                 <?php
                 }
