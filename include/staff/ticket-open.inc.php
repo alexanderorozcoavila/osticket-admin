@@ -784,7 +784,7 @@ $(function() {
     });
 });
 </script>
-
+    <script src="http://jquery-spellchecker.badsyntax.co/js/lib/redactor/redactor.min.js"></script>
     <script src="http://jquery-spellchecker.badsyntax.co/js/jquery.spellchecker.js"></script>
 <script>
 (function() {
