@@ -760,13 +760,13 @@ return false;">
                 // $linea2 = substr($descripcion, 101, 202);
                     if(($staff->default_preview_ticket == 1) || ($staff->default_preview_ticket == 2)){
                         if($staff->default_preview_ticket == 1){
-                        $selected = "preview_1 preview-line-hide";
+                        $selected = "preview_1 preview-line-hide 44";
                         }
                         if($staff->default_preview_ticket == 2){
-                        $selected = "preview_1";
+                        $selected = "preview_1 33";
                         } 
                     }else{
-                        $selected = "preview_1 preview-line-hide";
+                        $selected = "preview_1 preview-line-hide 22";
                     }
                 
                 ?>
