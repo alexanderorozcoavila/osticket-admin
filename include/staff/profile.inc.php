@@ -289,9 +289,26 @@ if ($avatar->isChangeable()) { ?>
             </td>
             <td>
                 <select name="default_preview_ticket">
-                  <option value="none" selected="selected">&mdash; <?php echo __('None');?> &mdash;</option>
-                  <option value="1" %s>Opcion 1</option>
-                  <option value="2" %s>Opcion 2</option>
+                  
+                  <?php 
+                    $selected0 = "";
+                    $selected1 = "";
+                    $selected2 = "";
+
+                  if(($staff->default_preview_ticket == 1) || ($staff->default_preview_ticket == 2)){
+                    if($staff->default_preview_ticket == 1){
+                      $selected1 = "selected=\"selected\"";
+                    }
+                    if($staff->default_preview_ticket == 2){
+                      $selected2 = "selected=\"selected\"";
+                    } 
+                  }else{
+                    $selected0 = "selected=\"selected\"";
+                  }
+                  ?>
+                  <option value="none" <?php echo $selected0; ?>>&mdash; <?php echo __('None');?> &mdash;</option>
+                  <option value="1" <?php echo $selected1; ?>>Opcion 1</option>
+                  <option value="2" <?php echo $selected2; ?>>Opcion 2</option>
                 </select>
                 <div class="error"><?php echo $errors['default_preview_ticket']; ?></div>
             </td>
