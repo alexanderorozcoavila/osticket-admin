@@ -8,6 +8,8 @@ if(!@$thisstaff->isStaff() || !$ticket->checkStaffPerm($thisstaff)) die('Access 
 //Re-use the post info on error...savekeyboards.org (Why keyboard? -> some people care about objects than users!!)
 $info=($_POST && $errors)?Format::input($_POST):array();
 
+
+
 //Get the goodies.
 $dept  = $ticket->getDept();  //Dept
 $role  = $thisstaff->getRole($dept);
@@ -53,7 +55,7 @@ if($ticket->getThread()->getLogConflict($ticket->getId())){
     if($ticket->getThread()->getLogConflictUser($ticket->getId())){
         
     }else{
-        #Http::redirect('tickets.php');
+        Http::redirect('tickets.php');
     }
 }else{
     $ticket->logConflictTikcet();
@@ -170,7 +172,7 @@ No es posible que dos agentes realicen operaciones sobre un mismo ticket de form
                     if($ticket->getThread()->getLogConflictUser($siguiente["ticket_id"])){
                         $nombreagente = "";
                     }else{
-                        $nombreagentes = $ticket->getThread()->getLogConflictUserAgente($anterior["ticket_id"]);
+                        $nombreagentes = $ticket->getThread()->getLogConflictUserAgente($siguiente["ticket_id"]);
                         $nombreagente =  $nombreagentes["username"];   
                     }
                 }else{
