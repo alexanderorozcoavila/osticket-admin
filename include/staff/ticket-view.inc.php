@@ -63,6 +63,23 @@ if($ticket->isOverdue())
     $warn.='&nbsp;&nbsp;<span class="Icon overdueTicket">'.__('Marked overdue!').'</span>';
 
 ?>
+<div class="dialog" id="alert2" style="top: 75.2857px;
+    left: 470px;display: none;">
+    <h3><span id="title">Conflicto de tramitación de ticket</span></h3>
+    <a class="close" href=""><i class="icon-remove-circle"></i></a>
+    <hr>
+    <div id="body" style="min-height: 20px;">El ticket selecciónado ya está siendo tramitado por el agente <a id="nombreagente"></a><br>
+No es posible que dos agentes realicen operaciones sobre un mismo ticket de forma simultánea. Para más información, contacte con dicho agente</div>
+    <hr style="margin-top:3em">
+    <p class="full-width">
+        <span class="buttons pull-right">
+            <input type="button" value="ACEPTAR" class="close ok">
+        </span>
+     </p>
+    <div class="clear"></div>
+</div>
+
+
 <div>
     <div class="sticky bar">
        <div class="content">
@@ -119,8 +136,28 @@ if($ticket->isOverdue())
 
             <?php 
             if($anterior){
+                $ticket=Ticket::lookup($anterior["ticket_id"]);
+                if($ticket->getThread()->getLogConflict($anterior["ticket_id"])){
+                    if($ticket->getThread()->getLogConflictUser($anterior["ticket_id"])){
+                        $nombreagente = "";
+                    }else{
+                        $nombreagentes = $ticket->getThread()->getLogConflictUserAgente($anterior["ticket_id"]);
+                        $nombreagente =  $nombreagentes["username"];   
+                    }
+                }else{
+                    $nombreagente = "";
+                }
+                if($nombreagente == ""){
+                    ?>
+                    <span class="action-button pull-right"><a href="tickets.php?id=<?php echo $anterior["ticket_id"].$statusUrl; ?>"><i class="icon-arrow-right"></i></a></span>
+                    <?php
+                }else{
+                    ?>
+                    <span class="action-button pull-right conflictoTicket" nombreagente="<?php echo $nombreagente; ?>"><a><i class="icon-arrow-right"></i></a></span>
+                    <?php
+                }
             ?>
-            <span class="action-button pull-right"><a href="tickets.php?id=<?php echo $anterior["ticket_id"].$statusUrl; ?>"><i class="icon-arrow-right"></i></a></span>
+            
             <?php
             }else{
             ?>
@@ -1501,6 +1538,15 @@ $(function() {
 
         return false;
     });
+
+});
+$('.conflictoTicket').click(function(){
+    var $input = $( this );
+    nombre = $input.attr('nombreagente');
+    $('#nombreagente').text(nombre);
+    $('.dialog#alert2').css({"top": "75.2857px" , "left": "470px"});
+    $('.dialog#alert2').show();
+
 
 });
 </script>
