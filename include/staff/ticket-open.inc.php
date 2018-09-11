@@ -761,7 +761,7 @@ $('#span-cco').click(function() {
             console.log('open tr');
         });
 $(function() {
-    $('#new-ticket').click(function(){
+    $('a').click(function(){
         var opcion = confirm("¿Seguro que desea salir? \nCualquier cambio o información que hayas introducido \nserán descartados");
         return opcion;
     });
