@@ -469,27 +469,7 @@ No es posible que dos agentes realicen operaciones sobre un mismo ticket de form
         require STAFFINC_DIR.'templates/queue-sort.tmpl.php';
         ?>
     </div>
-    <div class="pull-right" style="height:25px">
-        <span class="action-button muted" data-dropdown="#prew-line-ticket" data-toggle="tooltip" title="" >
-        <i class="icon-caret-down pull-right"></i>
-        <span><i class="icon-eye-open"></i> Previsualización</span>
-        </span>
-
-        <div id="prew-line-ticket" class="action-dropdown anchor-right" style="display: none;">
-            <ul class="bleed-left">
-                <li class="active" id="li-pre-1">
-                    <a href="#" id="btn-pre-1">
-                    <i class="icon-fixed-width icon-hand-down" id="ico-pre-1"></i> Previsualizar 1 linea del ticket</a>
-                </li>
-                <li id="li-pre-2">
-                    <a href="#" id="btn-pre-2">
-                    <i class="icon-fixed-width" id="ico-pre-2"></i> Previsualizar 2 lineas del ticket</a>
-                </li>
-                </ul>
-            </div>
-
-
-    </div>
+    
   
     <form action="tickets.php" method="get" onsubmit="javascript:
   $.pjax({
@@ -778,8 +758,20 @@ return false;">
                 }
                 $linea1 = substr($descripcion, 0, 250);
                 // $linea2 = substr($descripcion, 101, 202);
+                    if(($staff->default_preview_ticket == 1) || ($staff->default_preview_ticket == 2)){
+                        if($staff->default_preview_ticket == 1){
+                        $selected = "preview_1 preview-line-hide";
+                        }
+                        if($staff->default_preview_ticket == 2){
+                        $selected = "preview_1";
+                        } 
+                    }else{
+                        $selected = "preview_1 preview-line-hide";
+                    }
+                
                 ?>
-                <div class="preview_1 preview-line-hide" style="width: 891px;"><?php echo $linea1; ?></div>
+
+                <div class="<?php echo $selected; ?>" style="width: 891px;"><?php echo $linea1; ?></div>
                 <!-- <span class="preview_2" style="display:none;">
                 <?php //echo $linea2; ?>
                 </span> -->
@@ -848,6 +840,7 @@ return false;">
 $(function() {
     $('[data-toggle=tooltip]').tooltip();
 });
+
 $('#btn-pre-1').click(function(){
     //$('.preview_2').hide();
     $('.preview_1').addClass('preview-line-hide');
