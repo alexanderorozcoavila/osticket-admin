@@ -664,6 +664,131 @@ if ($errors['err'] && isset($_POST['a'])) {
                         <option value="0" <?php echo !$emailReply ? 'selected="selected"' : ''; ?>
                         >&mdash; <?php echo __('Do Not Email Reply'); ?> &mdash;</option>
                     </select>
+                    <?php if ($role->hasPerm(Ticket::PERM_CCANDCCO)) { ?>
+                        <script>
+                    var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
+                  '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
+
+                    $('#emailreply').selectize({
+                        persist: true,
+                        maxItems: 1,
+                        plugins: ['remove_button'],
+                        valueField: 'id',
+                        labelField: 'email',
+                        searchField: ['name', 'email','phone'],
+                        options: [],
+                        load: function(query, callback) {
+                            if (!query.length) return callback();
+                            $.ajax({
+                                url: 'ajax.php/users/local?q=' + encodeURIComponent(query),
+                                type: 'GET',
+                                // async:false,
+                                dataType: 'json',
+                                error: function() {
+                                    callback();
+                                },
+                                success: function(res) {
+                                    console.log(res);
+                                    callback(res);
+                                }
+                            });
+                        },
+                        render: {
+                            item: function(item, escape) {
+                                //console.log(item.name + '1');
+                                return '<div>' +
+                                    (item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
+                                '</div>';
+
+                            },
+                            option_create: function(item, escape) {
+                                return '<div class="create">Agregar <strong>' + escape(item.input) + '</strong>&hellip;</div>';
+                            }
+                        },
+                        createFilter: function(input) {
+                            var match, regex;
+
+                            // email@address.com
+                            regex = new RegExp('^' + REGEX_EMAIL + '$', 'i');
+                            match = input.match(regex);
+                            if (match) return !this.options.hasOwnProperty(match[0]);
+
+                            // name <email@address.com>
+                            regex = new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i');
+                            match = input.match(regex);
+                            if (match) return !this.options.hasOwnProperty(match[2]);
+
+                            return false;
+                        },
+                        onItemRemove: function(input) {
+                            $.ajax({
+                                url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/delete',
+                                type: 'POST',
+                                // async:false,
+                                data: { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: input },
+                                // dataType: 'json',
+                                error: function() {
+                                    console.log('error');
+                                },
+                                success: function(res) {
+                                    console.log(res);
+                                }
+                            });
+                        },
+                        onItemAdd: function(input,item){
+                            console.log(input);
+                            //data = { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: input, role:"O" }
+                            $.ajax({
+                                url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/addcco',
+                                type: 'POST',
+                                // async:false,
+                                data: { threadId:"<?php echo $ticket->getThreadId(); ?>",userId: input, role:"M" },
+                                // dataType: 'json',
+                                error: function() {
+                                    console.log('error');
+                                },
+                                success: function(res) {
+                                    console.log(res);
+                                }
+                            });
+                            console.log('agregador:' + input);
+
+                        },
+                        create: function(input) {
+                            
+                            if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
+                                idusernew = 0;
+                                $.ajax({
+                                    url: 'ajax.php/ccandcco/<?php echo $ticket->getThreadId(); ?>/adduser',
+                                    type: 'POST',
+                                    async:false,
+                                    data: { name: input, email:input },
+                                    // dataType: 'json',
+                                    error: function() {
+                                        console.log('error');
+                                    },
+                                    success: function(res) {
+                                        idusernew = res;
+                                        
+                                    }
+                                }); 
+                                return {email: input, id:idusernew}; 
+                                
+                            }
+                            var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
+                            if (match) {
+                                return {
+                                    email : match[2],
+                                    name  : $.trim(match[1])
+                                };
+                            }
+                            alert('Invalid email address.');
+                            return false;
+                        }
+                    });
+                    </script>
+
+                    <?php } ?>
                 </td>
             </tr>
             </tbody>
