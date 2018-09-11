@@ -164,9 +164,29 @@ No es posible que dos agentes realicen operaciones sobre un mismo ticket de form
             <span class="action-button pull-right"><a href="#"><i class="icon-arrow-right"></i></a></span>            
             <?php
             }
+            // $nombreagente = "";
             if($siguiente){
+                if($ticket->getThread()->getLogConflict($siguiente["ticket_id"])){
+                    if($ticket->getThread()->getLogConflictUser($siguiente["ticket_id"])){
+                        $nombreagente = "";
+                    }else{
+                        $nombreagentes = $ticket->getThread()->getLogConflictUserAgente($anterior["ticket_id"]);
+                        $nombreagente =  $nombreagentes["username"];   
+                    }
+                }else{
+                    $nombreagente = "";
+                }
+                if($nombreagente == ""){
+                    ?>
+                    <span class="action-button pull-right"><a href="tickets.php?id=<?php echo $siguiente["ticket_id"].$statusUrl; ?>"><i class="icon-arrow-left"></i></a></span>   
+                    <?php
+                }else{
+                    ?>
+                    <span class="action-button pull-right conflictoTicket" nombreagente="<?php echo $nombreagente; ?>"><a><i class="icon-arrow-left"></i></a></span>   
+                    <?php
+                }
             ?>
-            <span class="action-button pull-right"><a href="tickets.php?id=<?php echo $siguiente["ticket_id"].$statusUrl; ?>"><i class="icon-arrow-left"></i></a></span>            
+                     
             <?php
             }else{
             ?>
