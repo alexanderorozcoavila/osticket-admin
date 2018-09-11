@@ -758,11 +758,11 @@ return false;">
                 }
                 $linea1 = substr($descripcion, 0, 250);
                 // $linea2 = substr($descripcion, 101, 202);
-                    if(($staff->default_preview_ticket == 1) || ($staff->default_preview_ticket == 2)){
-                        if($staff->default_preview_ticket == 1){
+                    if(($staff->getDefaultPreviewTicket() == 1) || ($staff->getDefaultPreviewTicket() == 2)){
+                        if($staff->getDefaultPreviewTicket() == 1){
                         $selected = "preview_1 preview-line-hide 44";
                         }
-                        if($staff->default_preview_ticket == 2){
+                        if($staff->getDefaultPreviewTicket() == 2){
                         $selected = "preview_1 33";
                         } 
                     }else{
