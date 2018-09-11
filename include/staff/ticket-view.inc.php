@@ -297,9 +297,9 @@ if($ticket->isOverdue())
                         <li><a class="post-response"
                             data-placement="bottom" data-toggle="tooltip"
                             href="#post-reply"><i class="icon-mail-reply"></i> Publicar Repuesta</a>
-                        <li><a class="no-pjax ticket-action"
+                        <!--<li><a class="no-pjax ticket-action"
                             data-redirect="tickets.php"
-                            href="#ccandcco/<?php echo $ticket->getId(); ?>/reenviar"><i class="icon-arrow-right"></i> Reenviar</a>
+                            href="#ccandcco/<?php echo $ticket->getId(); ?>/reenviar"><i class="icon-arrow-right"></i> Reenviar</a>-->
                     </ul>
                 </div>
 
