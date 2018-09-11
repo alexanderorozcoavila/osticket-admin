@@ -283,6 +283,19 @@ if ($avatar->isChangeable()) { ?>
                 <div class="error"><?php echo $errors['default_paper_size']; ?></div>
             </td>
         </tr>
+        <tr>
+            <td width="180"><?php echo __('Default Paper Size');?>:
+              <div class="faded"><?php echo __('Paper size used when printing tickets to PDF');?></div>
+            </td>
+            <td>
+                <select name="default_preview_ticket">
+                  <option value="none" selected="selected">&mdash; <?php echo __('None');?> &mdash;</option>
+                  <option value="1" %s>Opcion 1</option>
+                  <option value="2" %s>Opcion 2</option>
+                </select>
+                <div class="error"><?php echo $errors['default_preview_ticket']; ?></div>
+            </td>
+        </tr>
       </tbody>
       <tbody>
         <tr class="header">
