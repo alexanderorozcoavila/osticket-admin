@@ -8,7 +8,9 @@ if ($link == false) {
                 .mysqli_connect_error());
 }
 
-$sql = "SELECT id, thread_id, timestamp as hora, DATE_ADD(timestamp, INTERVAL 5 MINUTE) as limite, NOW() as hora_actual FROM `os_thread_event` WHERE `data` = 'notedit'";
+$sql = "SELECT id, thread_id, timestamp as hora, DATE_ADD(timestamp, INTERVAL ".int($cfg->getScriptConflictTime())." MINUTE) as limite, NOW() as hora_actual FROM `os_thread_event` WHERE `data` = 'notedit'";
+print $sql;
+exit;
 $res = mysqli_query($link, $sql);
 while ($row = mysqli_fetch_array($res)) {
     $hora_thread = strtotime($row['hora']);
