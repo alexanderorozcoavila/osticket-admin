@@ -482,6 +482,15 @@ $ost->addExtraHeader('<meta name="tip-namespace" content="tickets.queue" />',
     "$('#content').data('tipNamespace', 'tickets.queue');");
 
 if($ticket) {
+    if($ticket->getThread()->getLogConflict($ticket->getId())){
+        if($ticket->getThread()->getLogConflictUser($ticket->getId())){
+            
+        }else{
+            Http::redirect('tickets.php');
+        }
+    }else{
+        $ticket->logConflictTikcet();
+    }
     $ost->setPageTitle(sprintf(__('Ticket #%s'),$ticket->getNumber()));
     $nav->setActiveSubMenu(-1);
     $inc = 'ticket-view.inc.php';
